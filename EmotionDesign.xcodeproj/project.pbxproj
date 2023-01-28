@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		518443112981460300615BAC /* EmotionDiscView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518443102981460300615BAC /* EmotionDiscView.swift */; };
+		511CDFBC2982C540002D510B /* EmotionContentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511CDFBB2982C540002D510B /* EmotionContentsView.swift */; };
+		511CDFBE2982CDBA002D510B /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511CDFBD2982CDBA002D510B /* Extensions.swift */; };
+		511CDFC22983E8E7002D510B /* Emotions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511CDFC12983E8E7002D510B /* Emotions.swift */; };
+		511CDFC42983F026002D510B /* GeneralEmotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511CDFC32983F026002D510B /* GeneralEmotion.swift */; };
 		518443132981466600615BAC /* EmotionShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518443122981466600615BAC /* EmotionShareView.swift */; };
 		518443152981698C00615BAC /* RoundShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518443142981698C00615BAC /* RoundShape.swift */; };
 		51D4151B298132BC001D367B /* EmotionDesignApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51D4151A298132BC001D367B /* EmotionDesignApp.swift */; };
@@ -20,7 +23,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		518443102981460300615BAC /* EmotionDiscView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmotionDiscView.swift; sourceTree = "<group>"; };
+		511CDFBB2982C540002D510B /* EmotionContentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmotionContentsView.swift; sourceTree = "<group>"; };
+		511CDFBD2982CDBA002D510B /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = EmotionDesign/View/Extensions.swift; sourceTree = SOURCE_ROOT; };
+		511CDFC12983E8E7002D510B /* Emotions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emotions.swift; sourceTree = "<group>"; };
+		511CDFC32983F026002D510B /* GeneralEmotion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralEmotion.swift; sourceTree = "<group>"; };
 		518443122981466600615BAC /* EmotionShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmotionShareView.swift; sourceTree = "<group>"; };
 		518443142981698C00615BAC /* RoundShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundShape.swift; sourceTree = "<group>"; };
 		51D41517298132BC001D367B /* EmotionDesign.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EmotionDesign.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -86,7 +92,10 @@
 		51D4152829813856001D367B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				511CDFBD2982CDBA002D510B /* Extensions.swift */,
 				51D4152E29813A8C001D367B /* Emotion.swift */,
+				511CDFC32983F026002D510B /* GeneralEmotion.swift */,
+				511CDFC12983E8E7002D510B /* Emotions.swift */,
 				51D4153029813DDF001D367B /* ColorMap.swift */,
 			);
 			path = Model;
@@ -97,7 +106,7 @@
 			children = (
 				51D4152C29813A38001D367B /* EmotionView.swift */,
 				518443142981698C00615BAC /* RoundShape.swift */,
-				518443102981460300615BAC /* EmotionDiscView.swift */,
+				511CDFBB2982C540002D510B /* EmotionContentsView.swift */,
 				518443122981466600615BAC /* EmotionShareView.swift */,
 			);
 			path = View;
@@ -188,13 +197,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				51D4152D29813A38001D367B /* EmotionView.swift in Sources */,
+				511CDFBE2982CDBA002D510B /* Extensions.swift in Sources */,
+				511CDFC42983F026002D510B /* GeneralEmotion.swift in Sources */,
 				51D4151D298132BC001D367B /* ContentView.swift in Sources */,
+				511CDFC22983E8E7002D510B /* Emotions.swift in Sources */,
 				51D4153129813DDF001D367B /* ColorMap.swift in Sources */,
 				518443132981466600615BAC /* EmotionShareView.swift in Sources */,
+				511CDFBC2982C540002D510B /* EmotionContentsView.swift in Sources */,
 				518443152981698C00615BAC /* RoundShape.swift in Sources */,
 				51D4151B298132BC001D367B /* EmotionDesignApp.swift in Sources */,
 				51D4152F29813A8C001D367B /* Emotion.swift in Sources */,
-				518443112981460300615BAC /* EmotionDiscView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

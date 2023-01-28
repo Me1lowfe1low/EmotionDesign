@@ -9,7 +9,7 @@ import SwiftUI
 
 struct EmotionShareView: View {
     var body: some View {
-        NavigationLink(destination: RoundShape() ) {
+        NavigationLink(destination: EmotionContentsView() ) {
             Image(systemName: "plus")
         }
     }

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct EmotionView: View {
-    @State var emotion: Emotion = Emotion.emotionSample
+    @State var emotion: GeneralEmotion = GeneralEmotion.emotionSample
     
     var body: some View {
         VStack {

@@ -7,22 +7,17 @@
 
 import Foundation
 
-struct Emotion: Identifiable {
-    let id = UUID()
-    let name: String
-    let color: ColorMap
-    let accentColor: ColorMap
+struct Emotion: Emotions {
+    var id = UUID()
+    var name: String
     
-    
-    #if DEBUG
-    static var emotionSample: Emotion = Emotion(name: "Happiness", color: ColorMap.forestgreen, accentColor: ColorMap.green)
-    static var emotionSampleList: [Emotion] = [
-        Emotion(name: "Anger", color: ColorMap.orangered, accentColor: ColorMap.poppy),
-        Emotion(name: "Disgust", color: ColorMap.periwinkle, accentColor: ColorMap.purple),
-        Emotion(name: "Sad", color: ColorMap.sky, accentColor: ColorMap.blue),
-        Emotion(name: "Happy", color: ColorMap.forestgreen, accentColor: ColorMap.green),
-        Emotion(name: "Suprise", color: ColorMap.lightyellow4, accentColor: ColorMap.yellow),
-        Emotion(name: "Fear", color: ColorMap.tan, accentColor: ColorMap.buttercup)
+    #if Debug
+    static var emotions: [Emotion] = [
+        Emotion(name: "emotion#1"),
+        Emotion(name: "emotion#2"),
+        Emotion(name: "emotion#3"),
+        Emotion(name: "emotion#4"),
+        Emotion(name: "emotion#5")
     ]
     #endif
 }
