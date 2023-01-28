@@ -9,24 +9,35 @@ import SwiftUI
 
 struct RoundShape: View {
     @State private var radius: CGFloat = 50
-    let emotionList: [Emotion] = Emotion.emotionSampleList
+    let emotionList: [GeneralEmotion] = GeneralEmotion.emotionSampleList
     
     var body: some View {
         ZStack {
-            Round()
-                .opacity(0.1)
-                .padding()
             RoundedRectangle(cornerRadius: 2)
-            .fill(LinearGradient(colors: [Color.indigo, Color.purple], startPoint: .top, endPoint: .bottom))
-            .opacity(0.042)
+            .fill(LinearGradient(gradient: Gradient(colors: [.blue,.green]),
+                                 startPoint: .topLeading,
+                                 endPoint: .bottomTrailing))
+                .opacity(0.1)
             ForEach(emotionList.indices, id: \.self) { index in
                 RoundedShape(segments: 6, id: index)
-                    .fill(LinearGradient(colors: [emotionList[index].color.getColor, emotionList[index].accentColor.getColor ], startPoint: .top, endPoint: .bottom))
+                    .fill(RadialGradient(gradient: Gradient(colors: [emotionList[index].color.getColor, emotionList[index].accentColor.getColor]),
+                                         center: .center,
+                                         startRadius: radius*2,
+                                         endRadius: radius*3))
+                    //.animation(Animation.default.repeatCount(5).speed(3))
+                    .gesture(
+                        TapGesture()
+                            .onEnded {
+                                print("You've just tapped # \(index) button")
+                            }
+                    )
                 RoundedShape(segments: 6, id: index)
                     .stroke(.white, lineWidth: 5)
+                    
             }
         }
     }
+    
     struct Round: Shape {
         func path(in rect: CGRect) -> Path {
             Path { path in
@@ -42,6 +53,7 @@ struct RoundShape: View {
     struct RoundedShape: Shape {
         let segments: Int
         let id: Int
+        
         private let startAngle: Double = 1.5 * Double.pi
         private let outerRadiusCoeff: Double = 1.5
         
