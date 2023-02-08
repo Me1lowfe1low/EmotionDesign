@@ -1,22 +1,28 @@
-//
+// Created for EmotionDesign 25.01.2023
 //  ContentView.swift
 //  EmotionDesign
 //
-//  Created by Дмитрий Гордиенко on 25.01.2023.
+// Using Swift 5.0
+// Running on macOS 13.0
 //
+//
+// Unauthorised reproduction is prohibited, contact dmgordienko@gmail.com for details
+// Could be used in educational purposes
 
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject var userData: UserDetails = UserDetails()
+    
     var body: some View {
         TabView {
             EmotionShareView()
-            //Text("Enter your mood")
+                .environmentObject(userData)
                 .tabItem {
                     Image(systemName: "plus")
                     Text("Main")
                 }
-            Text("Information")
+            Info()
                 .tabItem {
                     Image(systemName: "info.circle")
                     Text("Info")

@@ -1,15 +1,23 @@
-//
+// Created for EmotionDesign on 25.01.2023
 //  EmotionShareView.swift
 //  EmotionDesign
 //
-//  Created by Дмитрий Гордиенко on 25.01.2023.
+// Using Swift 5.0
+// Running on macOS 13.0
 //
+//
+// Unauthorised reproduction is prohibited, contact dmgordienko@gmail.com for details
+// Could be used in educational purposes
 
 import SwiftUI
 
 struct EmotionShareView: View {
+    @EnvironmentObject var userData : UserDetails
+    
     var body: some View {
-        NavigationLink(destination: EmotionContentsView() ) {
+        NavigationLink(destination: EmotionContentsView()
+            .environmentObject(userData)
+        ) {
             Image(systemName: "plus")
         }
     }

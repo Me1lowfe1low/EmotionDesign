@@ -1,24 +1,24 @@
-//
+// Created for EmotionDesign on 25.01.2023
 //  Emotion.swift
 //  EmotionDesign
 //
-//  Created by Дмитрий Гордиенко on 25.01.2023.
+// Using Swift 5.0
+// Running on macOS 13.0
 //
+//
+// Unauthorised reproduction is prohibited, contact dmgordienko@gmail.com for details
+// Could be used in educational purposes
+
 
 import Foundation
 
-struct Emotion: Emotions {
+struct Emotion: Emotions, Hashable {
     var id = UUID()
-    var name: String
+    var name: String? = "default name"
+    var description: String? = "default description"
     
-    #if Debug
-    static var emotions: [Emotion] = [
-        Emotion(name: "emotion#1"),
-        Emotion(name: "emotion#2"),
-        Emotion(name: "emotion#3"),
-        Emotion(name: "emotion#4"),
-        Emotion(name: "emotion#5")
-    ]
+    #if DEBUG
+    static var emotionSample: Emotion = Emotion(name: "emotion#1", description: "Emotion description for the test puproses. The most common emotion in the world")
     #endif
 }
 
