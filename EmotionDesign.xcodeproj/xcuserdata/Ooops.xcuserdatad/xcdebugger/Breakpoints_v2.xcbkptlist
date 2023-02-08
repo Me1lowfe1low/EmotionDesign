@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "2A250B78-2CA4-48D3-8FFE-AC849AEE2255"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "BCD71223-89A5-45E6-B086-F8C01486AB50"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "EmotionDesign/View/EmotionShareView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "12"
+            endingLineNumber = "12"
+            landmarkName = "unknown"
+            landmarkType = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "13973C15-E780-49FD-936B-F3E3BA50D617"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "EmotionDesign/View/EmotionShareView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "13"
+            endingLineNumber = "13"
+            landmarkName = "unknown"
+            landmarkType = "0">
+            <Locations>
+               <Location
+                  uuid = "13973C15-E780-49FD-936B-F3E3BA50D617 - 2a992beb7f86aeed"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "EmotionDesign.EmotionShareView.init() -&gt; EmotionDesign.EmotionShareView"
+                  moduleName = "EmotionDesign"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Ooops/Developer/EmotionDesign/EmotionDesign/View/EmotionShareView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "11"
+                  endingLineNumber = "11"
+                  offsetFromSymbolStart = "19">
+               </Location>
+               <Location
+                  uuid = "13973C15-E780-49FD-936B-F3E3BA50D617 - 2a9e71dc6c9b82f4"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "EmotionDesign.EmotionShareView.init(userData: SwiftUI.EnvironmentObject&lt;EmotionDesign.UserDetails&gt;) -&gt; EmotionDesign.EmotionShareView"
+                  moduleName = "EmotionDesign"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Ooops/Developer/EmotionDesign/EmotionDesign/View/EmotionShareView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "10">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
