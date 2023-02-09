@@ -36,7 +36,7 @@
             landmarkType = "0">
             <Locations>
                <Location
-                  uuid = "13973C15-E780-49FD-936B-F3E3BA50D617 - 2a992beb7f86aeed"
+                  uuid = "13973C15-E780-49FD-936B-F3E3BA50D617 - 2a992beb7f86af69"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -46,8 +46,8 @@
                   urlString = "file:///Users/Ooops/Developer/EmotionDesign/EmotionDesign/View/EmotionShareView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "11"
-                  endingLineNumber = "11"
+                  startingLineNumber = "15"
+                  endingLineNumber = "15"
                   offsetFromSymbolStart = "19">
                </Location>
                <Location

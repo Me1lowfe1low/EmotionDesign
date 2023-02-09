@@ -12,26 +12,65 @@
 import SwiftUI
 
 struct Analyze: View {
+    //@EnvironmentObject var userData : UserDetails
+    
+    @State private var currentDate: Date = Date()
+    @State private var userData: UserDetails = UserDetails.userDetailsSample
+    @State private var genEmotions: [GeneralEmotion] = GeneralEmotion.emotionSampleList
+    
     var body: some View {
-        Form {
-            Section("Day") {
-                HStack{
-                    Text("Pie")
-                    Text("Graph")
+        VStack {
+            Form {
+                Section("Days picture") {
+                    ForEach(userData.info, id: \.self ) { day in
+                        LazyVGrid(columns: [GridItem(.flexible())]) {
+                            HStack( alignment: .top) {
+                                ZStack {
+                                    ForEach(day.emotionList, id: \.self) { emotion in
+                                        AnimatedCircle(emotion: genEmotions[emotion.parentId])
+                                    }
+                                }
+                                .frame(width: 100, height: 100)
+                                .padding()
+                                Spacer()
+                                VStack(alignment: .leading) {
+                                    Section(header: Text(day.date, style: .date)) {
+                                        
+                                        Text("You felt: ")
+                                        ForEach(day.commentList, id: \.self) { comment in
+                                            if comment != "" {
+                                                Text(comment)
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
-            Section("Week") {
-                Text("Week calendar")
+           
+            Section("Whole picture")
+            {
+                ZStack {
+                    ForEach(userData.info, id: \.self ) { day in
+                        HStack {
+                            ForEach(day.emotionList, id: \.self) { emotion in
+                                AnimatedCircle(emotion: genEmotions[emotion.parentId])
+                            }
+                            
+                        }
+                        .padding()
+                    }
+                }
             }
-            Section("Year") {
-                Text("Year calendar")
-                Text("Graph")
-            }
+            .padding()
         }
     }
 }
 
 struct Analyze_Previews: PreviewProvider {
+    
     static var previews: some View {
         Analyze()
     }

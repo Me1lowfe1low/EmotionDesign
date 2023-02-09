@@ -27,7 +27,8 @@ struct ContentView: View {
                     Image(systemName: "info.circle")
                     Text("Info")
                 }
-            Image(systemName: "chart.pie")
+            Analyze()
+                .environmentObject(userData)
                 .tabItem {
                     Image(systemName: "chart.pie")
                     Text("Analyze")

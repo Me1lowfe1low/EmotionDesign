@@ -12,8 +12,19 @@
 import Foundation
 
 class UserDetails: ObservableObject {
-
     @Published var info = [UserDetail]()
+    
+    init() {
+        
+    }
+    
+    init(info: [UserDetail]) {
+        self.info = info
+    }
+    
+    func getSortedList() {
+        self.info = info.sorted()
+    }
     
     func addNewEntry(_ emotion: Emotion) {
         if checkCurrentDate() {
@@ -117,4 +128,153 @@ class UserDetails: ObservableObject {
         print(info)
     }
     
+    /*
+     func reduceData(_ date: Date) -> [PiePower] {
+     var piePower: [PiePower] = []
+     let dateIndex = getExactDate(date)
+     let mappedItems = info[dateIndex].emotionList.map { ($0, 1) }
+     let counts = Dictionary(mappedItems, uniquingKeysWith: +)
+     counts.forEach { element in
+     let temp = PiePower(name: element.key.name!, power: element.value, colorId: element.key.parentId  )
+     piePower.append(temp)
+     }
+     return piePower
+     }
+     */
+    
+#if DEBUG
+    static let emotionList0: [Emotion] = [
+        Emotion(name: "emotion#1", description: "Emotion description for the emotion#1", parentId: 0),
+        Emotion(name: "emotion#2", description: "Emotion description for the emotion#2", parentId: 1),
+        Emotion(name: "emotion#3", description: "Emotion description for the emotion#3", parentId: 2),
+        Emotion(name: "emotion#4", description: "Emotion description for the emotion#4", parentId: 1),
+        Emotion(name: "emotion#1", description: "Emotion description for the emotion#1", parentId: 0),
+        Emotion(name: "emotion#6", description: "Emotion description for the emotion#6", parentId: 1),
+        Emotion(name: "emotion#1", description: "Emotion description for the emotion#1", parentId: 0),
+        Emotion(name: "emotion#8", description: "Emotion description for the emotion#8", parentId: 0),
+        Emotion(name: "emotion#9", description: "Emotion description for the emotion#9", parentId: 2),
+    ]
+    static let emotionList1: [Emotion] = [
+        Emotion(name: "emotion#1", description: "Emotion description for the emotion#1", parentId: 1),
+        Emotion(name: "emotion#2", description: "Emotion description for the emotion#2", parentId: 0),
+        Emotion(name: "emotion#2", description: "Emotion description for the emotion#2", parentId: 0),
+        Emotion(name: "emotion#4", description: "Emotion description for the emotion#4", parentId: 2),
+    ]
+    static let emotionList2: [Emotion] = [
+        Emotion(name: "emotion#1", description: "Emotion description for the emotion#1", parentId: 1),
+        Emotion(name: "emotion#2", description: "Emotion description for the emotion#2", parentId: 2),
+    ]
+    static let emotionList3: [Emotion] = [
+        Emotion(name: "emotion#1", description: "Emotion description for the emotion#1", parentId: 0),
+        Emotion(name: "emotion#2", description: "Emotion description for the emotion#2", parentId: 1),
+        Emotion(name: "emotion#3", description: "Emotion description for the emotion#3", parentId: 3),
+        Emotion(name: "emotion#4", description: "Emotion description for the emotion#4", parentId: 1),
+        Emotion(name: "emotion#1", description: "Emotion description for the emotion#1", parentId: 3),
+        Emotion(name: "emotion#6", description: "Emotion description for the emotion#6", parentId: 1),
+        Emotion(name: "emotion#1", description: "Emotion description for the emotion#1", parentId: 4),
+        Emotion(name: "emotion#8", description: "Emotion description for the emotion#8", parentId: 0),
+        Emotion(name: "emotion#9", description: "Emotion description for the emotion#9", parentId: 5),
+    ]
+    static let emotionList4: [Emotion] = [
+        Emotion(name: "emotion#1", description: "Emotion description for the emotion#1", parentId: 1),
+        Emotion(name: "emotion#2", description: "Emotion description for the emotion#2", parentId: 1),
+        Emotion(name: "emotion#3", description: "Emotion description for the emotion#3", parentId: 5),
+        Emotion(name: "emotion#4", description: "Emotion description for the emotion#4", parentId: 1),
+        Emotion(name: "emotion#1", description: "Emotion description for the emotion#1", parentId: 5),
+        Emotion(name: "emotion#6", description: "Emotion description for the emotion#6", parentId: 3),
+        Emotion(name: "emotion#1", description: "Emotion description for the emotion#1", parentId: 3),
+        Emotion(name: "emotion#8", description: "Emotion description for the emotion#8", parentId: 0),
+        Emotion(name: "emotion#9", description: "Emotion description for the emotion#9", parentId: 2),
+    ]
+    static let emotionList5: [Emotion] = [
+        Emotion(name: "emotion#1", description: "Emotion description for the emotion#1", parentId: 0),
+        Emotion(name: "emotion#2", description: "Emotion description for the emotion#2", parentId: 1),
+        Emotion(name: "emotion#3", description: "Emotion description for the emotion#3", parentId: 5),
+        Emotion(name: "emotion#4", description: "Emotion description for the emotion#4", parentId: 5),
+        Emotion(name: "emotion#1", description: "Emotion description for the emotion#1", parentId: 0),
+        Emotion(name: "emotion#6", description: "Emotion description for the emotion#6", parentId: 2),
+        Emotion(name: "emotion#1", description: "Emotion description for the emotion#1", parentId: 3),
+        Emotion(name: "emotion#8", description: "Emotion description for the emotion#8", parentId: 0),
+        Emotion(name: "emotion#9", description: "Emotion description for the emotion#9", parentId: 2),
+    ]
+    static let emotionList6: [Emotion] = [
+        Emotion(name: "emotion#1", description: "Emotion description for the emotion#1", parentId: 1),
+        Emotion(name: "emotion#2", description: "Emotion description for the emotion#2", parentId: 4),
+        Emotion(name: "emotion#3", description: "Emotion description for the emotion#3", parentId: 3),
+        Emotion(name: "emotion#4", description: "Emotion description for the emotion#4", parentId: 3),
+        Emotion(name: "emotion#1", description: "Emotion description for the emotion#1", parentId: 3),
+        Emotion(name: "emotion#6", description: "Emotion description for the emotion#6", parentId: 1),
+        Emotion(name: "emotion#1", description: "Emotion description for the emotion#1", parentId: 5),
+        Emotion(name: "emotion#8", description: "Emotion description for the emotion#8", parentId: 0),
+        Emotion(name: "emotion#9", description: "Emotion description for the emotion#9", parentId: 2),
+    ]
+    static let emotionList7: [Emotion] = [
+        Emotion(name: "emotion#1", description: "Emotion description for the emotion#1", parentId: 3),
+        Emotion(name: "emotion#2", description: "Emotion description for the emotion#2", parentId: 4),
+        Emotion(name: "emotion#2", description: "Emotion description for the emotion#2", parentId: 0),
+        Emotion(name: "emotion#4", description: "Emotion description for the emotion#4", parentId: 2),
+    ]
+    static let emotionList8: [Emotion] = [
+        Emotion(name: "emotion#1", description: "Emotion description for the emotion#1", parentId: 3),
+        Emotion(name: "emotion#2", description: "Emotion description for the emotion#2", parentId: 3),
+        Emotion(name: "emotion#2", description: "Emotion description for the emotion#2", parentId: 4),
+        Emotion(name: "emotion#4", description: "Emotion description for the emotion#4", parentId: 4),
+    ]
+    static let emotionList9: [Emotion] = [
+        Emotion(name: "emotion#1", description: "Emotion description for the emotion#1", parentId: 4),
+        Emotion(name: "emotion#2", description: "Emotion description for the emotion#2", parentId: 5),
+        Emotion(name: "emotion#2", description: "Emotion description for the emotion#2", parentId: 5),
+        Emotion(name: "emotion#4", description: "Emotion description for the emotion#4", parentId: 2),
+    ]
+    static let emotionList10: [Emotion] = [
+        Emotion(name: "emotion#1", description: "Emotion description for the emotion#1", parentId: 5),
+        Emotion(name: "emotion#2", description: "Emotion description for the emotion#2", parentId: 5),
+        Emotion(name: "emotion#2", description: "Emotion description for the emotion#2", parentId: 5),
+        Emotion(name: "emotion#4", description: "Emotion description for the emotion#4", parentId: 4),
+    ]
+    static let userDetail0: UserDetail =
+    UserDetail(date: Calendar.current.date(byAdding: .day, value: -10, to: Date())!, emotionList: emotionList0, commentList: ["","","","","","","","",""])
+    static let userDetail1: UserDetail =
+        UserDetail(date: Calendar.current.date(byAdding: .day, value: -9, to: Date())!, emotionList: emotionList1, commentList: ["","","",""])
+    static let userDetail2: UserDetail =
+        UserDetail(date: Calendar.current.date(byAdding: .day, value: -8, to: Date())!, emotionList: emotionList2, commentList: ["",""])
+    static let userDetail3: UserDetail =
+    UserDetail(date: Calendar.current.date(byAdding: .day, value: -7, to: Date())!, emotionList: emotionList3, commentList: ["","","","","","","","",""])
+    static let userDetail4: UserDetail =
+    UserDetail(date: Calendar.current.date(byAdding: .day, value: -6, to: Date())!, emotionList: emotionList4, commentList: ["","","","","","","","",""])
+    static let userDetail5: UserDetail =
+    UserDetail(date: Calendar.current.date(byAdding: .day, value: -5, to: Date())!, emotionList: emotionList5, commentList: ["","","","","","","","",""])
+    static let userDetail6: UserDetail =
+    UserDetail(date: Calendar.current.date(byAdding: .day, value: -4, to: Date())!, emotionList: emotionList6, commentList: ["","","","","","","","",""])
+    static let userDetail7: UserDetail =
+        UserDetail(date: Calendar.current.date(byAdding: .day, value: -3, to: Date())!, emotionList: emotionList7, commentList: ["","","",""])
+    static let userDetail8: UserDetail =
+        UserDetail(date: Calendar.current.date(byAdding: .day, value: -2, to: Date())!, emotionList: emotionList8, commentList: ["","","",""])
+    static let userDetail9: UserDetail =
+        UserDetail(date: Calendar.current.date(byAdding: .day, value: -1, to: Date())!, emotionList: emotionList9, commentList: ["","","",""])
+    static let userDetail10: UserDetail =
+        UserDetail(date: Date(), emotionList: emotionList10, commentList: ["","","",""])
+
+    
+    static let userDataSet: [UserDetail] = [
+        UserDetails.userDetail0,
+        UserDetails.userDetail1,
+        UserDetails.userDetail2,
+        UserDetails.userDetail3,
+        UserDetails.userDetail4,
+        UserDetails.userDetail5,
+        UserDetails.userDetail6,
+        UserDetails.userDetail7,
+        UserDetails.userDetail8,
+        UserDetails.userDetail9,
+        UserDetails.userDetail10,
+    ]
+    
+    static let userDetailsSample: UserDetails = UserDetails(info: UserDetails.userDataSet )
+  
+    
+#endif
 }
+
+
+

@@ -11,7 +11,11 @@
 
 import Foundation
 
-struct UserDetail: Identifiable {
+struct UserDetail: Identifiable, Hashable, Comparable {
+    static func < (lhs: UserDetail, rhs: UserDetail) -> Bool {
+        lhs.date < rhs.date
+    }
+    
     let id: UUID = UUID()
     var date: Date = Date()
     var emotionList: [Emotion] = [Emotion]()
