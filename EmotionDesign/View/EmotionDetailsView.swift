@@ -12,16 +12,18 @@
 import SwiftUI
 
 struct EmotionDetailsView: View {
+    @Environment(\.managedObjectContext) var moc
     @Environment(\.dismiss) private var dismiss
-    @EnvironmentObject var userData: UserDetails
-    
+    @EnvironmentObject var dataController: DataController
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \DayDetail.date, ascending: false)]) var userDataSet: FetchedResults<DayDetail>
+
     @Binding var element: EmotionDTO
     @State var description: String = ""
     @State var initialDate: Date = Date()
     
     var body: some View {
         Form {
-            Section(header: Text(element.emotion.name!)) {
+            Section(header: Text(element.emotion.name)) {
                 TextField("Description", text: $description)
                 HStack {
                     Text(initialDate, style: .date)
@@ -39,14 +41,14 @@ struct EmotionDetailsView: View {
     }
     
     func processTheEntry() {
-        userData.processTheEntry(date: initialDate, comment: description, emotion: element.emotion)
+        dataController.saveData(moc, data: userDataSet, element: element, comment: description, date: initialDate)
         element.chosen = false
         dismiss()
     }
 }
 
-struct EmotionDetaisView_Previews: PreviewProvider {
+struct EmotionDetailsView_Previews: PreviewProvider {
     static var previews: some View {
-        EmotionDetailsView(element: .constant(EmotionDTO(emotion: Emotion.emotionSample , colour: .red, chosen: true )))
+        EmotionDetailsView(element: .constant(EmotionDTO(emotion: SubEmotion.emotionSample, color: .red)))
     }
 }

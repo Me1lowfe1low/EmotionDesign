@@ -7,63 +7,47 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "BCD71223-89A5-45E6-B086-F8C01486AB50"
+            uuid = "791BBDD1-95D5-44E6-A7A8-F2D841D8F8D6"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "EmotionDesign/View/EmotionShareView.swift"
+            filePath = "EmotionDesign/Model/ColorMap.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "12"
-            endingLineNumber = "12"
-            landmarkName = "unknown"
-            landmarkType = "0">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "13973C15-E780-49FD-936B-F3E3BA50D617"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "EmotionDesign/View/EmotionShareView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "13"
-            endingLineNumber = "13"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            startingLineNumber = "27"
+            endingLineNumber = "27"
+            landmarkName = "ColorMap"
+            landmarkType = "13">
             <Locations>
                <Location
-                  uuid = "13973C15-E780-49FD-936B-F3E3BA50D617 - 2a992beb7f86aeed"
+                  uuid = "791BBDD1-95D5-44E6-A7A8-F2D841D8F8D6 - fa0b4e32a7694528"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "EmotionDesign.EmotionShareView.init() -&gt; EmotionDesign.EmotionShareView"
+                  symbolName = "EmotionDesign.ColorMap.rawValue.getter : Swift.String"
                   moduleName = "EmotionDesign"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Ooops/Developer/EmotionDesign/EmotionDesign/View/EmotionShareView.swift"
+                  urlString = "file:///Users/Ooops/Developer/EmotionDesign/EmotionDesign/Model/ColorMap.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "11"
-                  endingLineNumber = "11"
-                  offsetFromSymbolStart = "19">
+                  startingLineNumber = "27"
+                  endingLineNumber = "27"
+                  offsetFromSymbolStart = "432">
                </Location>
                <Location
-                  uuid = "13973C15-E780-49FD-936B-F3E3BA50D617 - 2a9e71dc6c9b82f4"
+                  uuid = "791BBDD1-95D5-44E6-A7A8-F2D841D8F8D6 - 83d0765d066ee3ae"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "EmotionDesign.EmotionShareView.init(userData: SwiftUI.EnvironmentObject&lt;EmotionDesign.UserDetails&gt;) -&gt; EmotionDesign.EmotionShareView"
+                  symbolName = "EmotionDesign.ColorMap.init(rawValue: Swift.String) -&gt; Swift.Optional&lt;EmotionDesign.ColorMap&gt;"
                   moduleName = "EmotionDesign"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Ooops/Developer/EmotionDesign/EmotionDesign/View/EmotionShareView.swift"
+                  urlString = "file:///Users/Ooops/Developer/EmotionDesign/EmotionDesign/Model/ColorMap.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0"
-                  offsetFromSymbolStart = "10">
+                  startingLineNumber = "27"
+                  endingLineNumber = "27"
+                  offsetFromSymbolStart = "533">
                </Location>
             </Locations>
          </BreakpointContent>

@@ -11,14 +11,23 @@
 
 
 import SwiftUI
+import CoreData
 
 @main
 struct EmotionDesignApp: App {
+    let container = NSPersistentContainer(name: "EmotionDesign")
+    
     var body: some Scene {
         WindowGroup {
+            let context = container.viewContext
+            let dataController = DataController(context, container: container)
+            
             NavigationView {
                 ContentView()
+                    .environment(\.managedObjectContext, context)
+                    .environmentObject(dataController)
             }
         }
     }
 }
+

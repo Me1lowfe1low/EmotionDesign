@@ -12,7 +12,7 @@
 import SwiftUI
 
 struct AnimatedCircle: View {
-    var emotion: GeneralEmotion
+    var emotion: InitialEmotion
     private let multiplier: [Int] = [-1,1]
     @State private var rotationAngle = 0.0
     
@@ -21,8 +21,8 @@ struct AnimatedCircle: View {
             Circle()
                 .offset(x: CGFloat.random(in: -20...20)*CGFloat(multiplier.randomElement() ?? 1), y: CGFloat.random(in: -20...20)*CGFloat(multiplier.randomElement() ?? 1))
                 .fill(LinearGradient(colors: [
-                    emotion.color.getColor,
-                    emotion.accentColor.getColor],
+                    ColorMap(rawValue: emotion.color)!.getColor,
+                    ColorMap(rawValue: emotion.accentColor)!.getColor],
                                      startPoint: .topLeading,
                                      endPoint: .bottomTrailing))
                 .opacity(Double.random(in: 0.1...0.5))
@@ -38,11 +38,5 @@ struct AnimatedCircle: View {
                     }
                 }
         }
-    }
-}
-
-struct AnimatedCIrcle_Previews: PreviewProvider {
-    static var previews: some View {
-        AnimatedCircle(emotion: GeneralEmotion.emotionSampleList[2])
     }
 }

@@ -12,19 +12,15 @@
 import SwiftUI
 
 struct EmotionShareView: View {
-    @EnvironmentObject var userData : UserDetails
+    @Environment(\.managedObjectContext) var moc
+    @EnvironmentObject var dataController: DataController
     
     var body: some View {
         NavigationLink(destination: EmotionContentsView()
-            .environmentObject(userData)
+            .environment(\.managedObjectContext, moc)
+            .environmentObject(dataController)
         ) {
             Image(systemName: "plus")
         }
-    }
-}
-
-struct EmotionShareView_Previews: PreviewProvider {
-    static var previews: some View {
-        EmotionShareView()
     }
 }

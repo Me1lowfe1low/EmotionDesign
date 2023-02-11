@@ -12,32 +12,33 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject var userData: UserDetails = UserDetails()
+    @Environment(\.managedObjectContext) var moc
+    @EnvironmentObject var dataController: DataController
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \DayDetail.date, ascending: false)]) var userDataSet: FetchedResults<DayDetail>
     
     var body: some View {
-        TabView {
+        TabView  {
             EmotionShareView()
-                .environmentObject(userData)
+                .environment(\.managedObjectContext, moc)
+                .environmentObject(dataController)
                 .tabItem {
                     Image(systemName: "plus")
                     Text("Main")
                 }
             Info()
+                .environment(\.managedObjectContext, moc)
+                .environmentObject(dataController)
                 .tabItem {
                     Image(systemName: "info.circle")
                     Text("Info")
                 }
-            Image(systemName: "chart.pie")
+            Analyze()
+                .environment(\.managedObjectContext, moc)
+                .environmentObject(dataController)
                 .tabItem {
                     Image(systemName: "chart.pie")
                     Text("Analyze")
                 }
         }
-    }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
     }
 }

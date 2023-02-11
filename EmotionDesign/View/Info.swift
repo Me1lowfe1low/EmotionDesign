@@ -12,24 +12,29 @@
 import SwiftUI
 
 struct Info: View {
-    private let emotionList: [GeneralEmotion] = GeneralEmotion.emotionSampleList
+    private let emotionList: [InitialEmotion] = Bundle.main.decode([InitialEmotion].self, from: "EmotionInitialList.json")
     
     var body: some View {
         Form {
             Section("Main info") {
-                ForEach(emotionList, id: \.self) { generalEmotion in
-                    Section(generalEmotion.name!) {
+                ForEach(emotionList, id: \.self) { mainEmotion in
+                    Section(header: Text(mainEmotion.name)
+                        .font(.title3)
+                        .bold()
+                    ) {
                         HStack(alignment: .center) {
-                            Text(generalEmotion.description!)
+                            Text(mainEmotion.description)
+                                .font(.callout)
                             Spacer()
                             RoundedRectangle(cornerRadius: 20)
                                 .fill(LinearGradient(gradient: Gradient(colors: [
-                                    generalEmotion.color.getColor,
-                                    generalEmotion.accentColor.getColor]),
-                                                     startPoint: .leading,
-                                                     endPoint: .trailing)
+                                ColorMap(rawValue: mainEmotion.color)!.getColor,
+                                ColorMap(rawValue: mainEmotion.accentColor)!.getColor]),
+                                                     startPoint: .topLeading,
+                                                     endPoint: .bottomTrailing)
                                      )
-                                .frame(width: 150, height: 75, alignment: .trailing)
+                                .frame(width: 150, alignment: .trailing)
+                                .scaledToFill()
                         }
                     }
                 }
