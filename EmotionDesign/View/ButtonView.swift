@@ -15,34 +15,46 @@ struct ButtonView: View {
     @Binding var element: EmotionDTO
 
     var body: some View {
-        HStack(alignment: .center, spacing: 0) {
-            VStack {
-                Text(element.emotion.name)
-                    .font(.title2)
-                    .padding(.horizontal)
-                    .foregroundColor(element.color)
-                Text(element.emotion.description)
-                    .padding(.horizontal)
-            }
-            Image(systemName: "arrow.right.circle.fill")
-                .resizable()
-                .scaledToFit()
+        ZStack {
+            //RoundedRectangle(cornerRadius: 20)
+            Capsule()
+                .stroke(.white, lineWidth: 4)
+                .frame(height: 150)
+            Capsule()
+                .opacity(0.8)
+                .frame(height: 150)
+                .scaledToFill()
+                .blendMode(.destinationOut)
+                .overlay(
+            HStack(alignment: .center, spacing: 0) {
+                Spacer()
+                VStack(alignment: .center) {
+                    Text(element.emotion.name)
+                        .font(.title2)
+                        .foregroundColor(element.color)
+                    Text(element.emotion.description)
+                        .font(.caption)
+                        .foregroundColor(.white)
+                        .lineLimit(nil)
+                }
+                .multilineTextAlignment(.center)
                 .padding()
-                .frame(width: 100, height: 100)
-                .foregroundColor(.gray)
+                Spacer()
+                Image(systemName: "arrow.right.circle.fill")
+                    .resizable()
+                    .scaledToFit()
+                    .padding()
+                    .frame(width: 150, height: 150, alignment: .trailing)
+                    .foregroundColor(.white)
+            })
         }
-        .overlay(
-        Capsule()
-        .fill(.gray)
-        .opacity(0.4)
-        .blendMode(.destinationOut)
-        )
+        .padding()
     }
 }
 
 
 struct ButtonView_Previews: PreviewProvider {
     static var previews: some View {
-        ButtonView(element: .constant(EmotionDTO(emotion: SubEmotion.emotionSample , color: .red )))
+        ButtonView(element: .constant(EmotionDTO(emotion: SubEmotion.emotionSample , color: .yellow )))
     }
 }

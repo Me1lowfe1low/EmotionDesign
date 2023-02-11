@@ -14,14 +14,30 @@ import Foundation
 import SwiftUI
 
 class DataController: ObservableObject {
-
-    init(_ context: NSManagedObjectContext, container: NSPersistentContainer) {
+    let container = NSPersistentContainer(name: "EmotionDesign")
+    
+    static var preview: DataController {
+        let storage = DataController(inMemory: true)
+        
+        let emotionDTO = EmotionDTO(emotion: SubEmotion.emotionSample, color: .yellow)
+        storage.createAndFillNewDayEntry(storage.container.viewContext, element: emotionDTO, comment: "No comments", date: Date())
+        
+        return storage
+    }
+ 
+    
+    init(inMemory: Bool = false) {
+        
+        if inMemory {
+            container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
+        }
+        
         container.loadPersistentStores { description, error in
             if let error = error {
                 print("Core Data failed to load: \(error.localizedDescription)")
                 return
             }
-            container.viewContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
+            self.container.viewContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
         }
     }
     

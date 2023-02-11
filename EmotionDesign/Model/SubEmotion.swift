@@ -18,7 +18,7 @@ struct SubEmotion: Identifiable, Hashable, Codable {
     var description: String = ""
     
 #if DEBUG
-static var emotionSample: SubEmotion = SubEmotion(name: "emotion#1", description: "Emotion description for the test puproses. The most common emotion in the world")
+static var emotionSample: SubEmotion = SubEmotion(name: "pride", description: "A feeling of pleasure and satisfaction that you get when you, or someone connected with you, have achieved something special")
 #endif
 }
 
