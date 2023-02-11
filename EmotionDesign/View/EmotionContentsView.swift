@@ -71,3 +71,12 @@ struct EmotionContentsView: View {
         }
     }
 }
+
+
+struct EmotionContentsView_Previews: PreviewProvider {
+    static var previews: some View {
+        EmotionContentsView()
+            .environment(\.managedObjectContext, DataController.preview.container.viewContext)
+            .environmentObject(DataController.preview)
+    }
+}

@@ -16,11 +16,34 @@ struct EmotionShareView: View {
     @EnvironmentObject var dataController: DataController
     
     var body: some View {
-        NavigationLink(destination: EmotionContentsView()
+        NavigationLink(destination:
+                        EmotionContentsView()
             .environment(\.managedObjectContext, moc)
             .environmentObject(dataController)
         ) {
-            Image(systemName: "plus")
+            ZStack {
+                Circle()
+                    .stroke(.white, lineWidth: 4)
+                    .padding()
+                Circle()
+                    .padding()
+                    .opacity(0.8)
+                    .blendMode(.destinationOut)
+                    .overlay(
+                        Image(systemName: "plus.circle")
+                            .resizable()
+                            .scaledToFit()
+                            .foregroundColor(.white)
+                    )
+            }
         }
+    }
+}
+
+struct EmotionShareView_Previews: PreviewProvider {
+    static var previews: some View {
+        EmotionShareView()
+            .environment(\.managedObjectContext, DataController.preview.container.viewContext)
+            .environmentObject(DataController.preview)
     }
 }

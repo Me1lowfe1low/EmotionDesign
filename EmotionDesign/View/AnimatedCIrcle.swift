@@ -40,3 +40,9 @@ struct AnimatedCircle: View {
         }
     }
 }
+
+struct AnimatedCircle_Previews: PreviewProvider {
+    static var previews: some View {
+        AnimatedCircle(emotion: InitialEmotion(name: "EmotionSample", description: "Description", color: "yellow", accentColor: "orangered", subEmotions: [SubEmotion.emotionSample]))
+    }
+}
