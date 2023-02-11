@@ -17,11 +17,11 @@ struct ButtonView: View {
     var body: some View {
         HStack(alignment: .center, spacing: 0) {
             VStack {
-                Text(element.emotion.name!)
+                Text(element.emotion.name)
                     .font(.title2)
                     .padding(.horizontal)
-                    .foregroundColor(element.colour)
-                Text(element.emotion.description!)
+                    .foregroundColor(element.color)
+                Text(element.emotion.description)
                     .padding(.horizontal)
             }
             Image(systemName: "arrow.right.circle.fill")
@@ -43,6 +43,6 @@ struct ButtonView: View {
 
 struct ButtonView_Previews: PreviewProvider {
     static var previews: some View {
-        ButtonView(element: .constant(EmotionDTO(emotion: Emotion.emotionSample , colour: .red )))
+        ButtonView(element: .constant(EmotionDTO(emotion: SubEmotion.emotionSample , color: .red )))
     }
 }

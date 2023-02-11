@@ -12,35 +12,34 @@
 import SwiftUI
 
 struct Analyze: View {
-    //@EnvironmentObject var userData : UserDetails
+    @Environment(\.managedObjectContext) var moc
+    @EnvironmentObject var dataController: DataController
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \DayDetail.date, ascending: false)]) var userDataSet: FetchedResults<DayDetail>
+    private let emotionJsonList: [InitialEmotion] = Bundle.main.decode([InitialEmotion].self, from: "EmotionInitialList.json")
     
     @State private var currentDate: Date = Date()
-    @State private var userData: UserDetails = UserDetails.userDetailsSample
-    @State private var genEmotions: [GeneralEmotion] = GeneralEmotion.emotionSampleList
     
     var body: some View {
         VStack {
             Form {
                 Section("Days picture") {
-                    ForEach(userData.info, id: \.self ) { day in
+                    ForEach(userDataSet, id: \.self ) { day in
                         LazyVGrid(columns: [GridItem(.flexible())]) {
                             HStack( alignment: .top) {
                                 ZStack {
-                                    ForEach(day.emotionList, id: \.self) { emotion in
-                                        AnimatedCircle(emotion: genEmotions[emotion.parentId])
+                                    ForEach(day.emotions , id: \.self) { emotion in
+                                        AnimatedCircle(emotion: emotionJsonList[emotion.wrappedParent] )
                                     }
                                 }
                                 .frame(width: 100, height: 100)
                                 .padding()
                                 Spacer()
                                 VStack(alignment: .leading) {
-                                    Section(header: Text(day.date, style: .date)) {
-                                        
+                                    Section(header: Text(day.wrappedDate, style: .date)) {
                                         Text("You felt: ")
-                                        ForEach(day.commentList, id: \.self) { comment in
-                                            if comment != "" {
-                                                Text(comment)
-                                            }
+                                        ForEach(day.uniqueEmotion , id: \.key) { emotion in
+                                            Text(emotion.key)
+                                                .frame(alignment: .center)
                                         }
                                     }
                                 }
@@ -49,28 +48,32 @@ struct Analyze: View {
                     }
                 }
             }
-           
             Section("Whole picture")
             {
                 ZStack {
-                    ForEach(userData.info, id: \.self ) { day in
+                    ForEach(userDataSet, id: \.self ) { day in
                         HStack {
-                            ForEach(day.emotionList, id: \.self) { emotion in
-                                AnimatedCircle(emotion: genEmotions[emotion.parentId])
+                            ForEach(day.emotions, id: \.self) { emotion in
+                                AnimatedCircle(emotion: emotionJsonList[emotion.wrappedParent])
                             }
-                            
                         }
                         .padding()
                     }
                 }
             }
             .padding()
+            Button("Clear all data") {
+                clearData()
+            }
         }
+    }
+    
+    func clearData() {
+        dataController.clearData(moc, data: userDataSet)
     }
 }
 
 struct Analyze_Previews: PreviewProvider {
-    
     static var previews: some View {
         Analyze()
     }

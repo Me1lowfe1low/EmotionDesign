@@ -12,26 +12,29 @@
 import SwiftUI
 
 struct EmotionContentsView: View {
-    @EnvironmentObject var userData : UserDetails
-    private let emotionList: [GeneralEmotion] = GeneralEmotion.emotionSampleList
-    @State private var emotionDTO: EmotionDTO = EmotionDTO(emotion: Emotion(), colour: .gray)
+    @Environment(\.managedObjectContext) var moc
+    @EnvironmentObject var dataController: DataController
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \DayDetail.date, ascending: false)]) var userDataSet: FetchedResults<DayDetail>
+    
+    private let emotionJsonList: [InitialEmotion] = Bundle.main.decode([InitialEmotion].self, from: "EmotionInitialList.json")
+    
+    @State private var emotionDTO: EmotionDTO = EmotionDTO(emotion: SubEmotion(), color: .gray)
     @State private var choice: Int = -1
     
     var body: some View {
         VStack {
-            //Toolbar with elements
             HStack(spacing: 0) {
                 Group{
-                    ForEach(emotionList.indices, id: \.self) { index in
-                        Text(emotionList[index].name!)
+                    ForEach(emotionJsonList.indices, id: \.self) { index in
+                        Text(emotionJsonList[index].name)
                             .font(.caption2)
                             .padding(.vertical)
                             .frame(maxWidth: .infinity)
                             .background(Rectangle()
                                 .fill(LinearGradient(gradient: Gradient(colors: [
-                                    emotionList[index].color.getColor,
-                                    emotionList[index].accentColor.getColor,
-                                    (index + 1) < emotionList.count ? emotionList[index+1].color.getColor : emotionList[index].accentColor.getColor]),
+                                    ColorMap(rawValue: emotionJsonList[index].color)!.getColor,
+                                    ColorMap(rawValue: emotionJsonList[index].accentColor)!.getColor,
+                                    (index + 1) < emotionJsonList.count ? ColorMap(rawValue: emotionJsonList[index+1].color)!.getColor : ColorMap(rawValue: emotionJsonList[index].accentColor)!.getColor]),
                                                      startPoint: .leading,
                                                      endPoint: .trailing)
                                      ))
@@ -39,7 +42,6 @@ struct EmotionContentsView: View {
                                 TapGesture()
                                     .onEnded {
                                         choice = index
-                                        print("You've just tapped # \(choice) button")
                                     }
                             )
                     }
@@ -47,9 +49,6 @@ struct EmotionContentsView: View {
             }
             .mask(RoundedRectangle(cornerRadius: 40))
             .padding()
-            
-            Text("There should be line with buttons")
-            //View that will hold all choosen emotions. Each would have it's shape
             Divider()
             VStack {
                 if ( choice == -1 ) {
@@ -57,57 +56,18 @@ struct EmotionContentsView: View {
                         .stroke(lineWidth: 4.0)
                         .opacity(0)
                 } else {
-                    ZStack {
-                        ScrollView {
-                            LazyVGrid(columns: [GridItem(.adaptive(minimum: 100))]) {
-                                ForEach(emotionList[choice].subEmotions.indices) { emotionId in
-                                    ZStack {
-                                        AnimatedCircle(emotion: emotionList[choice])
-                                        Text(emotionList[choice].subEmotions[emotionId].name!)
-                                            .font(.caption2)
-                                            .frame(width: 70, height: 70 ,alignment: .center)
-                                            .padding()
-                                            .fixedSize()
-                                            .background(LinearGradient(colors: [
-                                                emotionList[choice].color.getColor,
-                                                emotionList[choice].accentColor.getColor
-                                            ],
-                                                                       startPoint: .topLeading,
-                                                                       endPoint: .bottomTrailing), in: FireShape.Fire())
-                                            .gesture(
-                                                TapGesture()
-                                                    .onEnded {
-                                                        emotionDTO.setEmotion(emotionList[choice].subEmotions[emotionId], colour: emotionList[choice].color.getColor, chosen: true)
-                                                    }
-                                            )
-                                    }
-                                }
-                                .padding(.horizontal)
-                            }
-                            .padding(.horizontal)
-                        }
-                    }
-                    .padding(.horizontal)
-                    //Button
+                    ElementsView(choice: $choice, emotionDTO:  $emotionDTO)
                     if emotionDTO.chosen {
                         NavigationLink(destination: EmotionDetailsView(element: $emotionDTO)
-                            .environmentObject(userData))
+                            .environment(\.managedObjectContext, moc)
+                            .environmentObject(dataController)
+                        )
                         {
                             ButtonView(element: $emotionDTO )
                         }
                     }
                 }
             }
-        }
-    }
-}
-    
-
-
-struct EmotionContentsView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationView {
-            EmotionContentsView()
         }
     }
 }

@@ -13,13 +13,13 @@ import Foundation
 import SwiftUI
 
 struct EmotionDTO {
-    var emotion: Emotion
-    var colour: Color
+    var emotion: SubEmotion
+    var color: Color
     var chosen: Bool = false
     
-    mutating func setEmotion(_ emotion: Emotion, colour: Color, chosen: Bool) {
+    mutating func setEmotion(_ emotion: SubEmotion, color: Color, chosen: Bool) {
         self.emotion = emotion
-        self.colour = colour
+        self.color = color
         self.chosen = chosen
     }
 }
