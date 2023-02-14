@@ -67,6 +67,7 @@ struct EmotionContentsView: View {
                         {
                             ButtonView(element: $emotionDTO )
                         }
+                        .buttonStyle(PlainButtonStyle())
                     }
                 }
             }

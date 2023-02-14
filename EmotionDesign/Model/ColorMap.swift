@@ -15,6 +15,8 @@ import SwiftUI
 enum ColorMap: String, CaseIterable, Identifiable {
     case gray
     case green
+    case brightgreen
+    case chartreuse
     case blue
     case orangered
     case silver

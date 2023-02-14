@@ -32,8 +32,7 @@ struct Info: View {
                                                      startPoint: .topLeading,
                                                      endPoint: .bottomTrailing)
                                      )
-                                .frame(width: 150, alignment: .trailing)
-                                .scaledToFill()
+                                .frame(width: 150, height: 200, alignment: .trailing)
                         }
                     }
                 }
