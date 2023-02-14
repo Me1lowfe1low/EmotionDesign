@@ -12,9 +12,10 @@
 import SwiftUI
 
 struct EmotionDetailsView: View {
+    @EnvironmentObject var dataController: DataController
     @Environment(\.managedObjectContext) var moc
     @Environment(\.dismiss) private var dismiss
-    @EnvironmentObject var dataController: DataController
+    
     @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \DayDetail.date, ascending: false)]) var userDataSet: FetchedResults<DayDetail>
 
     @Binding var element: EmotionDTO
@@ -50,5 +51,7 @@ struct EmotionDetailsView: View {
 struct EmotionDetailsView_Previews: PreviewProvider {
     static var previews: some View {
         EmotionDetailsView(element: .constant(EmotionDTO(emotion: SubEmotion.emotionSample, color: .red)))
+            .environmentObject(DataController.preview)
+            .environment(\.managedObjectContext, DataController.preview.container.viewContext)
     }
 }

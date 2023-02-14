@@ -27,14 +27,12 @@ struct Info: View {
                                 .font(.callout)
                             Spacer()
                             RoundedRectangle(cornerRadius: 20)
-                                .fill(LinearGradient(gradient: Gradient(colors: [
-                                ColorMap(rawValue: mainEmotion.color)!.getColor,
-                                ColorMap(rawValue: mainEmotion.accentColor)!.getColor]),
+                                .fill(LinearGradient(gradient: Gradient(colors:
+                                    mainEmotion.returnColors()),
                                                      startPoint: .topLeading,
                                                      endPoint: .bottomTrailing)
                                      )
-                                .frame(width: 150, alignment: .trailing)
-                                .scaledToFill()
+                                .frame(width: 150, height: 200, alignment: .trailing)
                         }
                     }
                 }

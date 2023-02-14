@@ -20,9 +20,8 @@ struct AnimatedCircle: View {
         ForEach(1...3, id: \.self) { _ in
             Circle()
                 .offset(x: CGFloat.random(in: -20...20)*CGFloat(multiplier.randomElement() ?? 1), y: CGFloat.random(in: -20...20)*CGFloat(multiplier.randomElement() ?? 1))
-                .fill(LinearGradient(colors: [
-                    ColorMap(rawValue: emotion.color)!.getColor,
-                    ColorMap(rawValue: emotion.accentColor)!.getColor],
+                .fill(LinearGradient(colors:
+                                        emotion.returnColors(),
                                      startPoint: .topLeading,
                                      endPoint: .bottomTrailing))
                 .opacity(Double.random(in: 0.1...0.5))

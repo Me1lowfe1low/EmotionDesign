@@ -14,7 +14,6 @@ import SwiftUI
 struct ContentView: View {
     @Environment(\.managedObjectContext) var moc
     @EnvironmentObject var dataController: DataController
-    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \DayDetail.date, ascending: false)]) var userDataSet: FetchedResults<DayDetail>
     
     var body: some View {
         TabView  {
@@ -26,15 +25,11 @@ struct ContentView: View {
                     Text("Main")
                 }
             Info()
-                .environment(\.managedObjectContext, moc)
-                .environmentObject(dataController)
                 .tabItem {
                     Image(systemName: "info.circle")
                     Text("Info")
                 }
             Analyze()
-                .environment(\.managedObjectContext, moc)
-                .environmentObject(dataController)
                 .tabItem {
                     Image(systemName: "chart.pie")
                     Text("Analyze")

@@ -48,7 +48,10 @@ struct Analyze: View {
                     }
                 }
             }
-            Section("Whole picture")
+            Section(header: Text("Whole picture")
+                .font(.caption)
+                .textCase(.uppercase)
+            )
             {
                 ZStack {
                     ForEach(userDataSet, id: \.self ) { day in

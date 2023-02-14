@@ -14,6 +14,7 @@ import SwiftUI
 struct EmotionShareView: View {
     @Environment(\.managedObjectContext) var moc
     @EnvironmentObject var dataController: DataController
+    private let emotionJsonList: [InitialEmotion] = Bundle.main.decode([InitialEmotion].self, from: "EmotionInitialList.json")
     
     var body: some View {
         NavigationLink(destination:
@@ -22,21 +23,26 @@ struct EmotionShareView: View {
             .environmentObject(dataController)
         ) {
             ZStack {
-                Circle()
-                    .stroke(.white, lineWidth: 4)
-                    .padding()
-                Circle()
-                    .padding()
-                    .opacity(0.8)
-                    .blendMode(.destinationOut)
-                    .overlay(
-                        Image(systemName: "plus.circle")
-                            .resizable()
-                            .scaledToFit()
-                            .foregroundColor(.white)
-                    )
+                LinearGradient(colors:
+                    getColorList(), startPoint: .top, endPoint: .trailing)
+                .scaledToFit()
+                .mask(
+                    Image(systemName: "plus.circle")
+                        .resizable()
+                        .scaledToFit()
+                        .padding()
+                )
             }
         }
+    }
+    
+    func getColorList() -> [Color] {
+        var colorList = [Color]()
+        emotionJsonList.forEach { element in
+            colorList.append(element.getColor())
+            colorList.append(element.getAccentColor())
+        }
+        return colorList
     }
 }
 

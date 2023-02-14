@@ -78,7 +78,7 @@
     {
         "name": "Enjoyment",
         "description": "Enjoyment is a positive affective state that occurs when a person engages in an experience or activity that satisfies a desire, goal, or need, including but not limited to the need for pleasure, meaning, security, safety, sustenance, esteem, belongingness, or love",
-        "color": "buttercup",
+        "color": "brightgreen",
         "accentColor": "green",
         "subEmotions": [
             {
