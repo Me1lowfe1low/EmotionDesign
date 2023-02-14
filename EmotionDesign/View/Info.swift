@@ -27,9 +27,8 @@ struct Info: View {
                                 .font(.callout)
                             Spacer()
                             RoundedRectangle(cornerRadius: 20)
-                                .fill(LinearGradient(gradient: Gradient(colors: [
-                                ColorMap(rawValue: mainEmotion.color)!.getColor,
-                                ColorMap(rawValue: mainEmotion.accentColor)!.getColor]),
+                                .fill(LinearGradient(gradient: Gradient(colors:
+                                    mainEmotion.returnColors()),
                                                      startPoint: .topLeading,
                                                      endPoint: .bottomTrailing)
                                      )

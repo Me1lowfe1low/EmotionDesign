@@ -10,6 +10,7 @@
 // Could be used in educational purposes 
 
 import Foundation
+import SwiftUI
 
 struct InitialEmotion: Identifiable, Hashable, Codable {
     let id = UUID()
@@ -18,4 +19,20 @@ struct InitialEmotion: Identifiable, Hashable, Codable {
     var color: String
     let accentColor: String
     var subEmotions: [SubEmotion]
+    
+
+    func getColor() -> Color {
+        ColorMap(rawValue: color)!.getColor
+    }
+    
+    func getAccentColor() -> Color {
+        ColorMap(rawValue: accentColor)!.getColor
+    }
+    
+    func returnColors() -> [Color] {
+        var colorList: [Color] = []
+        colorList.append(getColor())
+        colorList.append(getAccentColor())
+        return colorList
+    }
 }

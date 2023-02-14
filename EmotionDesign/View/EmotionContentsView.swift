@@ -14,7 +14,7 @@ import SwiftUI
 struct EmotionContentsView: View {
     @Environment(\.managedObjectContext) var moc
     @EnvironmentObject var dataController: DataController
-    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \DayDetail.date, ascending: false)]) var userDataSet: FetchedResults<DayDetail>
+    
     
     private let emotionJsonList: [InitialEmotion] = Bundle.main.decode([InitialEmotion].self, from: "EmotionInitialList.json")
     
@@ -24,27 +24,29 @@ struct EmotionContentsView: View {
     var body: some View {
         VStack {
             HStack(spacing: 0) {
-                Group{
-                    ForEach(emotionJsonList.indices, id: \.self) { index in
-                        Text(emotionJsonList[index].name)
-                            .font(.caption2)
-                            .padding(.vertical)
-                            .frame(maxWidth: .infinity)
-                            .background(Rectangle()
-                                .fill(LinearGradient(gradient: Gradient(colors: [
-                                    ColorMap(rawValue: emotionJsonList[index].color)!.getColor,
-                                    ColorMap(rawValue: emotionJsonList[index].accentColor)!.getColor,
-                                    (index + 1) < emotionJsonList.count ? ColorMap(rawValue: emotionJsonList[index+1].color)!.getColor : ColorMap(rawValue: emotionJsonList[index].accentColor)!.getColor]),
-                                                     startPoint: .leading,
-                                                     endPoint: .trailing)
-                                     ))
-                            .gesture(
-                                TapGesture()
-                                    .onEnded {
-                                        choice = index
-                                    }
-                            )
-                    }
+                ForEach(emotionJsonList.indices, id: \.self) { index in
+                    Text(emotionJsonList[index].name)
+                        .font(.caption2)
+                        .foregroundColor(.black)
+                        .bold()
+                        .padding(.vertical)
+                        .frame(maxWidth: .infinity)
+                        .background(Rectangle()
+                            .fill(
+                                LinearGradient(gradient: Gradient(colors: [
+                                    emotionJsonList[index].getColor(),
+                                    emotionJsonList[index].getAccentColor(),
+                                    (index + 1) < emotionJsonList.count ? emotionJsonList[index+1].getColor() :  emotionJsonList[index].getAccentColor()
+                                ]),
+                                               startPoint: .leading,
+                                               endPoint: .trailing)
+                            ))
+                        .gesture(
+                            TapGesture()
+                                .onEnded {
+                                    choice = index
+                                }
+                        )
                 }
             }
             .mask(RoundedRectangle(cornerRadius: 40))
@@ -76,7 +78,6 @@ struct EmotionContentsView: View {
 struct EmotionContentsView_Previews: PreviewProvider {
     static var previews: some View {
         EmotionContentsView()
-            .environment(\.managedObjectContext, DataController.preview.container.viewContext)
-            .environmentObject(DataController.preview)
     }
 }
+

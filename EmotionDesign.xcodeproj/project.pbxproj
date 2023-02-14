@@ -11,7 +11,7 @@
 		512DEBB02993BBEA004DEB04 /* AnimatedCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 512DEBAF2993BBEA004DEB04 /* AnimatedCircle.swift */; };
 		512DEBB22993C184004DEB04 /* Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = 512DEBB12993C184004DEB04 /* Info.swift */; };
 		512DEBB42993CACF004DEB04 /* Analyze.swift in Sources */ = {isa = PBXBuildFile; fileRef = 512DEBB32993CACF004DEB04 /* Analyze.swift */; };
-		5140773129961AF200585A88 /* JsonReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5140773029961AF200585A88 /* JsonReader.swift */; };
+		5140773129961AF200585A88 /* JSONReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5140773029961AF200585A88 /* JSONReader.swift */; };
 		514077332996326800585A88 /* EmotionInitialList.json in Resources */ = {isa = PBXBuildFile; fileRef = 514077322996326800585A88 /* EmotionInitialList.json */; };
 		514077352996349F00585A88 /* InitialEmotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 514077342996349F00585A88 /* InitialEmotion.swift */; };
 		51407739299668D700585A88 /* ElementsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51407738299668D700585A88 /* ElementsView.swift */; };
@@ -39,7 +39,7 @@
 		512DEBAF2993BBEA004DEB04 /* AnimatedCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedCircle.swift; sourceTree = "<group>"; };
 		512DEBB12993C184004DEB04 /* Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Info.swift; sourceTree = "<group>"; };
 		512DEBB32993CACF004DEB04 /* Analyze.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Analyze.swift; path = EmotionDesign/View/Analyze.swift; sourceTree = SOURCE_ROOT; };
-		5140773029961AF200585A88 /* JsonReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonReader.swift; sourceTree = "<group>"; };
+		5140773029961AF200585A88 /* JSONReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONReader.swift; sourceTree = "<group>"; };
 		514077322996326800585A88 /* EmotionInitialList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = EmotionInitialList.json; sourceTree = "<group>"; };
 		514077342996349F00585A88 /* InitialEmotion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialEmotion.swift; sourceTree = "<group>"; };
 		51407738299668D700585A88 /* ElementsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementsView.swift; sourceTree = "<group>"; };
@@ -149,7 +149,7 @@
 				514077462996D23900585A88 /* DayDetail+CoreDataClass.swift */,
 				514077472996D23900585A88 /* DayDetail+CoreDataProperties.swift */,
 				5162FBE2299574D500E34A85 /* DataController.swift */,
-				5140773029961AF200585A88 /* JsonReader.swift */,
+				5140773029961AF200585A88 /* JSONReader.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -203,7 +203,6 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
-				Base,
 			);
 			mainGroup = 51D4150E298132BB001D367B;
 			productRefGroup = 51D41518298132BC001D367B /* Products */;
@@ -246,7 +245,7 @@
 				5162FBE3299574D500E34A85 /* DataController.swift in Sources */,
 				5162FBD9299567CA00E34A85 /* EmotionDesign.xcdatamodeld in Sources */,
 				512DEBB42993CACF004DEB04 /* Analyze.swift in Sources */,
-				5140773129961AF200585A88 /* JsonReader.swift in Sources */,
+				5140773129961AF200585A88 /* JSONReader.swift in Sources */,
 				5140774A2996D23900585A88 /* DayDetail+CoreDataClass.swift in Sources */,
 				514077482996D23900585A88 /* Emotion+CoreDataClass.swift in Sources */,
 				514077492996D23900585A88 /* Emotion+CoreDataProperties.swift in Sources */,

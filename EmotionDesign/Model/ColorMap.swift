@@ -13,29 +13,29 @@
 import SwiftUI
 
 enum ColorMap: String, CaseIterable, Identifiable {
-    case gray = "gray"
-    case green = "green"
-    case blue = "blue"
-    case orangered = "orangered"
-    case silver = "silver"
-    case forestgreen = "forestgreen"
+    case gray
+    case green
+    case blue
+    case orangered
+    case silver
+    case forestgreen
     case lightyellow4 = "lightyellow4"
-    case bubblegum = "bubblegum"
-    case buttercup = "buttercup"
-    case indigo = "indigo"
-    case lavender = "lavender"
-    case magenta = "magenta"
-    case navy = "navy"
-    case orange = "orange"
-    case oxblood = "oxblood"
-    case periwinkle = "periwinkle"
-    case poppy = "poppy"
-    case purple = "purple"
-    case seafoam = "seafoam"
-    case sky = "sky"
-    case tan = "tan"
-    case teal = "teal"
-    case yellow = "yellow"
+    case bubblegum
+    case buttercup
+    case indigo
+    case lavender
+    case magenta
+    case navy
+    case orange
+    case oxblood
+    case periwinkle
+    case poppy
+    case purple
+    case seafoam
+    case sky
+    case tan
+    case teal
+    case yellow
     
     var id: String {
         return self.rawValue

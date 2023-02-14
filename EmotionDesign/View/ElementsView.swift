@@ -25,19 +25,20 @@ struct ElementsView: View {
                             AnimatedCircle(emotion: emotionJsonList[choice])
                             Text(emotion.name)
                                 .font(.caption2)
+                                .foregroundColor(.black)
+                                .bold()
                                 .frame(width: 70, height: 70 ,alignment: .center)
                                 .padding()
                                 .fixedSize()
-                                .background(LinearGradient(colors: [
-                                    ColorMap(rawValue: emotionJsonList[choice].color)!.getColor,
-                                    ColorMap(rawValue: emotionJsonList[choice].accentColor)!.getColor
-                                ],
-                                                           startPoint: .topLeading,
-                                                           endPoint: .bottomTrailing), in: FireShape.Fire())
+                                .background(
+                                    LinearGradient(colors:
+                                                    emotionJsonList[choice].returnColors(),
+                                                   startPoint: .topLeading,
+                                                   endPoint: .bottomTrailing), in: FireShape.Fire())
                                 .gesture(
                                     TapGesture()
                                         .onEnded {
-                                            emotionDTO.setEmotion(emotion, color: ColorMap(rawValue: emotionJsonList[choice].color)!.getColor, chosen: true)
+                                            emotionDTO.setEmotion(emotion, color: emotionJsonList[choice].getColor(), chosen: true)
                                         }
                                 )
                         }

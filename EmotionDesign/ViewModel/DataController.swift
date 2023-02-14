@@ -16,6 +16,7 @@ import SwiftUI
 class DataController: ObservableObject {
     let container = NSPersistentContainer(name: "EmotionDesign")
     
+    
     static var preview: DataController {
         let storage = DataController(inMemory: true)
         
@@ -82,9 +83,7 @@ class DataController: ObservableObject {
     }
     
     func saveData(_ context: NSManagedObjectContext, data: FetchedResults<DayDetail>, element: EmotionDTO, comment: String, date: Date) {
-        if data.isEmpty {
-            createAndFillNewDayEntry(context, element: element, comment: comment, date: date)
-        } else {
+        guard data.first == nil else {
             var dateFound = false
             data.forEach {
                 if Calendar.current.isDate( $0.wrappedDate , equalTo: Date(), toGranularity: .day ) {
@@ -95,7 +94,10 @@ class DataController: ObservableObject {
             if dateFound == false {
                 createAndFillNewDayEntry(context, element: element, comment: comment, date: date)
             }
+            
+            return
         }
+        createAndFillNewDayEntry(context, element: element, comment: comment, date: date)
     }
     
     func clearData(_ context: NSManagedObjectContext, data: FetchedResults<DayDetail>) {
