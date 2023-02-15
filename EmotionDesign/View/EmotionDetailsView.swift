@@ -17,27 +17,35 @@ struct EmotionDetailsView: View {
     @Environment(\.dismiss) private var dismiss
     
     @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \DayDetail.date, ascending: false)]) var userDataSet: FetchedResults<DayDetail>
-
+    private let emotionJsonList: [InitialEmotion] = Bundle.main.decode([InitialEmotion].self, from: "EmotionInitialList.json")
+    
     @Binding var element: EmotionDTO
     @State var description: String = ""
     @State var initialDate: Date = Date()
     
     var body: some View {
-        Form {
-            Section(header: Text(element.emotion.name)) {
-                TextField("Description", text: $description)
-                HStack {
-                    Text(initialDate, style: .date)
-                    Text(initialDate, style: .time)
+        VStack {
+            LinearGradient(colors: emotionJsonList[element.emotion.parent].returnColors(),
+                                                               startPoint: .topLeading,
+                           endPoint: .bottomTrailing)
+            .mask( FireShape.Fire())
+                .padding()
+            Form {
+                Section(header: Text(element.emotion.name)) {
+                    TextField("Description", text: $description)
+                    HStack {
+                        Text(initialDate, style: .date)
+                        Text(initialDate, style: .time)
+                    }
                 }
+                Text("Commit")
+                    .gesture(
+                        TapGesture()
+                            .onEnded {
+                                processTheEntry()
+                            }
+                    )
             }
-            Text("Commit")
-                .gesture(
-                    TapGesture()
-                        .onEnded {
-                            processTheEntry()
-                        }
-                )
         }
     }
     

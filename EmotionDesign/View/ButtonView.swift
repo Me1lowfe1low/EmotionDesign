@@ -32,7 +32,7 @@ struct ButtonView: View {
                         .font(.title)
                         .bold()
                         .foregroundColor(element.color)
-                        .shadow(color: .black, radius: 0.5)
+                        .shadow(radius: 0.5)
                     Text(element.emotion.description)
                         .font(.caption)
                         .lineLimit(nil)

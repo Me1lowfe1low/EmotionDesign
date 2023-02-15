@@ -82,6 +82,11 @@ class DataController: ObservableObject {
         saveContext(context)
     }
     
+    func delete(_ context: NSManagedObjectContext, day: DayDetail ) {
+        context.delete(day)
+        saveContext(context)
+    }
+    
     func saveData(_ context: NSManagedObjectContext, data: FetchedResults<DayDetail>, element: EmotionDTO, comment: String, date: Date) {
         guard data.first == nil else {
             var dateFound = false

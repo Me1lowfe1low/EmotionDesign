@@ -22,38 +22,36 @@ struct ElementsView: View {
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 100))]) {
                     ForEach(emotionJsonList[choice].subEmotions, id: \.id) { emotion in
                         ZStack {
-                            AnimatedCircle(emotion: emotionJsonList[choice])
-                            Text(emotion.name)
-                                .font(.caption2)
-                                .foregroundColor(.black)
-                                .bold()
-                                .frame(width: 70, height: 70 ,alignment: .center)
-                                .padding()
-                                .fixedSize()
-                                .background(
-                                    LinearGradient(colors:
-                                                    emotionJsonList[choice].returnColors(),
-                                                   startPoint: .topLeading,
-                                                   endPoint: .bottomTrailing), in: FireShape.Fire())
-                                .gesture(
-                                    TapGesture()
-                                        .onEnded {
-                                            emotionDTO.setEmotion(emotion, color: emotionJsonList[choice].getColor(), chosen: true)
-                                        }
+                            Circle()
+                                .stroke(emotionJsonList[choice].getColor(), lineWidth: 4)
+                                .shadow(radius: 0.5)
+                                .overlay(
+                                    Text(emotion.name)
+                                        .font(.caption2)
+                                        .bold()
+                                        .frame(width: 80, height: 80 ,alignment: .center)
+                                        .fixedSize()
+                                        .scaledToFit()
+                                        .gesture(
+                                            TapGesture()
+                                                .onEnded {
+                                                    emotionDTO.setEmotion(emotion, color: emotionJsonList[choice].getColor(), chosen: true)
+                                                }
+                                        )
                                 )
                         }
                     }
-                    .padding(.horizontal)
+                    .padding()
                 }
                 .padding(.horizontal)
             }
         }
-        .padding(.horizontal)
+        .padding()
     }
 }
 
 struct ElementsView_Previews: PreviewProvider {
     static var previews: some View {
-        ElementsView(choice: .constant(0), emotionDTO: .constant(EmotionDTO(emotion: SubEmotion(), color: .gray)))
+        ElementsView(choice: .constant(0), emotionDTO: .constant(EmotionDTO(emotion: SubEmotion(), color: .green)))
     }
 }
