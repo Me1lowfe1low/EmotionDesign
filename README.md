@@ -1,6 +1,6 @@
 # This project implements EmotionDesign app
 
-![EmotionDesignlogo.png](Images/EmotionDesignLogo.png)
+![EmotionDesignlogo.png](EmotionDesign/Images/EmotionDesignLogo.png)
 
 > EmotionDesign is a service that will help users to control their emotions,\
 > it will hold data per day with the ability to show total graph with emotions
@@ -31,7 +31,7 @@ This application was created with intention to help users to control and analyze
 
 | Dark Theme | Light Theme |
 | --- | --- |
-|![0_mainWindow_darkTheme.jpg](Images/0_mainWindow_darkTheme.jpg)|![0_mainWindow_darkTheme.jpg](Images/0_mainWindow_darkTheme.jpg)|
+|![0_mainWindow_darkTheme.jpg](EmotionDesign/Images/0_mainWindow_darkTheme.jpg)|![0_mainWindow_darkTheme.jpg](EmotionDesign/Images/0_mainWindow_darkTheme.jpg)|
 
 
 [Back to the table of contents ⬆](#TableOfContents)
