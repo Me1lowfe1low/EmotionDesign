@@ -18,21 +18,26 @@ struct Analyze: View {
     private let emotionJsonList: [InitialEmotion] = Bundle.main.decode([InitialEmotion].self, from: "EmotionInitialList.json")
     
     @State private var currentDate: Date = Date()
+    @State private var isConfirmed: Bool = false
     
     var body: some View {
-        VStack {
-            Form {
-                Section("Days picture") {
+        VStack(alignment: .leading) {
+            Section(header: Text("Days picture")
+                .font(.caption)
+                .textCase(.uppercase)
+            ) {
+                List {
                     ForEach(userDataSet, id: \.self ) { day in
                         LazyVGrid(columns: [GridItem(.flexible())]) {
                             HStack( alignment: .top) {
                                 ZStack {
                                     ForEach(day.emotions , id: \.self) { emotion in
-                                        AnimatedCircle(emotion: emotionJsonList[emotion.wrappedParent] )
+                                        AnimatedCircle( emotion: emotionJsonList[emotion.wrappedParent] )
                                     }
                                 }
                                 .frame(width: 100, height: 100)
                                 .padding()
+                                
                                 Spacer()
                                 VStack(alignment: .leading) {
                                     Section(header: Text(day.wrappedDate, style: .date)) {
@@ -46,13 +51,14 @@ struct Analyze: View {
                             }
                         }
                     }
+                    .onDelete(perform: delete)
                 }
             }
+            .padding()
             Section(header: Text("Whole picture")
                 .font(.caption)
                 .textCase(.uppercase)
-            )
-            {
+            ){
                 ZStack {
                     ForEach(userDataSet, id: \.self ) { day in
                         HStack {
@@ -65,15 +71,30 @@ struct Analyze: View {
                 }
             }
             .padding()
-            Button("Clear all data") {
-                clearData()
+            Button("Clear all data", role: .destructive) {
+                isConfirmed = true
             }
+            .confirmationDialog("Are you sure?", isPresented: $isConfirmed ) {
+                Button("Clear", role: .destructive)
+                {
+                    clearData()
+                }
+            }
+            .padding()
         }
+        .padding()
     }
     
     func clearData() {
         dataController.clearData(moc, data: userDataSet)
     }
+    
+    func delete(at offsets: IndexSet) {
+        for offset in offsets {
+            dataController.delete(moc, day: userDataSet[offset])
+        }
+    }
+
 }
 
 struct Analyze_Previews: PreviewProvider {
