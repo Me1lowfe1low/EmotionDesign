@@ -32,7 +32,6 @@ A brief description about the project:
 - [x] The project uses [MVVM](https://en.wikipedia.org/wiki/Model–view–viewmodel) model  
 - [x] The initial data is holded in json file, thus, it is easy to add new data to the app 
 - [x] Persistence of data is achieved by using [Core Data](https://developer.apple.com/documentation/coredata) 
-- [x] 
 
 
 [Back to the table of contents ⬆](#TableOfContents)
