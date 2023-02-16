@@ -4,8 +4,8 @@
 <img src="EmotionDesign/Images/EmotionDesignLogo.png" width="200" height="200">
 </p>
 
-> EmotionDesign is a service that will help users to control their emotions,\
-> it will hold data per day with the ability to show total graph with emotions
+> EmotionDesign is an app that allows users to track their emotions daily \
+> and analyse the range of their feelings over time using statistics.
 
 # <a name="TableOfContents">Table of contents</a>
 + [Description](#Description)
