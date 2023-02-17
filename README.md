@@ -7,7 +7,8 @@
 > EmotionDesign is an app that allows users to track their emotions daily \
 > and analyse the range of their feelings over time using statistics.
 
-# <a name="TableOfContents">Table of contents</a>
+<a id="TableOfContents"></a>
+# Table of contents
 + [Description](#Description)
     + [Technology](#Technology)
     + [Main view](#MainView)
@@ -36,7 +37,8 @@ A brief description about the project:
 
 [Back to the table of contents ⬆](#TableOfContents)
 
-## <a name="MainView">Main view</a>
+<a id="MainView"></a>
+## Main view
 At the main view there is a TabView with 3 tabs that one could find below. \
 All tabs are interactive and would be described further in this guide.
 
@@ -44,7 +46,8 @@ All tabs are interactive and would be described further in this guide.
 
 [Back to the table of contents ⬆](#TableOfContents)
 
-### <a name="AddEntry">Add entry tab</a>
+<a id="AddEntry"></a>
+### Add entry tab
 This is the first tab that user could find in the app. By pressing the button the user would be navigated further to \
 the [Initial emotion selection tab](#InitialEmotion), there they could choos one of the several initial emotions.
 
@@ -54,7 +57,8 @@ the [Initial emotion selection tab](#InitialEmotion), there they could choos one
 
 [Back to the table of contents ⬆](#TableOfContents)
 
-### <a name="Info">Info tab</a>
+<a id="Info"></a>
+### Info tab
 This tab provides a brief description of initial emotions that you may face. 
 
 | Dark Theme | Light Theme |
@@ -63,7 +67,8 @@ This tab provides a brief description of initial emotions that you may face.
 
 [Back to the table of contents ⬆](#TableOfContents)
 
-### <a name="Analysis">Analysis tab</a>
+<a id="Analysis"></a>
+### Analysis tab
 At the Analysys tab there are two sections: the first section provides information about emotions users felt day by day \
 The second section describes in graphical manner all emotions that were added to the history by the user. \
 Users could review all this data, delete exact days from their emotion history or clear all the data. 
@@ -80,7 +85,8 @@ Light Theme
 
 [Back to the table of contents ⬆](#TableOfContents)
 
-## <a name="InitialEmotion">Initial emotion selection tab</a>
+<a id="InitialEmotion"></a>
+## Initial emotion selection tab
 Initial Emotion tab is an auxiliarytab, that is performed in a gradient line with initial emotions on it. \
 Line is clickable, so users could chose the general emotion they felt. After choosen one of the emotions, \
 the relevant common emotions are being listed below 
@@ -91,7 +97,8 @@ the relevant common emotions are being listed below
 
 [Back to the table of contents ⬆](#TableOfContents)
 
-###  <a name="CommonEmotion">Common emotion selection</a>
+<a id="CommonEmotion"></a>
+###  Common emotion selection
 This view is fully interactive. And user could chose one of the emotions they've felt. \
 TO confirm the choice the button belove should be pressed, thus, the user will be redirected to the additional view.
 
@@ -101,7 +108,8 @@ TO confirm the choice the button belove should be pressed, thus, the user will b
 
 [Back to the table of contents ⬆](#TableOfContents)
 
-###  <a name="SaveEmotion">Add emotion to history</a>
+<a id="SaveEmotion"></a>
+###  Add emotion to history
 At this view users could comment their emotion choice or leave it empty as it is. \
 To add chosen emotions to the history users should press the 'confirm' button.
 
