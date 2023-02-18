@@ -22,8 +22,8 @@
 # <a name="Description">Description</a>
 
 This application was created with intention to help users to control and analyze their emotions. \
-It contains a wide range of emotions that user could choose and review an infographycs in day slices \
-Finally one could review how all emotions they felt are accumulated in the colorfull graph. \
+It contains a wide range of emotions that user could choose and review an infographics in day slices \
+Finally one could review how all emotions they felt are accumulated in the colorful graph. \
 The less negative emotions were felt - the clearer would be the image.
 
 [Back to the table of contents ⬆](#TableOfContents)
