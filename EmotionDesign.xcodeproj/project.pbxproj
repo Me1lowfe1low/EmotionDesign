@@ -26,6 +26,8 @@
 		5186757B29853123006BE4D0 /* FireShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5186757A29853123006BE4D0 /* FireShape.swift */; };
 		5186757F298655AB006BE4D0 /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5186757E298655AB006BE4D0 /* ButtonView.swift */; };
 		518675812986E6E0006BE4D0 /* EmotionDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518675802986E6E0006BE4D0 /* EmotionDTO.swift */; };
+		5190C78E29A0E8A200E4E2B0 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5190C78D29A0E8A200E4E2B0 /* InfoView.swift */; };
+		51A07DDB29A3FA37009F18A0 /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51A07DDA29A3FA37009F18A0 /* Schedule.swift */; };
 		51D4151B298132BC001D367B /* EmotionDesignApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51D4151A298132BC001D367B /* EmotionDesignApp.swift */; };
 		51D4151D298132BC001D367B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51D4151C298132BC001D367B /* ContentView.swift */; };
 		51D4151F298132BF001D367B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 51D4151E298132BF001D367B /* Assets.xcassets */; };
@@ -54,6 +56,8 @@
 		5186757A29853123006BE4D0 /* FireShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireShape.swift; sourceTree = "<group>"; };
 		5186757E298655AB006BE4D0 /* ButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonView.swift; sourceTree = "<group>"; };
 		518675802986E6E0006BE4D0 /* EmotionDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmotionDTO.swift; sourceTree = "<group>"; };
+		5190C78D29A0E8A200E4E2B0 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
+		51A07DDA29A3FA37009F18A0 /* Schedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
 		51D41517298132BC001D367B /* EmotionDesign.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EmotionDesign.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		51D4151A298132BC001D367B /* EmotionDesignApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmotionDesignApp.swift; sourceTree = "<group>"; };
 		51D4151C298132BC001D367B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -134,9 +138,11 @@
 				5186757E298655AB006BE4D0 /* ButtonView.swift */,
 				51F067F2299003CB00972459 /* EmotionDetailsView.swift */,
 				512DEBB12993C184004DEB04 /* Info.swift */,
+				5190C78D29A0E8A200E4E2B0 /* InfoView.swift */,
 				512DEBB32993CACF004DEB04 /* Analyze.swift */,
 				5186757A29853123006BE4D0 /* FireShape.swift */,
 				512DEBAF2993BBEA004DEB04 /* AnimatedCircle.swift */,
+				51A07DDA29A3FA37009F18A0 /* Schedule.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -238,6 +244,7 @@
 				51407739299668D700585A88 /* ElementsView.swift in Sources */,
 				51F067F3299003CB00972459 /* EmotionDetailsView.swift in Sources */,
 				5140774B2996D23900585A88 /* DayDetail+CoreDataProperties.swift in Sources */,
+				51A07DDB29A3FA37009F18A0 /* Schedule.swift in Sources */,
 				514077352996349F00585A88 /* InitialEmotion.swift in Sources */,
 				51D4151D298132BC001D367B /* ContentView.swift in Sources */,
 				518675812986E6E0006BE4D0 /* EmotionDTO.swift in Sources */,
@@ -247,6 +254,7 @@
 				512DEBB42993CACF004DEB04 /* Analyze.swift in Sources */,
 				5140773129961AF200585A88 /* JSONReader.swift in Sources */,
 				5140774A2996D23900585A88 /* DayDetail+CoreDataClass.swift in Sources */,
+				5190C78E29A0E8A200E4E2B0 /* InfoView.swift in Sources */,
 				514077482996D23900585A88 /* Emotion+CoreDataClass.swift in Sources */,
 				514077492996D23900585A88 /* Emotion+CoreDataProperties.swift in Sources */,
 				51D4153129813DDF001D367B /* ColorMap.swift in Sources */,

@@ -29,12 +29,12 @@ struct ButtonView: View {
                 Spacer()
                 VStack(alignment: .center) {
                     Text(element.emotion.name)
-                        .font(.title)
+                        .font(.title3)
                         .bold()
                         .foregroundColor(element.color)
                         .shadow(radius: 0.5)
                     Text(element.emotion.description)
-                        .font(.caption)
+                        .font(.callout)
                         .lineLimit(nil)
                 }
                 .multilineTextAlignment(.center)

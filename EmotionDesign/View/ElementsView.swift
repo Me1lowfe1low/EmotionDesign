@@ -21,32 +21,26 @@ struct ElementsView: View {
             ScrollView {
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 100))]) {
                     ForEach(emotionJsonList[choice].subEmotions, id: \.id) { emotion in
-                        ZStack {
-                            Circle()
-                                .stroke(emotionJsonList[choice].getColor(), lineWidth: 4)
-                                .shadow(radius: 0.5)
+                        Button(action: { emotionDTO.setEmotion(emotion, color: emotionJsonList[choice].getColor(), chosen: true)} )
+                        {
+                            RoundedRectangle(cornerRadius: 20)
+                                .fill(.white)
+                                .frame(width: 90, height: 90 ,alignment: .center)
+                                .shadow(radius: 5)
                                 .overlay(
                                     Text(emotion.name)
                                         .font(.caption2)
                                         .bold()
-                                        .frame(width: 80, height: 80 ,alignment: .center)
                                         .fixedSize()
                                         .scaledToFit()
-                                        .gesture(
-                                            TapGesture()
-                                                .onEnded {
-                                                    emotionDTO.setEmotion(emotion, color: emotionJsonList[choice].getColor(), chosen: true)
-                                                }
-                                        )
                                 )
                         }
+                        .buttonStyle(PlainButtonStyle())
                     }
                     .padding()
                 }
-                .padding(.horizontal)
             }
         }
-        .padding()
     }
 }
 

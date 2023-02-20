@@ -17,14 +17,13 @@ struct ContentView: View {
     
     var body: some View {
         TabView  {
-            EmotionShareView()
-                .environment(\.managedObjectContext, moc)
-                .environmentObject(dataController)
+            Text("Schedule")
                 .tabItem {
-                    Image(systemName: "plus")
-                    Text("Main")
+                    Image(systemName: "alarm")
+                    Text("Schedule")
                 }
-            Info()
+            //Info()
+            InfoView()
                 .tabItem {
                     Image(systemName: "info.circle")
                     Text("Info")
@@ -33,6 +32,14 @@ struct ContentView: View {
                 .tabItem {
                     Image(systemName: "chart.pie")
                     Text("Analyze")
+                }
+            //EmotionShareView()
+            EmotionContentsView()
+                .environment(\.managedObjectContext, moc)
+                .environmentObject(dataController)
+                .tabItem {
+                    Image(systemName: "plus")
+                    Text("Main")
                 }
         }
     }
