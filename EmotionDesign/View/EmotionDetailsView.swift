@@ -47,6 +47,8 @@ struct EmotionDetailsView: View {
                     )
             }
         }
+        .navigationTitle("Choose emotion")
+        .navigationBarTitleDisplayMode(.inline)
     }
     
     func processTheEntry() {
@@ -58,8 +60,10 @@ struct EmotionDetailsView: View {
 
 struct EmotionDetailsView_Previews: PreviewProvider {
     static var previews: some View {
-        EmotionDetailsView(element: .constant(EmotionDTO(emotion: SubEmotion.emotionSample, color: .red)))
-            .environmentObject(DataController.preview)
-            .environment(\.managedObjectContext, DataController.preview.container.viewContext)
+        NavigationView {
+            EmotionDetailsView(element: .constant(EmotionDTO(emotion: SubEmotion.emotionSample, color: .red)))
+                .environmentObject(DataController.preview)
+                .environment(\.managedObjectContext, DataController.preview.container.viewContext)
+        }
     }
 }

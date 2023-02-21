@@ -75,6 +75,8 @@ struct EmotionContentsView: View {
             }
         }
         .padding()
+        .navigationTitle("Emotion menu")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
@@ -83,7 +85,9 @@ struct EmotionContentsView: View {
 
 struct EmotionContentsView_Previews: PreviewProvider {
     static var previews: some View {
-        EmotionContentsView()
+        NavigationView {
+            EmotionContentsView()
+        }
     }
 }
 

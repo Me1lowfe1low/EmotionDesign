@@ -14,33 +14,47 @@ import SwiftUI
 struct ContentView: View {
     @Environment(\.managedObjectContext) var moc
     @EnvironmentObject var dataController: DataController
+    @State private var selection = 4
     
     var body: some View {
-        TabView  {
-            Text("Schedule")
+        TabView(selection: $selection)  {
+            NotificationView()
+                .environment(\.managedObjectContext, moc)
+                .environmentObject(dataController)
                 .tabItem {
                     Image(systemName: "alarm")
                     Text("Schedule")
                 }
+                .tag(0)
             //Info()
             InfoView()
                 .tabItem {
                     Image(systemName: "info.circle")
                     Text("Info")
                 }
-            Analyze()
-                .tabItem {
-                    Image(systemName: "chart.pie")
-                    Text("Analyze")
-                }
+                .tag(1)
             //EmotionShareView()
             EmotionContentsView()
                 .environment(\.managedObjectContext, moc)
                 .environmentObject(dataController)
                 .tabItem {
-                    Image(systemName: "plus")
+                    Image(systemName: "plus.circle")
                     Text("Main")
+                    
                 }
+                .tag(2)
+            Analyze()
+                .tabItem {
+                    Image(systemName: "chart.pie")
+                    Text("Analyze")
+                }
+                .tag(3)
+            HomeScreen()
+                .tabItem {
+                    Image(systemName: "house.circle.fill")
+                    Text("Home")
+                }
+                .tag(4)
         }
     }
 }

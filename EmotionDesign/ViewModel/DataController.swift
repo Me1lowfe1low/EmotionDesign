@@ -87,6 +87,11 @@ class DataController: ObservableObject {
         saveContext(context)
     }
     
+    func delete(_ context: NSManagedObjectContext, notification: AppNotification ) {
+        context.delete(notification)
+        saveContext(context)
+    }
+    
     func saveData(_ context: NSManagedObjectContext, data: FetchedResults<DayDetail>, element: EmotionDTO, comment: String, date: Date) {
         guard data.first == nil else {
             var dateFound = false
@@ -104,6 +109,26 @@ class DataController: ObservableObject {
         }
         createAndFillNewDayEntry(context, element: element, comment: comment, date: date)
     }
+    
+    func saveData(_ context: NSManagedObjectContext, element: Alert) {
+        let alarm = AppNotification(context: context)
+        alarm.id = UUID()
+        alarm.title = element.title
+        alarm.date = element.time
+        saveContext(context)
+        
+        element.period.days.forEach { day in
+            let weekday = AppWeekday(context: context)
+            weekday.checked = day.checked
+            weekday.name = day.name
+            weekday.id = day.id
+            weekday.position = Int16(day.shortName.rawValue)
+            weekday.notification = alarm
+            saveContext(context)
+        }
+    }
+    
+    
     
     func clearData(_ context: NSManagedObjectContext, data: FetchedResults<DayDetail>) {
         data.forEach {

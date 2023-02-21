@@ -16,10 +16,12 @@ struct ButtonView: View {
 
     var body: some View {
         ZStack {
-            Capsule()
+            //Capsule()
+            RoundedRectangle(cornerRadius: 40)
                 .stroke(element.color, lineWidth: 4)
                 .frame(height: 150)
-            Capsule()
+            //Capsule()
+            RoundedRectangle(cornerRadius: 40)
                 .opacity(0.8)
                 .frame(height: 150)
                 .scaledToFill()
