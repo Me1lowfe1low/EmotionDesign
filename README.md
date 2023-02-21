@@ -5,7 +5,8 @@
 </p>
 
 > EmotionDesign is an app that allows users to track their emotions daily \
-> and analyse the range of their feelings over time using statistics.
+> and analyse the range of their feelings over time using statistics. \
+> Currently working on redesingning app. So the images below are not the save as application would look like
 
 <a id="TableOfContents"></a>
 # Table of contents
