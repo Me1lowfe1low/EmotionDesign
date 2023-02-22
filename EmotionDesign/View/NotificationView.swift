@@ -54,7 +54,7 @@ struct NotificationView: View {
                 .padding()
                 List {
                     ForEach(notifications, id: \.id) { entry in
-                        alarmElement(notification: entry)
+                            alarmElement(notification: entry)
                     }
                     .onDelete(perform: delete)
                 }

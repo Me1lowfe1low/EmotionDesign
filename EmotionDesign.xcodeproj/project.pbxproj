@@ -29,6 +29,8 @@
 		518ED6C329A5149800DA3669 /* AppNotification+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518ED6BF29A5149800DA3669 /* AppNotification+CoreDataProperties.swift */; };
 		518ED6C429A5149800DA3669 /* AppWeekday+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518ED6C029A5149800DA3669 /* AppWeekday+CoreDataClass.swift */; };
 		518ED6C529A5149800DA3669 /* AppWeekday+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518ED6C129A5149800DA3669 /* AppWeekday+CoreDataProperties.swift */; };
+		518ED6C729A5FC7E00DA3669 /* DayList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518ED6C629A5FC7E00DA3669 /* DayList.swift */; };
+		518ED6C929A6011900DA3669 /* NotificationEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518ED6C829A6011900DA3669 /* NotificationEntry.swift */; };
 		5190C78E29A0E8A200E4E2B0 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5190C78D29A0E8A200E4E2B0 /* InfoView.swift */; };
 		51A07DDB29A3FA37009F18A0 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51A07DDA29A3FA37009F18A0 /* NotificationView.swift */; };
 		51A07DDD29A402CE009F18A0 /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51A07DDC29A402CE009F18A0 /* HomeScreen.swift */; };
@@ -63,6 +65,8 @@
 		518ED6BF29A5149800DA3669 /* AppNotification+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppNotification+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		518ED6C029A5149800DA3669 /* AppWeekday+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppWeekday+CoreDataClass.swift"; sourceTree = "<group>"; };
 		518ED6C129A5149800DA3669 /* AppWeekday+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppWeekday+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		518ED6C629A5FC7E00DA3669 /* DayList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayList.swift; sourceTree = "<group>"; };
+		518ED6C829A6011900DA3669 /* NotificationEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationEntry.swift; sourceTree = "<group>"; };
 		5190C78D29A0E8A200E4E2B0 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		51A07DDA29A3FA37009F18A0 /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		51A07DDC29A402CE009F18A0 /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
@@ -129,6 +133,7 @@
 		51D4152829813856001D367B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				518ED6C829A6011900DA3669 /* NotificationEntry.swift */,
 				514077342996349F00585A88 /* InitialEmotion.swift */,
 				51427FB129978AE40078AC53 /* SubEmotion.swift */,
 				518675802986E6E0006BE4D0 /* EmotionDTO.swift */,
@@ -151,6 +156,7 @@
 				512DEBAF2993BBEA004DEB04 /* AnimatedCircle.swift */,
 				51A07DDA29A3FA37009F18A0 /* NotificationView.swift */,
 				518ED6BC29A4B8E800DA3669 /* ScheduleView.swift */,
+				518ED6C629A5FC7E00DA3669 /* DayList.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -253,6 +259,7 @@
 				51427FB229978AE40078AC53 /* SubEmotion.swift in Sources */,
 				5186757B29853123006BE4D0 /* FireShape.swift in Sources */,
 				51407739299668D700585A88 /* ElementsView.swift in Sources */,
+				518ED6C729A5FC7E00DA3669 /* DayList.swift in Sources */,
 				51F067F3299003CB00972459 /* EmotionDetailsView.swift in Sources */,
 				518ED6C329A5149800DA3669 /* AppNotification+CoreDataProperties.swift in Sources */,
 				5140774B2996D23900585A88 /* DayDetail+CoreDataProperties.swift in Sources */,
@@ -274,6 +281,7 @@
 				514077492996D23900585A88 /* Emotion+CoreDataProperties.swift in Sources */,
 				51D4153129813DDF001D367B /* ColorMap.swift in Sources */,
 				518ED6C429A5149800DA3669 /* AppWeekday+CoreDataClass.swift in Sources */,
+				518ED6C929A6011900DA3669 /* NotificationEntry.swift in Sources */,
 				518ED6C229A5149800DA3669 /* AppNotification+CoreDataClass.swift in Sources */,
 				512DEBB02993BBEA004DEB04 /* AnimatedCircle.swift in Sources */,
 				511CDFBC2982C540002D510B /* EmotionContentsView.swift in Sources */,

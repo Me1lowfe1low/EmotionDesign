@@ -110,7 +110,7 @@ class DataController: ObservableObject {
         createAndFillNewDayEntry(context, element: element, comment: comment, date: date)
     }
     
-    func saveData(_ context: NSManagedObjectContext, element: Alert) {
+    func saveData(_ context: NSManagedObjectContext, element: NotificationEntry) {
         let alarm = AppNotification(context: context)
         alarm.id = UUID()
         alarm.title = element.title
