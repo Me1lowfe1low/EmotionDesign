@@ -23,34 +23,41 @@ struct EmotionContentsView: View {
     
     var body: some View {
         VStack {
-            HStack(spacing: 0) {
-                ForEach(emotionJsonList.indices, id: \.self) { index in
-                    Text(emotionJsonList[index].name)
-                        .font(.caption2)
-                        .foregroundColor(.black)
-                        .bold()
-                        .padding(.vertical)
-                        .frame(maxWidth: .infinity)
-                        .background(Rectangle()
-                            .fill(
-                                LinearGradient(gradient: Gradient(colors: [
-                                    emotionJsonList[index].getColor(),
-                                    emotionJsonList[index].getAccentColor(),
-                                    (index + 1) < emotionJsonList.count ? emotionJsonList[index+1].getColor() :  emotionJsonList[index].getAccentColor()
+            Text("How are you feeling?")
+                .font(.title)
+                .bold()
+            Text("At this window you could find several emotions grouped by the one general emotion")
+                .font(.caption)
+            Divider()
+            ScrollView(.horizontal) {
+                HStack {
+                    ForEach(emotionJsonList.indices, id: \.self) { index in
+                        Button(action: {choice = index
+                            emotionDTO.chosen = false } )
+                        {
+                            RoundedRectangle(cornerRadius: 20)
+                                .fill(LinearGradient(gradient: Gradient(colors: [
+                                    choice == index ?  emotionJsonList[index].getColor() : .white,
+                                    choice == index ? emotionJsonList[index].getAccentColor() : .white
                                 ]),
                                                startPoint: .leading,
-                                               endPoint: .trailing)
-                            ))
-                        .gesture(
-                            TapGesture()
-                                .onEnded {
-                                    choice = index
-                                }
-                        )
+                                               endPoint: .trailing))
+                                .frame(width: 100, height: 100 ,alignment: .center)
+                                .shadow(radius: 5)
+                                .padding()
+                                .overlay(
+                                    Text(emotionJsonList[index].name)
+                                        .font(.caption2)
+                                        .bold()
+                                        .fixedSize()
+                                        .scaledToFit()
+                                )
+                        }
+                        .buttonStyle(PlainButtonStyle())
+                    }
                 }
+                .padding()
             }
-            .mask(RoundedRectangle(cornerRadius: 40))
-            .padding()
             Divider()
             VStack {
                 if ( choice == -1 ) {
@@ -72,13 +79,20 @@ struct EmotionContentsView: View {
                 }
             }
         }
+        .padding()
+        .navigationTitle("Emotion menu")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
 
+
+
 struct EmotionContentsView_Previews: PreviewProvider {
     static var previews: some View {
-        EmotionContentsView()
+        NavigationView {
+            EmotionContentsView()
+        }
     }
 }
 

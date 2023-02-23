@@ -25,11 +25,20 @@ struct EmotionDetailsView: View {
     
     var body: some View {
         VStack {
-            LinearGradient(colors: emotionJsonList[element.emotion.parent].returnColors(),
-                                                               startPoint: .topLeading,
-                           endPoint: .bottomTrailing)
-            .mask( FireShape.Fire())
-                .padding()
+            ZStack {
+                
+                LinearGradient(colors: emotionJsonList[element.emotion.parent].returnColors(),
+                 startPoint: .topLeading,
+                 endPoint: .bottomTrailing)
+                .mask(RoundedRectangle(cornerRadius: 40)
+                    .padding())
+                .opacity(0.3)
+                Image(element.emotion.icon)
+                    .resizable()
+                    .scaledToFit()
+                    .padding()
+                    .blendMode(.sourceAtop)
+            }
             Form {
                 Section(header: Text(element.emotion.name)) {
                     TextField("Description", text: $description)
@@ -47,6 +56,8 @@ struct EmotionDetailsView: View {
                     )
             }
         }
+        .navigationTitle("Choose emotion")
+        .navigationBarTitleDisplayMode(.inline)
     }
     
     func processTheEntry() {
@@ -58,8 +69,10 @@ struct EmotionDetailsView: View {
 
 struct EmotionDetailsView_Previews: PreviewProvider {
     static var previews: some View {
-        EmotionDetailsView(element: .constant(EmotionDTO(emotion: SubEmotion.emotionSample, color: .red)))
-            .environmentObject(DataController.preview)
-            .environment(\.managedObjectContext, DataController.preview.container.viewContext)
+        NavigationView {
+            EmotionDetailsView(element: .constant(EmotionDTO(emotion: SubEmotion.emotionSample, color: .red)))
+                .environmentObject(DataController.preview)
+                .environment(\.managedObjectContext, DataController.preview.container.viewContext)
+        }
     }
 }

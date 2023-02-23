@@ -4,42 +4,50 @@
         "description": "The strong feeling you get when you think someone has treated you badly or unfairly, that makes you want to hurt them or shout at them",
         "color": "orangered",
         "accentColor": "poppy",
+        "icon": "anger",
         "subEmotions": [
             {
                 "name": "annoyed",
                 "parent": 0,
-                "description": "Feeling slightly angry or impatient"
+                "description": "Feeling slightly angry or impatient",
+                "icon": "annoyed"
             },
             {
                 "name": "frustrated",
                 "parent": 0,
-                "description": "Feeling annoyed and impatient because you are prevented from achieving something"
+                "description": "Feeling annoyed and impatient because you are prevented from achieving something",
+                "icon": "frustrated"
             },
             {
                 
                 "name": "bitter",
                 "parent": 0,
-                "description": "Feeling angry or upset because of a bad experience, especially when you think that you have been treated unfairly"
+                "description": "Feeling angry or upset because of a bad experience, especially when you think that you have been treated unfairly",
+                "icon": "bitter"
             },
             {
                 "name": "infuriated",
                 "parent": 0,
-                "description": "Extremely angry"
+                "description": "Extremely angry",
+                "icon": "infuriated"
             },
             {
                 "name": "mad",
                 "parent": 0,
-                "description": "Enraged; greatly provoked or irritated"
+                "description": "Enraged; greatly provoked or irritated",
+                "icon": "mad"
             },
             {
                 "name": "insulted",
                 "parent": 0,
-                "description": "To feel angry and upset because of something that someone has said or done"
+                "description": "To feel angry and upset because of something that someone has said or done",
+                "icon": "insulted"
             },
             {
                 "name": "vengeful",
                 "parent": 0,
-                "description": "Wanting or trying to harm someone because they have done something bad to you"
+                "description": "Wanting or trying to harm someone because they have done something bad to you",
+                "icon": "vengeful"
             }
         ]
     },
@@ -48,31 +56,44 @@
         "description": "The feeling that you have when you are frightened",
         "color": "yellow",
         "accentColor": "lightyellow4",
+        "icon": "mad",
         "subEmotions": [
             {
                 "name": "worried",
                 "parent": 1,
-                "description": "Unhappy because you are thinking about your problems or about bad things that could happen"},
+                "description": "Unhappy because you are thinking about your problems or about bad things that could happen",
+                "icon": "worried"
+            },
             {
                 "name": "nervous",
                 "parent": 1,
-                "description": "Feeling excited and worried, or slightly afraid"},
+                "description": "Feeling excited and worried, or slightly afraid",
+                "icon": "nervous"
+            },
             {
                 "name": "anxious",
                 "parent": 1,
-                "description": "Worried because you think something bad might happen"},
+                "description": "Worried because you think something bad might happen",
+                "icon": "anxious"
+            },
             {
                 "name": "scared",
                 "parent": 1,
-                "description": "Frightened, or worried"},
+                "description": "Frightened, or worried",
+                "icon": "scared"
+            },
             {
                 "name": "panicked",
                 "parent": 1,
-                "description": "To have a sudden strong feeling of fear or worry and be unable to think clearly or calmly or decide what to do"},
+                "description": "To have a sudden strong feeling of fear or worry and be unable to think clearly or calmly or decide what to do",
+                "icon": "panicked"
+            },
             {
                 "name": "stressed",
                 "parent": 1,
-                "description": "Affected by stress"}
+                "description": "Affected by stress",
+                "icon": "stressed"
+            }
         ]
     },
     {
@@ -80,40 +101,56 @@
         "description": "Enjoyment is a positive affective state that occurs when a person engages in an experience or activity that satisfies a desire, goal, or need, including but not limited to the need for pleasure, meaning, security, safety, sustenance, esteem, belongingness, or love",
         "color": "brightgreen",
         "accentColor": "green",
+        "icon": "enjoyment",
         "subEmotions": [
             {
                 "name": "pleasure",
                 "parent": 2,
-                "description": "A feeling of happiness, enjoyment, or satisfaction"
+                "description": "A feeling of happiness, enjoyment, or satisfaction",
+                "icon": "pleasure"
             },
             {
                 "name": "joy",
                 "parent": 2,
-                "description": "A feeling of great happiness"},
+                "description": "A feeling of great happiness",
+                "icon": "joy"
+            },
             {
                 "name": "happiness",
                 "parent": 2,
-                "description": "The feeling of being happy"},
+                "description": "The feeling of being happy",
+                "icon": "happiness"
+            },
             {
                 "name": "amusement",
                 "parent": 2,
-                "description": "A feeling of being amused"},
+                "description": "A feeling of being amused",
+                "icon": "amusement"
+            },
             {
                 "name": "pride",
                 "parent": 2,
-                "description": "A feeling of pleasure and satisfaction that you get when you, or someone connected with you, have achieved something special"},
+                "description": "A feeling of pleasure and satisfaction that you get when you, or someone connected with you, have achieved something special",
+                "icon": "pride"
+            },
             {
                 "name": "awe",
                 "parent": 2,
-                "description": "A feeling of great respect and admiration, often combined with fear"},
+                "description": "A feeling of great respect and admiration, often combined with fear",
+                "icon": "awe"
+            },
             {
                 "name": "excitement",
                 "parent": 2,
-                "description": "The feeling of being excited"},
+                "description": "The feeling of being excited",
+                "icon": "excitement"
+            },
             {
                 "name": "ecstasy",
                 "parent": 2,
-                "description": "A feeling of great happiness and pleasure, often sexual pleasure"}
+                "description": "A feeling of great happiness and pleasure, often sexual pleasure",
+                "icon": "ecstasy"
+            }
         ]
     },
     {
@@ -121,27 +158,38 @@
         "description": "Sadness is an emotional pain associated with, or characterized by, feelings of disadvantage, loss, despair, grief, helplessness, disappointment and sorrow",
         "color": "lavender",
         "accentColor": "sky",
+        "icon": "sadness",
         "subEmotions": [
             {
                 "name": "lonely",
                 "parent": 3,
-                "description": "Unhappy because you are alone or because you have no friends"},
+                "description": "Unhappy because you are alone or because you have no friends",
+                "icon": "lonely"
+            },
             {
                 "name": "unhappy",
                 "parent": 3,
-                "description": "Feeling sad or upset, not satisfied"},
+                "description": "Feeling sad or upset, not satisfied",
+                "icon": "unhappy"
+            },
             {
                 "name": "hopeless",
                 "parent": 3,
-                "description": "Feeling or showing no hope"},
+                "description": "Feeling or showing no hope",
+                "icon": "hopeless"
+            },
             {
                 "name": "gloomy",
                 "parent": 3,
-                "description": "Feeling sad and without hope"},
+                "description": "Feeling sad and without hope",
+                "icon": "gloomy"
+            },
             {
                 "name": "miserable",
                 "parent": 3,
-                "description": "Extremely unhappy or uncomfortable"}
+                "description": "Extremely unhappy or uncomfortable",
+                "icon": "miserable"
+            }
         ]
     },
     {
@@ -149,31 +197,44 @@
         "description": "A very strong feeling of not liking something",
         "color": "periwinkle",
         "accentColor": "purple",
+        "icon": "disgust",
         "subEmotions": [
             {
                 "name": "dislike",
                 "parent": 4,
-                "description": "To not like someone or something"},
+                "description": "To not like someone or something",
+                "icon": "dislike"
+            },
             {
                 "name": "revulsion",
                 "parent": 4,
-                "description": "An extreme feeling of disliking someone or something that is so unpleasant that you feel slightly ill"},
+                "description": "An extreme feeling of disliking someone or something that is so unpleasant that you feel slightly ill",
+                "icon": "revulsion"
+            },
             {
                 "name": "nauseated",
                 "parent": 4,
-                "description": "Feeling as if you are going to vomit. The more usual phrase for this is to make someone feel sick"},
+                "description": "Feeling as if you are going to vomit. The more usual phrase for this is to make someone feel sick",
+                "icon": "nauseated"
+            },
             {
                 "name": "aversion",
                 "parent": 4,
-                "description": "A strong feeling that you dislike someone or something"},
+                "description": "A strong feeling that you dislike someone or something",
+                "icon": "aversion"
+            },
             {
                 "name": "offended",
                 "parent": 4,
-                "description": "Be upset and angry by actions of someone"},
+                "description": "Be upset and angry by actions of someone",
+                "icon": "offended"
+            },
             {
                 "name": "horrified",
                 "parent": 4,
-                "description": "Very shocked or frightened"}
+                "description": "Very shocked or frightened",
+                "icon": "horrified"
+            }
         ]
     }
 ]

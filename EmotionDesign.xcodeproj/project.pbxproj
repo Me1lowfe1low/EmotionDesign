@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		511CDFBC2982C540002D510B /* EmotionContentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511CDFBB2982C540002D510B /* EmotionContentsView.swift */; };
 		512DEBB02993BBEA004DEB04 /* AnimatedCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 512DEBAF2993BBEA004DEB04 /* AnimatedCircle.swift */; };
-		512DEBB22993C184004DEB04 /* Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = 512DEBB12993C184004DEB04 /* Info.swift */; };
 		512DEBB42993CACF004DEB04 /* Analyze.swift in Sources */ = {isa = PBXBuildFile; fileRef = 512DEBB32993CACF004DEB04 /* Analyze.swift */; };
 		5140773129961AF200585A88 /* JSONReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5140773029961AF200585A88 /* JSONReader.swift */; };
 		514077332996326800585A88 /* EmotionInitialList.json in Resources */ = {isa = PBXBuildFile; fileRef = 514077322996326800585A88 /* EmotionInitialList.json */; };
@@ -22,10 +21,22 @@
 		51427FB229978AE40078AC53 /* SubEmotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51427FB129978AE40078AC53 /* SubEmotion.swift */; };
 		5162FBD9299567CA00E34A85 /* EmotionDesign.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5162FBD7299567CA00E34A85 /* EmotionDesign.xcdatamodeld */; };
 		5162FBE3299574D500E34A85 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5162FBE2299574D500E34A85 /* DataController.swift */; };
-		518443132981466600615BAC /* EmotionShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518443122981466600615BAC /* EmotionShareView.swift */; };
 		5186757B29853123006BE4D0 /* FireShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5186757A29853123006BE4D0 /* FireShape.swift */; };
 		5186757F298655AB006BE4D0 /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5186757E298655AB006BE4D0 /* ButtonView.swift */; };
 		518675812986E6E0006BE4D0 /* EmotionDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518675802986E6E0006BE4D0 /* EmotionDTO.swift */; };
+		518ED6BD29A4B8E800DA3669 /* ScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518ED6BC29A4B8E800DA3669 /* ScheduleView.swift */; };
+		518ED6C229A5149800DA3669 /* AppNotification+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518ED6BE29A5149700DA3669 /* AppNotification+CoreDataClass.swift */; };
+		518ED6C329A5149800DA3669 /* AppNotification+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518ED6BF29A5149800DA3669 /* AppNotification+CoreDataProperties.swift */; };
+		518ED6C429A5149800DA3669 /* AppWeekday+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518ED6C029A5149800DA3669 /* AppWeekday+CoreDataClass.swift */; };
+		518ED6C529A5149800DA3669 /* AppWeekday+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518ED6C129A5149800DA3669 /* AppWeekday+CoreDataProperties.swift */; };
+		518ED6C729A5FC7E00DA3669 /* DayList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518ED6C629A5FC7E00DA3669 /* DayList.swift */; };
+		518ED6C929A6011900DA3669 /* NotificationEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518ED6C829A6011900DA3669 /* NotificationEntry.swift */; };
+		518ED6CB29A605B600DA3669 /* ScheduledNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518ED6CA29A605B600DA3669 /* ScheduledNotification.swift */; };
+		518ED6D029A661BB00DA3669 /* NotificationList+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518ED6CE29A661BB00DA3669 /* NotificationList+CoreDataClass.swift */; };
+		518ED6D129A661BB00DA3669 /* NotificationList+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518ED6CF29A661BB00DA3669 /* NotificationList+CoreDataProperties.swift */; };
+		5190C78E29A0E8A200E4E2B0 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5190C78D29A0E8A200E4E2B0 /* InfoView.swift */; };
+		51A07DDB29A3FA37009F18A0 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51A07DDA29A3FA37009F18A0 /* NotificationView.swift */; };
+		51A07DDD29A402CE009F18A0 /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51A07DDC29A402CE009F18A0 /* HomeScreen.swift */; };
 		51D4151B298132BC001D367B /* EmotionDesignApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51D4151A298132BC001D367B /* EmotionDesignApp.swift */; };
 		51D4151D298132BC001D367B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51D4151C298132BC001D367B /* ContentView.swift */; };
 		51D4151F298132BF001D367B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 51D4151E298132BF001D367B /* Assets.xcassets */; };
@@ -37,7 +48,6 @@
 /* Begin PBXFileReference section */
 		511CDFBB2982C540002D510B /* EmotionContentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmotionContentsView.swift; sourceTree = "<group>"; };
 		512DEBAF2993BBEA004DEB04 /* AnimatedCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedCircle.swift; sourceTree = "<group>"; };
-		512DEBB12993C184004DEB04 /* Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Info.swift; sourceTree = "<group>"; };
 		512DEBB32993CACF004DEB04 /* Analyze.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Analyze.swift; path = EmotionDesign/View/Analyze.swift; sourceTree = SOURCE_ROOT; };
 		5140773029961AF200585A88 /* JSONReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONReader.swift; sourceTree = "<group>"; };
 		514077322996326800585A88 /* EmotionInitialList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = EmotionInitialList.json; sourceTree = "<group>"; };
@@ -50,10 +60,22 @@
 		51427FB129978AE40078AC53 /* SubEmotion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubEmotion.swift; sourceTree = "<group>"; };
 		5162FBD8299567CA00E34A85 /* EmotionDesign.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = EmotionDesign.xcdatamodel; sourceTree = "<group>"; };
 		5162FBE2299574D500E34A85 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
-		518443122981466600615BAC /* EmotionShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmotionShareView.swift; sourceTree = "<group>"; };
 		5186757A29853123006BE4D0 /* FireShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireShape.swift; sourceTree = "<group>"; };
 		5186757E298655AB006BE4D0 /* ButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonView.swift; sourceTree = "<group>"; };
 		518675802986E6E0006BE4D0 /* EmotionDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmotionDTO.swift; sourceTree = "<group>"; };
+		518ED6BC29A4B8E800DA3669 /* ScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleView.swift; sourceTree = "<group>"; };
+		518ED6BE29A5149700DA3669 /* AppNotification+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppNotification+CoreDataClass.swift"; sourceTree = "<group>"; };
+		518ED6BF29A5149800DA3669 /* AppNotification+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppNotification+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		518ED6C029A5149800DA3669 /* AppWeekday+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppWeekday+CoreDataClass.swift"; sourceTree = "<group>"; };
+		518ED6C129A5149800DA3669 /* AppWeekday+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppWeekday+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		518ED6C629A5FC7E00DA3669 /* DayList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayList.swift; sourceTree = "<group>"; };
+		518ED6C829A6011900DA3669 /* NotificationEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationEntry.swift; sourceTree = "<group>"; };
+		518ED6CA29A605B600DA3669 /* ScheduledNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduledNotification.swift; sourceTree = "<group>"; };
+		518ED6CE29A661BB00DA3669 /* NotificationList+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationList+CoreDataClass.swift"; sourceTree = "<group>"; };
+		518ED6CF29A661BB00DA3669 /* NotificationList+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationList+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		5190C78D29A0E8A200E4E2B0 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
+		51A07DDA29A3FA37009F18A0 /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
+		51A07DDC29A402CE009F18A0 /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
 		51D41517298132BC001D367B /* EmotionDesign.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EmotionDesign.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		51D4151A298132BC001D367B /* EmotionDesignApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmotionDesignApp.swift; sourceTree = "<group>"; };
 		51D4151C298132BC001D367B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -117,6 +139,7 @@
 		51D4152829813856001D367B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				518ED6C829A6011900DA3669 /* NotificationEntry.swift */,
 				514077342996349F00585A88 /* InitialEmotion.swift */,
 				51427FB129978AE40078AC53 /* SubEmotion.swift */,
 				518675802986E6E0006BE4D0 /* EmotionDTO.swift */,
@@ -128,15 +151,19 @@
 		51D415292981385E001D367B /* View */ = {
 			isa = PBXGroup;
 			children = (
-				518443122981466600615BAC /* EmotionShareView.swift */,
+				51A07DDC29A402CE009F18A0 /* HomeScreen.swift */,
 				511CDFBB2982C540002D510B /* EmotionContentsView.swift */,
 				51407738299668D700585A88 /* ElementsView.swift */,
 				5186757E298655AB006BE4D0 /* ButtonView.swift */,
 				51F067F2299003CB00972459 /* EmotionDetailsView.swift */,
-				512DEBB12993C184004DEB04 /* Info.swift */,
+				5190C78D29A0E8A200E4E2B0 /* InfoView.swift */,
 				512DEBB32993CACF004DEB04 /* Analyze.swift */,
 				5186757A29853123006BE4D0 /* FireShape.swift */,
 				512DEBAF2993BBEA004DEB04 /* AnimatedCircle.swift */,
+				51A07DDA29A3FA37009F18A0 /* NotificationView.swift */,
+				518ED6CA29A605B600DA3669 /* ScheduledNotification.swift */,
+				518ED6BC29A4B8E800DA3669 /* ScheduleView.swift */,
+				518ED6C629A5FC7E00DA3669 /* DayList.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -144,6 +171,12 @@
 		51D4152A29813865001D367B /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				518ED6CE29A661BB00DA3669 /* NotificationList+CoreDataClass.swift */,
+				518ED6CF29A661BB00DA3669 /* NotificationList+CoreDataProperties.swift */,
+				518ED6BE29A5149700DA3669 /* AppNotification+CoreDataClass.swift */,
+				518ED6BF29A5149800DA3669 /* AppNotification+CoreDataProperties.swift */,
+				518ED6C029A5149800DA3669 /* AppWeekday+CoreDataClass.swift */,
+				518ED6C129A5149800DA3669 /* AppWeekday+CoreDataProperties.swift */,
 				514077442996D23900585A88 /* Emotion+CoreDataClass.swift */,
 				514077452996D23900585A88 /* Emotion+CoreDataProperties.swift */,
 				514077462996D23900585A88 /* DayDetail+CoreDataClass.swift */,
@@ -234,23 +267,34 @@
 			files = (
 				51427FB229978AE40078AC53 /* SubEmotion.swift in Sources */,
 				5186757B29853123006BE4D0 /* FireShape.swift in Sources */,
-				512DEBB22993C184004DEB04 /* Info.swift in Sources */,
 				51407739299668D700585A88 /* ElementsView.swift in Sources */,
+				518ED6C729A5FC7E00DA3669 /* DayList.swift in Sources */,
 				51F067F3299003CB00972459 /* EmotionDetailsView.swift in Sources */,
+				518ED6C329A5149800DA3669 /* AppNotification+CoreDataProperties.swift in Sources */,
 				5140774B2996D23900585A88 /* DayDetail+CoreDataProperties.swift in Sources */,
+				518ED6BD29A4B8E800DA3669 /* ScheduleView.swift in Sources */,
+				51A07DDB29A3FA37009F18A0 /* NotificationView.swift in Sources */,
 				514077352996349F00585A88 /* InitialEmotion.swift in Sources */,
+				518ED6CB29A605B600DA3669 /* ScheduledNotification.swift in Sources */,
 				51D4151D298132BC001D367B /* ContentView.swift in Sources */,
 				518675812986E6E0006BE4D0 /* EmotionDTO.swift in Sources */,
 				5186757F298655AB006BE4D0 /* ButtonView.swift in Sources */,
+				518ED6C529A5149800DA3669 /* AppWeekday+CoreDataProperties.swift in Sources */,
+				51A07DDD29A402CE009F18A0 /* HomeScreen.swift in Sources */,
 				5162FBE3299574D500E34A85 /* DataController.swift in Sources */,
+				518ED6D029A661BB00DA3669 /* NotificationList+CoreDataClass.swift in Sources */,
 				5162FBD9299567CA00E34A85 /* EmotionDesign.xcdatamodeld in Sources */,
 				512DEBB42993CACF004DEB04 /* Analyze.swift in Sources */,
 				5140773129961AF200585A88 /* JSONReader.swift in Sources */,
 				5140774A2996D23900585A88 /* DayDetail+CoreDataClass.swift in Sources */,
+				5190C78E29A0E8A200E4E2B0 /* InfoView.swift in Sources */,
 				514077482996D23900585A88 /* Emotion+CoreDataClass.swift in Sources */,
 				514077492996D23900585A88 /* Emotion+CoreDataProperties.swift in Sources */,
+				518ED6D129A661BB00DA3669 /* NotificationList+CoreDataProperties.swift in Sources */,
 				51D4153129813DDF001D367B /* ColorMap.swift in Sources */,
-				518443132981466600615BAC /* EmotionShareView.swift in Sources */,
+				518ED6C429A5149800DA3669 /* AppWeekday+CoreDataClass.swift in Sources */,
+				518ED6C929A6011900DA3669 /* NotificationEntry.swift in Sources */,
+				518ED6C229A5149800DA3669 /* AppNotification+CoreDataClass.swift in Sources */,
 				512DEBB02993BBEA004DEB04 /* AnimatedCircle.swift in Sources */,
 				511CDFBC2982C540002D510B /* EmotionContentsView.swift in Sources */,
 				51D4151B298132BC001D367B /* EmotionDesignApp.swift in Sources */,

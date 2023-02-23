@@ -16,35 +16,30 @@ struct ButtonView: View {
 
     var body: some View {
         ZStack {
-            Capsule()
-                .stroke(element.color, lineWidth: 4)
-                .frame(height: 150)
-            Capsule()
-                .opacity(0.8)
-                .frame(height: 150)
-                .scaledToFill()
-                .blendMode(.destinationOver)
-                .overlay(
+            RoundedRectangle(cornerRadius: 30)
+                .fill(.white)
+                .frame(height: 120)
+                .shadow(radius: 5)
+                .overlay (
             HStack(alignment: .center, spacing: 0) {
                 Spacer()
                 VStack(alignment: .center) {
                     Text(element.emotion.name)
-                        .font(.title)
+                        .font(.title3)
                         .bold()
                         .foregroundColor(element.color)
                         .shadow(radius: 0.5)
                     Text(element.emotion.description)
-                        .font(.caption)
+                        .font(.caption2)
                         .lineLimit(nil)
                 }
                 .multilineTextAlignment(.center)
                 .padding()
-                Spacer()
                 Image(systemName: "arrow.right.circle.fill")
                     .resizable()
                     .scaledToFit()
                     .padding()
-                    .frame(width: 150, height: 150, alignment: .trailing)
+                    .frame(width: 100, height: 100, alignment: .trailing)
                     .foregroundColor(element.color)
             })
         }

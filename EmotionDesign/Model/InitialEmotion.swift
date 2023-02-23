@@ -18,6 +18,7 @@ struct InitialEmotion: Identifiable, Hashable, Codable {
     var description: String
     var color: String
     let accentColor: String
+    var icon: String = "EmotionDesignLogo"
     var subEmotions: [SubEmotion]
     
 

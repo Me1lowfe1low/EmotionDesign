@@ -18,7 +18,6 @@ struct EmotionDesignApp: App {
     var body: some Scene {
         WindowGroup {
             let dataController = DataController()
-            
             NavigationView {
                 ContentView()
                     .environment(\.managedObjectContext, dataController.container.viewContext)
