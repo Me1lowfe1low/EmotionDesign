@@ -36,7 +36,12 @@ struct EmotionContentsView: View {
                             emotionDTO.chosen = false } )
                         {
                             RoundedRectangle(cornerRadius: 20)
-                                .fill(.white)
+                                .fill(LinearGradient(gradient: Gradient(colors: [
+                                    choice == index ?  emotionJsonList[index].getColor() : .white,
+                                    choice == index ? emotionJsonList[index].getAccentColor() : .white
+                                ]),
+                                               startPoint: .leading,
+                                               endPoint: .trailing))
                                 .frame(width: 100, height: 100 ,alignment: .center)
                                 .shadow(radius: 5)
                                 .padding()

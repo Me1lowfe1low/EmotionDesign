@@ -19,7 +19,7 @@ struct SubEmotion: Identifiable, Hashable, Codable {
     var icon: String = "EmotionDesignLogo"
     
 #if DEBUG
-static var emotionSample: SubEmotion = SubEmotion(name: "pride", description: "A feeling of pleasure and satisfaction that you get when you, or someone connected with you, have achieved something special")
+    static var emotionSample: SubEmotion = SubEmotion(name: "pride", description: "A feeling of pleasure and satisfaction that you get when you, or someone connected with you, have achieved something special", icon: "pride" )
 #endif
 }
 

@@ -44,7 +44,6 @@ struct HomeScreen: View {
                         .font(.caption)
                         .bold()
                         .padding()
-                    
                 )
                 .shadow(radius: 15)
         }

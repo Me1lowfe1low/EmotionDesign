@@ -21,10 +21,17 @@ struct ElementsView: View {
             ScrollView {
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 100))]) {
                     ForEach(emotionJsonList[choice].subEmotions, id: \.id) { emotion in
-                        Button(action: { emotionDTO.setEmotion(emotion, color: emotionJsonList[choice].getColor(), chosen: true)} )
+                        Button(action: { emotionDTO.setEmotion(emotion, color: emotionJsonList[choice].getColor(), chosen: true)
+                        } )
                         {
                             RoundedRectangle(cornerRadius: 20)
-                                .fill(.white)
+                                //.fill(.white)
+                                .fill(LinearGradient(gradient: Gradient(colors: [
+                                    emotion.name == emotionDTO.emotion.name ? emotionJsonList[choice].getColor() : .white,
+                                    emotion.name == emotionDTO.emotion.name ? emotionJsonList[choice].getAccentColor() : .white
+                                ]),
+                                               startPoint: .leading,
+                                               endPoint: .trailing))
                                 .frame(width: 90, height: 90 ,alignment: .center)
                                 .shadow(radius: 5)
                                 .overlay(
