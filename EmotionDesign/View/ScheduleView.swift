@@ -16,8 +16,17 @@ struct ScheduleView: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var dataController: DataController
 
+    @State var notification: AppNotification?
+    @State var notificationDTO: NotificationEntry
     
-    @State var notification: NotificationEntry = NotificationEntry()
+    init(recievedNotification: AppNotification?) {
+        if let notificationItem = recievedNotification {
+            _notification = State(initialValue: notificationItem)
+            _notificationDTO = State(initialValue: NotificationEntry(title: notificationItem.wrappedTitle, time: notificationItem.wrappedDate, period: notificationItem.returnWeek() , enabled: notificationItem.wrappedEnabled) )
+        } else {
+            _notificationDTO = State(initialValue: NotificationEntry() )
+        }
+    }
     
     var body: some View {
         VStack {
@@ -27,10 +36,10 @@ struct ScheduleView: View {
                     saveNotification()
                     dismiss()
                 }
-                .frame(width: .infinity, alignment: .topTrailing)
+                .frame(alignment: .topTrailing)
             }
             .padding()
-            DatePicker(selection: $notification.time, in: ...Date.now, displayedComponents: .hourAndMinute)
+            DatePicker(selection: $notificationDTO.time, in: Date.now..., displayedComponents: .hourAndMinute)
             {
                 Text("")
             }
@@ -39,15 +48,15 @@ struct ScheduleView: View {
                 HStack(spacing: 0) {
                     Text("Repeat")
                         .frame(maxWidth: .infinity, alignment: .leading)
-                    NavigationLink(destination: DayList(scheme: $notification)) {
-                        Text(notification.returnPeriod().capitalized)
+                    NavigationLink(destination: DayList(scheme: $notificationDTO)) {
+                        Text(notificationDTO.returnPeriod().capitalized)
                     }
                         .frame(maxWidth: .infinity, alignment: .trailing)
                 }
                 HStack {
                     Text("Label: ")
                         .frame(maxWidth: .infinity, alignment: .leading)
-                    TextField("Alarm", text: $notification.title)
+                    TextField("Alarm", text: $notificationDTO.title)
                         .frame(maxWidth: .infinity, alignment: .trailing)
                 }
             }
@@ -58,17 +67,18 @@ struct ScheduleView: View {
     }
     
     func saveNotification() {
-        dataController.saveData(moc, element: notification)
+        dataController.saveData(moc, toAdd: notificationDTO, toEdit: notification)
         dismiss()
     }
-    
 }
 
 
 struct ScheduleView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            ScheduleView()
+            ScheduleView(recievedNotification: nil)
+                .environment(\.managedObjectContext, DataController.preview.container.viewContext)
+                .environmentObject(DataController.preview)
         }
     }
 }

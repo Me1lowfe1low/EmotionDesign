@@ -22,7 +22,7 @@ extension AppWeekday {
 
     @NSManaged public var name: String?
     @NSManaged public var id: UUID?
-    @NSManaged public var checked: Bool
+    @NSManaged public var checked: NSNumber?
     @NSManaged public var notification: AppNotification?
     @NSManaged public var position: Int16
 
@@ -34,6 +34,9 @@ extension AppWeekday {
         name ?? ""
     }
     
+    public var wrappedChecked: Bool {
+        checked?.boolValue ?? false
+    }
 }
 
 extension AppWeekday : Identifiable {

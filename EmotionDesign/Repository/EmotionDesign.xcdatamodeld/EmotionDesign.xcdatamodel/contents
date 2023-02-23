@@ -5,6 +5,7 @@
         <attribute name="enabled" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="title" optional="YES" attributeType="String"/>
+        <relationship name="notifications" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="NotificationList" inverseName="appNotification" inverseEntity="NotificationList"/>
         <relationship name="weekday" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="AppWeekday" inverseName="notification" inverseEntity="AppWeekday"/>
     </entity>
     <entity name="AppWeekday" representedClassName="AppWeekday" syncable="YES">
@@ -27,5 +28,12 @@
         <attribute name="parent" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="day" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DayDetail" inverseName="emotion" inverseEntity="DayDetail"/>
+    </entity>
+    <entity name="NotificationList" representedClassName="NotificationList" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <relationship name="appNotification" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AppNotification" inverseName="notifications" inverseEntity="AppNotification"/>
+        <userInfo>
+            <entry key="key" value="id"/>
+        </userInfo>
     </entity>
 </model>

@@ -19,12 +19,12 @@ struct DayList: View {
             ForEach(scheme.period.days.indices, id: \.self) { dayIndex in
                 Button(action: {
                     scheme.period.days[dayIndex].changeState()
-                    print(scheme.period)
                 }) {
                     HStack {
                         Text("Every \(scheme.period.days[dayIndex].name)")
                         Spacer()
-                        Image(systemName: scheme.period.days[dayIndex].checked ? "checkmark" : "")
+                        Image(systemName: "checkmark")
+                            .opacity(scheme.period.days[dayIndex].checked ? 1.0 : 0.0)
                     }
                 }
             }
