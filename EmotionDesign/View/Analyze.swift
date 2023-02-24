@@ -60,13 +60,11 @@ struct Analyze: View {
                                     .shadow(radius: 5)
                                     .padding()
                                     .overlay(
-                                        Chart {
-                                            ForEach( chartList.charts[selectionId!].points.prefix(7), id: \.self) { point in
-                                                LineMark(x: .value("Date", point.getDate()),
-                                                         y: .value("Total count", point.count))
-                                                PointMark(x: .value("Date", point.getDate()),
-                                                         y: .value("Total count", point.count))
-                                            }
+                                        Chart(chartList.charts[selectionId!].points.prefix(7)) { point in
+                                            LineMark(x: .value("Date", point.getDate()),
+                                                     y: .value("Total count", point.count))
+                                            PointMark(x: .value("Date", point.getDate()),
+                                                      y: .value("Total count", point.count))
                                         }
                                             .frame(width: 200, height: 200 ,alignment: .center)
                                             .foregroundStyle(chartList.charts[selectionId!].color)

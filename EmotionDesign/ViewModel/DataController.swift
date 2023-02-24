@@ -328,22 +328,27 @@ class DataController: ObservableObject {
         }
         
         days.forEach { day in
+            print("Current date: \(day.getDate())")
             for ind in 0..<chartList.charts.count {
                 // If there are no points for given date - create one with 0 value
                 var tempIndex = 0
-                if chartList.charts[ind].points.firstIndex(where: { $0.date == day.wrappedDate }) == nil  {
+                if chartList.charts[ind].points.firstIndex(where: { Calendar.current.isDate(  $0.date , equalTo: day.wrappedDate, toGranularity: .day ) }) == nil  {
+                    print("Creating point for date: \(day.getDate())")
                     chartList.charts[ind].addPoint(day.wrappedDate)
-                    print("Adding new point...")
+                    print("Added new point:")
+                    print("day: \(chartList.charts[ind].points.last!.getDate()), value: \(chartList.charts[ind].points.last!.count), emotion: \(chartList.charts[ind].emotion)")
+                    tempIndex = chartList.charts[ind].points.firstIndex(where: { Calendar.current.isDate(  $0.date , equalTo: day.wrappedDate, toGranularity: .day ) })!
                 } else {
-                    tempIndex = chartList.charts[ind].points.firstIndex(where: { $0.date == day.wrappedDate })!
+                    tempIndex = chartList.charts[ind].points.firstIndex(where: { Calendar.current.isDate(  $0.date , equalTo: day.wrappedDate, toGranularity: .day ) })!
+                    print("Saved index: \(tempIndex)")
                 }
                 
                 // Check users data unique emotions
                 day.uniqueMainEmotion.forEach { element in
-                    print("index: \(ind), emotion: \(chartList.charts[ind].emotion), counts: \(element.key), mainEmotionName: \(emotionJsonList[element.key].name)")
-                    
                     if chartList.charts[ind].emotion == emotionJsonList[element.key].name {
                         chartList.charts[ind].points[tempIndex].setValue(element.value)
+                        print("Changed point:")
+                        print("Date: \(chartList.charts[ind].points[tempIndex].getDate()), value: \(chartList.charts[ind].points[tempIndex].count ), emotion: \(chartList.charts[ind].emotion)")
                     }
                 }
             }
