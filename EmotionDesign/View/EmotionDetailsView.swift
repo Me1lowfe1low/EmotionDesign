@@ -17,7 +17,7 @@ struct EmotionDetailsView: View {
     @Environment(\.dismiss) private var dismiss
     
     @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \DayDetail.date, ascending: false)]) var userDataSet: FetchedResults<DayDetail>
-    private let emotionJsonList: [InitialEmotion] = Bundle.main.decode([InitialEmotion].self, from: "EmotionInitialList.json")
+    //private let emotionJsonList: [InitialEmotion] = Bundle.main.decode([InitialEmotion].self, from: "EmotionInitialList.json")
     
     @Binding var element: EmotionDTO
     @State var description: String = ""
@@ -26,8 +26,7 @@ struct EmotionDetailsView: View {
     var body: some View {
         VStack {
             ZStack {
-                
-                LinearGradient(colors: emotionJsonList[element.emotion.parent].returnColors(),
+                LinearGradient(colors: dataController.emotionJsonList[element.emotion.parent].returnColors(),
                  startPoint: .topLeading,
                  endPoint: .bottomTrailing)
                 .mask(RoundedRectangle(cornerRadius: 40)

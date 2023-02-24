@@ -17,25 +17,12 @@ class DataController: ObservableObject {
     let container = NSPersistentContainer(name: "EmotionDesign")
     let calendar = Calendar.current
     let center = UNUserNotificationCenter.current()
-    
-    static var preview: DataController {
-        let storage = DataController(inMemory: true)
-        
-        let emotionDTO = EmotionDTO(emotion: SubEmotion.emotionSample, color: .yellow)
-        let notificationSample = NotificationEntry()
-        storage.createAndFillNewDayEntry(storage.container.viewContext, element: emotionDTO, comment: "No comments", date: Date())
-        storage.saveData(storage.container.viewContext, toAdd: notificationSample, toEdit: nil)
-        
-        return storage
-    }
- 
+    let emotionJsonList: [InitialEmotion] = Bundle.main.decode([InitialEmotion].self, from: "EmotionInitialList.json")
     
     init(inMemory: Bool = false) {
-        
         if inMemory {
             container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
         }
-        
         container.loadPersistentStores { description, error in
             if let error = error {
                 print("Core Data failed to load: \(error.localizedDescription)")
@@ -103,7 +90,6 @@ class DataController: ObservableObject {
         print("Data removed")
     }
     
-    
     func saveData(_ context: NSManagedObjectContext, data: FetchedResults<DayDetail>, element: EmotionDTO, comment: String, date: Date) {
         guard data.first == nil else {
             var dateFound = false
@@ -121,7 +107,6 @@ class DataController: ObservableObject {
         }
         createAndFillNewDayEntry(context, element: element, comment: comment, date: date)
     }
-    
     
     func saveData(_ context: NSManagedObjectContext, toAdd: NotificationEntry, toEdit: AppNotification?) {
         guard toEdit != nil else {
@@ -243,7 +228,7 @@ class DataController: ObservableObject {
         }
         if counter == 0 {
             dateComponents.day = calendar.component(.day, from: data.time)
-    
+            
             let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
             let notificationObject = NotificationList(context: context)
             notificationObject.id = UUID()
@@ -327,13 +312,73 @@ class DataController: ObservableObject {
         deleteNotificationList(context, notification: notification )
     }
     
-    
-    
     func clearData(_ context: NSManagedObjectContext, data: FetchedResults<DayDetail>) {
         data.forEach {
             context.delete($0)
             saveContext(context)
         }
     }
+    
+    func getChartData(_ context: NSManagedObjectContext, days: FetchedResults<DayDetail>) -> ChartController {
+        var chartList: ChartController = ChartController()
+        emotionJsonList.forEach { emotion in
+            let tempTitle = "\(emotion.name.capitalized) chart"
+            let emotionChart: EmotionChart = EmotionChart(title: tempTitle, emotion: emotion.name, color: emotion.getColor())
+            chartList.charts.append(emotionChart)
+        }
+        
+        days.forEach { day in
+            for ind in 0..<chartList.charts.count {
+                // If there are no points for given date - create one with 0 value
+                var tempIndex = 0
+                if chartList.charts[ind].points.firstIndex(where: { $0.date == day.wrappedDate }) == nil  {
+                    chartList.charts[ind].addPoint(day.wrappedDate)
+                    print("Adding new point...")
+                } else {
+                    tempIndex = chartList.charts[ind].points.firstIndex(where: { $0.date == day.wrappedDate })!
+                }
+                
+                // Check users data unique emotions
+                day.uniqueMainEmotion.forEach { element in
+                    print("index: \(ind), emotion: \(chartList.charts[ind].emotion), counts: \(element.key), mainEmotionName: \(emotionJsonList[element.key].name)")
+                    
+                    if chartList.charts[ind].emotion == emotionJsonList[element.key].name {
+                        chartList.charts[ind].points[tempIndex].setValue(element.value)
+                    }
+                }
+            }
+        }
+        return chartList
+    }
+    
+#if DEBUG
+    static var preview: DataController {
+        let storage = DataController(inMemory: true)
+        
+        let emotionDTO0 = EmotionDTO(emotion: SubEmotion.emotionSample0, color: .green)
+        let emotionDTO1 = EmotionDTO(emotion: SubEmotion.emotionSample1, color: .green)
+        let emotionDTO2 = EmotionDTO(emotion: SubEmotion.emotionSample2, color: .green)
+        let emotionDTO3 = EmotionDTO(emotion: SubEmotion.emotionSample3, color: .green)
+        let emotionDTO4 = EmotionDTO(emotion: SubEmotion.emotionSample4, color: .green)
+        let emotionDTO5 = EmotionDTO(emotion: SubEmotion.emotionSample5, color: .green)
+        let notificationSample = NotificationEntry()
+        
+        let tempDate = Calendar.current.date(byAdding: .day, value: -1, to: Date())!
+        let tempDate1 = Calendar.current.date(byAdding: .day, value: -2, to: Date())!
+        storage.createAndFillNewDayEntry(storage.container.viewContext, element: emotionDTO0, comment: "", date: tempDate)
+        storage.createAndFillNewDayEntry(storage.container.viewContext, element: emotionDTO1, comment: "I've found my car broken", date: tempDate)
+        storage.createAndFillNewDayEntry(storage.container.viewContext, element: emotionDTO2, comment: "They said that I've passed the exams", date: tempDate)
+        storage.createAndFillNewDayEntry(storage.container.viewContext, element: emotionDTO2, comment: "Hmm", date: tempDate)
+        storage.createAndFillNewDayEntry(storage.container.viewContext, element: emotionDTO3, comment: "Strange feeling", date: Date())
+        storage.createAndFillNewDayEntry(storage.container.viewContext, element: emotionDTO4, comment: "I've broken my favourite cup", date: Date())
+        storage.createAndFillNewDayEntry(storage.container.viewContext, element: emotionDTO5, comment: "I've been invited to the party", date: Date())
+        storage.createAndFillNewDayEntry(storage.container.viewContext, element: emotionDTO2, comment: "Saad", date: tempDate1)
+      
+        
+        storage.saveData(storage.container.viewContext, toAdd: notificationSample, toEdit: nil)
+        
+        return storage
+    }
+#endif
 }
 

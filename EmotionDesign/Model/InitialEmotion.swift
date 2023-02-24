@@ -36,4 +36,12 @@ struct InitialEmotion: Identifiable, Hashable, Codable {
         colorList.append(getAccentColor())
         return colorList
     }
+    
+    func findEmotionIcon(_ emotion: String) -> String {
+        let tempArray: [String] = subEmotions.filter{ $0.name == emotion }.map { $0.name }
+        guard tempArray.isEmpty else {
+            return tempArray.first!
+        }
+        return ""
+    }
 }

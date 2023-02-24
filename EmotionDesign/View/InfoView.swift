@@ -12,7 +12,9 @@
 import SwiftUI
 
 struct InfoView: View {
-    private let emotionList: [InitialEmotion] = Bundle.main.decode([InitialEmotion].self, from: "EmotionInitialList.json")
+    @Environment(\.managedObjectContext) var moc
+    @EnvironmentObject var dataController: DataController
+    //private let emotionList: [InitialEmotion] = Bundle.main.decode([InitialEmotion].self, from: "EmotionInitialList.json")
     
     @State var emotionsView = PostitionListDTO()
     @State private var offset = CGSize.zero
@@ -48,14 +50,14 @@ struct InfoView: View {
                     }
                 }
             }
-            Text(emotionList[emotionsView.positionList.last!.elementId].name)
+            Text(dataController.emotionJsonList[emotionsView.positionList.last!.elementId].name)
                 .font(.title2)
-                .foregroundColor(emotionList[emotionsView.positionList.last!.elementId].getColor())
+                .foregroundColor(dataController.emotionJsonList[emotionsView.positionList.last!.elementId].getColor())
                 .bold()
                 .shadow(radius: 0.8)
                 .textCase(.uppercase)
                 .padding()
-            Text(emotionList[emotionsView.positionList.last!.elementId].description)
+            Text(dataController.emotionJsonList[emotionsView.positionList.last!.elementId].description)
                 .font(.callout)
                 .padding()
             Spacer()
@@ -64,9 +66,10 @@ struct InfoView: View {
     }
     
     struct EmotionView: View {
+        @Environment(\.managedObjectContext) var moc
+        @EnvironmentObject var dataController: DataController
         @Binding var position: PositionDTO
         
-        private let emotionList: [InitialEmotion] = Bundle.main.decode([InitialEmotion].self, from: "EmotionInitialList.json")
         
         var body: some View {
             HStack {
@@ -78,7 +81,7 @@ struct InfoView: View {
                         .fill(.white)
                         .frame(width: position.position == .center ? 175 : 90, height: position.position == .center ? 175 : 90)
                         .shadow(radius: 25)
-                    Image(emotionList[position.elementId].icon)
+                    Image(dataController.emotionJsonList[position.elementId].icon)
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .clipShape(RoundedRectangle(cornerRadius: position.position == .center ? 40 : 20)
@@ -156,5 +159,7 @@ struct PostitionListDTO: Identifiable {
 struct InfoView_Previews: PreviewProvider {
     static var previews: some View {
         InfoView()
+            .environment(\.managedObjectContext, DataController.preview.container.viewContext)
+            .environmentObject(DataController.preview)
     }
 }

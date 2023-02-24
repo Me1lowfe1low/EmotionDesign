@@ -14,9 +14,7 @@ import SwiftUI
 struct EmotionContentsView: View {
     @Environment(\.managedObjectContext) var moc
     @EnvironmentObject var dataController: DataController
-    
-    
-    private let emotionJsonList: [InitialEmotion] = Bundle.main.decode([InitialEmotion].self, from: "EmotionInitialList.json")
+    //private let emotionJsonList: [InitialEmotion] = Bundle.main.decode([InitialEmotion].self, from: "EmotionInitialList.json")
     
     @State private var emotionDTO: EmotionDTO = EmotionDTO(emotion: SubEmotion(), color: .gray)
     @State private var choice: Int = -1
@@ -31,14 +29,14 @@ struct EmotionContentsView: View {
             Divider()
             ScrollView(.horizontal) {
                 HStack {
-                    ForEach(emotionJsonList.indices, id: \.self) { index in
+                    ForEach(dataController.emotionJsonList.indices, id: \.self) { index in
                         Button(action: {choice = index
                             emotionDTO.chosen = false } )
                         {
                             RoundedRectangle(cornerRadius: 20)
                                 .fill(LinearGradient(gradient: Gradient(colors: [
-                                    choice == index ?  emotionJsonList[index].getColor() : .white,
-                                    choice == index ? emotionJsonList[index].getAccentColor() : .white
+                                    choice == index ?  dataController.emotionJsonList[index].getColor() : .white,
+                                    choice == index ? dataController.emotionJsonList[index].getAccentColor() : .white
                                 ]),
                                                startPoint: .leading,
                                                endPoint: .trailing))
@@ -46,7 +44,7 @@ struct EmotionContentsView: View {
                                 .shadow(radius: 5)
                                 .padding()
                                 .overlay(
-                                    Text(emotionJsonList[index].name)
+                                    Text(dataController.emotionJsonList[index].name)
                                         .font(.caption2)
                                         .bold()
                                         .fixedSize()
@@ -66,6 +64,8 @@ struct EmotionContentsView: View {
                         .opacity(0)
                 } else {
                     ElementsView(choice: $choice, emotionDTO:  $emotionDTO)
+                        .environment(\.managedObjectContext, moc)
+                        .environmentObject(dataController)
                     if emotionDTO.chosen {
                         NavigationLink(destination: EmotionDetailsView(element: $emotionDTO)
                             .environment(\.managedObjectContext, moc)
@@ -92,6 +92,8 @@ struct EmotionContentsView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             EmotionContentsView()
+                .environment(\.managedObjectContext, DataController.preview.container.viewContext)
+                .environmentObject(DataController.preview)
         }
     }
 }

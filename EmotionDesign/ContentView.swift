@@ -26,14 +26,14 @@ struct ContentView: View {
                     Text("Schedule")
                 }
                 .tag(0)
-            //Info()
             InfoView()
+                .environment(\.managedObjectContext, moc)
+                .environmentObject(dataController)
                 .tabItem {
                     Image(systemName: "info.circle")
                     Text("Info")
                 }
                 .tag(1)
-            //EmotionShareView()
             EmotionContentsView()
                 .environment(\.managedObjectContext, moc)
                 .environmentObject(dataController)
@@ -44,6 +44,8 @@ struct ContentView: View {
                 }
                 .tag(2)
             Analyze()
+                .environment(\.managedObjectContext, moc)
+                .environmentObject(dataController)
                 .tabItem {
                     Image(systemName: "chart.pie")
                     Text("Analyze")
