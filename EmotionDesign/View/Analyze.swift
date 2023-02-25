@@ -10,69 +10,161 @@
 // Could be used in educational purposes 
 
 import SwiftUI
+import Charts
 
 struct Analyze: View {
     @Environment(\.managedObjectContext) var moc
     @EnvironmentObject var dataController: DataController
-    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \DayDetail.date, ascending: false)]) var userDataSet: FetchedResults<DayDetail>
-    private let emotionJsonList: [InitialEmotion] = Bundle.main.decode([InitialEmotion].self, from: "EmotionInitialList.json")
     
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \DayDetail.date, ascending: true)]) var userDataSet: FetchedResults<DayDetail>
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \DayDetail.date, ascending: false)]) var userDataSetOrdered: FetchedResults<DayDetail>
+    
+    @State var chartList: ChartController = ChartController()
     @State private var currentDate: Date = Date()
     @State private var isConfirmed: Bool = false
+    @State var selectionName: String = "Chart"
+    @State var selectionId: Int?
     
     var body: some View {
         VStack(alignment: .leading) {
-            Section(header: Text("Days picture")
+            HStack {
+                Spacer()
+                Menu {
+                    ForEach( chartList.charts.indices, id: \.self) { chartId in
+                        Button(action: { selectionId = chartId
+                            selectionName = chartList.charts[chartId].title
+                        } ) {
+                            Text(chartList.charts[chartId].title)
+                                .bold()
+                                .font(.title3)
+                        }
+                    }
+                } label: {
+                    Image(systemName: "list.bullet")
+                        .font(.title)
+                        .frame(alignment: .trailing)
+                }
+            }
+            Section(header: Text(selectionName)
                 .font(.caption)
                 .textCase(.uppercase)
-            ) {
-                List {
-                    ForEach(userDataSet, id: \.self ) { day in
-                        LazyVGrid(columns: [GridItem(.flexible())]) {
-                            HStack( alignment: .top) {
-                                ZStack {
-                                    ForEach(day.emotions , id: \.self) { emotion in
-                                        AnimatedCircle( emotion: emotionJsonList[emotion.wrappedParent] )
-                                    }
-                                }
-                                .frame(width: 100, height: 100)
-                                .padding()
-                                
-                                Spacer()
-                                VStack(alignment: .leading) {
-                                    Section(header: Text(day.wrappedDate, style: .date)) {
-                                        Text("You felt: ")
-                                        ForEach(day.uniqueEmotion , id: \.key) { emotion in
-                                            Text(emotion.key)
-                                                .frame(alignment: .center)
+                .padding(.vertical)
+                    
+            ){
+                VStack  {
+                    if selectionId != nil {
+                        VStack {
+                            if !chartList.charts[selectionId!].points.isEmpty {
+                                RoundedRectangle(cornerRadius: 20)
+                                    .fill(.white)
+                                    .frame(height: 250 ,alignment: .center)
+                                    .shadow(radius: 5)
+                                    .padding()
+                                    .overlay(
+                                        Chart(chartList.charts[selectionId!].points.prefix(7)) { point in
+                                            LineMark(x: .value("Date", point.getDate()),
+                                                     y: .value("Total count", point.count))
+                                            PointMark(x: .value("Date", point.getDate()),
+                                                      y: .value("Total count", point.count))
                                         }
-                                    }
+                                            .frame(width: 200, height: 200 ,alignment: .center)
+                                            .foregroundStyle(chartList.charts[selectionId!].color)
+                                            .chartXAxisLabel("Date")
+                                            .chartYAxisLabel("Counts")
+                                    )
+                            }
+                            else {
+                                ZStack {
+                                    RoundedRectangle(cornerRadius: 20)
+                                        .fill(.white)
+                                        .frame(height: 250 ,alignment: .center)
+                                        .shadow(radius: 5)
+                                        .padding()
+                                        .overlay(
+                                            Text("Currently there is no data in this chart")
+                                                .font(.caption2)
+                                                .bold()
+                                                .fixedSize()
+                                                .scaledToFit()
+                                        )
                                 }
                             }
                         }
                     }
-                    .onDelete(perform: delete)
+                    else {
+                        RoundedRectangle(cornerRadius: 20)
+                             .fill(.white)
+                             .frame(height: 250 ,alignment: .center)
+                             .shadow(radius: 5)
+                             .padding()
+                             .overlay(
+                                 Text("You may look through your weekly \n emotion statistics by clicking \n on the bullet list \n at the top right corner")
+                                     .font(.caption2)
+                                     .bold()
+                                     .padding()
+                                     .multilineTextAlignment(.center)
+                             )
+                    }
                 }
+                .onAppear(perform: { chartList = dataController.getChartData(moc, days: userDataSet)
+                })
             }
-            .padding()
-            Section(header: Text("Whole picture")
+            .padding(.horizontal)
+            Section(header: Text("Journal")
                 .font(.caption)
                 .textCase(.uppercase)
             ){
-                ZStack {
-                    ForEach(userDataSet, id: \.self ) { day in
-                        HStack {
-                            ForEach(day.emotions, id: \.self) { emotion in
-                                AnimatedCircle(emotion: emotionJsonList[emotion.wrappedParent])
+                ScrollView(.vertical) {
+                    ForEach(userDataSetOrdered, id: \.self ) { day in
+                        ForEach(day.emotions, id: \.self) { emotion in
+                            HStack(spacing: 20) {
+                                ZStack {
+                                    RoundedRectangle(cornerRadius: 20)
+                                        .fill(.white)
+                                        .frame(width: 90, height: 90, alignment: .leading)
+                                        .shadow(radius: 5)
+                                    Image(dataController.emotionJsonList[Int(emotion.parent)].findEmotionIcon(emotion.name!))
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fill)
+                                        .clipShape(RoundedRectangle(cornerRadius:  20))
+                                        .frame(width: 90, height: 90)
+                                }
+                                VStack(alignment: .leading) {
+                                    Text(emotion.name!)
+                                        .font(.caption)
+                                        .foregroundColor(dataController.emotionJsonList[Int(emotion.parent)].getColor())
+                                        .textCase(.uppercase)
+                                        .bold()
+                                    Text(emotion.comment!)
+                                        .font(.caption)
+                                }
+                                Spacer()
+                                Text(day.getDate())
+                                    .font(.caption)
                             }
+                            .padding()
                         }
-                        .padding()
                     }
                 }
             }
             .padding()
-            Button("Clear all data", role: .destructive) {
-                isConfirmed = true
+            
+            
+            Button(role: .destructive) { isConfirmed = true }
+        label:
+            {
+                RoundedRectangle(cornerRadius: 20)
+                    .fill(.white)
+                    .frame(height: 50 ,alignment: .center)
+                    .shadow(radius: 5)
+                    .padding()
+                    .overlay(
+                        Text("Clear all data")
+                            .font(.caption2)
+                            .bold()
+                            .fixedSize()
+                            .scaledToFit()
+                    )
             }
             .confirmationDialog("Are you sure?", isPresented: $isConfirmed ) {
                 Button("Clear", role: .destructive)
@@ -80,25 +172,27 @@ struct Analyze: View {
                     clearData()
                 }
             }
-            .padding()
         }
         .padding()
     }
+        
     
     func clearData() {
         dataController.clearData(moc, data: userDataSet)
     }
     
-    func delete(at offsets: IndexSet) {
-        for offset in offsets {
-            dataController.delete(moc, day: userDataSet[offset])
-        }
-    }
 
 }
+
 
 struct Analyze_Previews: PreviewProvider {
     static var previews: some View {
         Analyze()
+            .environment(\.managedObjectContext, DataController.preview.container.viewContext)
+            .environmentObject(DataController.preview)
     }
 }
+
+
+
+

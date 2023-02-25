@@ -54,6 +54,16 @@ extension DayDetail {
             $0.key < $1.key
         }
     }
+    
+    public var uniqueMainEmotion: [(key: Int,value: Int)] {
+        let set = emotion as? Set<Emotion> ?? []
+        let counts = set.reduce(into: [:]) { counts, element in
+            counts[element.wrappedParent, default: 0] += 1
+        }
+        return counts.sorted {
+            $0.key < $1.key
+        }
+    }
 }
 
 // MARK: Generated accessors for emotion
@@ -75,4 +85,18 @@ extension DayDetail {
 
 extension DayDetail : Identifiable {
 
+    /*func fillDataForCharts() -> [ChartPoint] {
+        //var chartDetails: [ChartPoint] = []
+        let set = emotion as? Set<Emotion> ?? []
+        let counts = set.reduce(into: [:]) { counts, element in
+            counts[element.wrappedParent, default: 0] += 1
+        }
+        var chartDetails: [ChartPoint] = counts.map { ChartPoint(date: self.wrappedDate, color: .red, count: $0.value , emotion: $0.key ) }
+    }*/
+    
+    func getDate() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "d MMM"
+        return dateFormatter.string(from: date!)
+    }
 }

@@ -22,5 +22,12 @@ struct EmotionDTO {
         self.color = color
         self.chosen = chosen
     }
+    
+    func getColor(_ emotion: String, colorSet: [Color] ) -> [Color] {
+        if self.emotion.name == emotion {
+            return colorSet
+        }
+        return [ .white, .white]
+    }
 }
 

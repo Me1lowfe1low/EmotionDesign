@@ -13,7 +13,7 @@ import SwiftUI
 
 struct HomeScreen: View {
     var body: some View {
-        VStack(alignment: .leading, spacing: 40) {
+        VStack(alignment: .leading) {
             RoundedRectangle(cornerRadius: 25)
                 .fill(.white)
                 .frame(height: 100)
@@ -34,6 +34,7 @@ struct HomeScreen: View {
                     }
                     
                 )
+                .padding()
                 .shadow(radius: 15)
             
             RoundedRectangle(cornerRadius: 40)
@@ -45,6 +46,7 @@ struct HomeScreen: View {
                         .bold()
                         .padding()
                 )
+                .padding()
                 .shadow(radius: 15)
         }
         .padding()
