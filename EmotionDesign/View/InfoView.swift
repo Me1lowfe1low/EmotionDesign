@@ -14,8 +14,7 @@ import SwiftUI
 struct InfoView: View {
     @Environment(\.managedObjectContext) var moc
     @EnvironmentObject var dataController: DataController
-    //private let emotionList: [InitialEmotion] = Bundle.main.decode([InitialEmotion].self, from: "EmotionInitialList.json")
-    
+
     @State var emotionsView = PostitionListDTO()
     @State private var offset = CGSize.zero
     
@@ -65,94 +64,7 @@ struct InfoView: View {
         .padding()
     }
     
-    struct EmotionView: View {
-        @Environment(\.managedObjectContext) var moc
-        @EnvironmentObject var dataController: DataController
-        @Binding var position: PositionDTO
-        
-        
-        var body: some View {
-            HStack {
-                if position.position == .right {
-                    Spacer()
-                }
-                ZStack {
-                    RoundedRectangle(cornerRadius: position.position == .center ? 40 : 20)
-                        .fill(.white)
-                        .frame(width: position.position == .center ? 175 : 90, height: position.position == .center ? 175 : 90)
-                        .shadow(radius: 25)
-                    Image(dataController.emotionJsonList[position.elementId].icon)
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .clipShape(RoundedRectangle(cornerRadius: position.position == .center ? 40 : 20)
-                        )
-                        .frame(width: position.position == .center ? 175 : 90, height: position.position == .center ? 175 : 90)
-                }
-                if position.position == .left {
-                    Spacer()
-                }
-            }
-            .padding()
-        }
-    }
-}
-
-
-enum Position: String {
-    case left
-    case center
-    case right
     
-    public var alignment: Alignment {
-        var alignTo: Alignment
-        switch self {
-            case .left:
-                alignTo = Alignment.leading
-            case .right:
-                alignTo = Alignment.trailing
-            default:
-                alignTo = Alignment.center
-        }
-        return alignTo
-    }
-}
-
-struct PositionDTO: Identifiable {
-    var id: UUID = UUID()
-    var elementId: Int
-    var position: Position
-}
-
-struct PostitionListDTO: Identifiable {
-    var id: UUID = UUID()
-    var positionList: [PositionDTO] =
-    [PositionDTO(elementId: 1, position: .left),PositionDTO(elementId: 3, position: .right),PositionDTO(elementId: 2, position: .center)]
-    private let emotionList: [InitialEmotion] = Bundle.main.decode([InitialEmotion].self, from: "EmotionInitialList.json")
-    
-    
-    mutating func moveLeft() {
-        for ind in 0..<positionList.count {
-            if positionList[ind].elementId != 0 {  positionList[ind].elementId -= 1
-            } else {
-                positionList[ind].elementId = emotionList.count - 1
-            }
-        }
-    }
-    
-    mutating func moveRight() {
-        for ind in 0..<positionList.count {
-            if positionList[ind].elementId != emotionList.count - 1 {
-                positionList[ind].elementId += 1
-            } else {
-                positionList[ind].elementId = 0
-            }
-        }
-    }
-    
-    func printPositions() {
-        let tempPositionList = positionList.map { $0.elementId }
-        print(tempPositionList)
-    }
 }
 
 

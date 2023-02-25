@@ -55,7 +55,6 @@ struct NotificationView: View {
                     List {
                         ForEach(notifications, id: \.id) { entry in
                             ZStack {
-                                //ScheduledNotification(notification: entry)
                                 ScheduledNotification(recievedNotification: entry)
                                 NavigationLink("Invisible link", destination: ScheduleView(recievedNotification: entry)
                                     .environment(\.managedObjectContext, moc)

@@ -12,19 +12,19 @@
 import SwiftUI
 
 struct DayList: View {
-    @Binding var scheme: NotificationEntry
+    @Binding var days: [Day]
     
     var body: some View {
         List {
-            ForEach(scheme.period.days.indices, id: \.self) { dayIndex in
+            ForEach(days.indices, id: \.self) { dayIndex in
                 Button(action: {
-                    scheme.period.days[dayIndex].changeState()
+                    days[dayIndex].changeState()
                 }) {
                     HStack {
-                        Text("Every \(scheme.period.days[dayIndex].name)")
+                        Text("Every \(days[dayIndex].name)")
                         Spacer()
                         Image(systemName: "checkmark")
-                            .opacity(scheme.period.days[dayIndex].checked ? 1.0 : 0.0)
+                            .opacity(days[dayIndex].checked ? 1.0 : 0.0)
                     }
                 }
             }
@@ -34,6 +34,6 @@ struct DayList: View {
 
 struct DayList_Previews: PreviewProvider {
     static var previews: some View {
-        DayList(scheme: .constant(NotificationEntry()))
+        DayList(days: .constant(NotificationEntry().period.days))
     }
 }

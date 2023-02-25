@@ -41,6 +41,7 @@ struct Analyze: View {
                     }
                 } label: {
                     Image(systemName: "list.bullet")
+                        .font(.title)
                         .frame(alignment: .trailing)
                 }
             }
@@ -180,15 +181,8 @@ struct Analyze: View {
         dataController.clearData(moc, data: userDataSet)
     }
     
-    
-    /*func delete(at offsets: IndexSet) {
-        for offset in offsets {
-            dataController.delete(moc, day: userDataSet[offset])
-        }
-    }*/
+
 }
-
-
 
 
 struct Analyze_Previews: PreviewProvider {
@@ -200,44 +194,5 @@ struct Analyze_Previews: PreviewProvider {
 }
 
 
-struct ListButtonView: View {
-    var body: some View {
-        Text("")
-    }
-}
 
 
-
-
-struct EmotionChart: Identifiable {
-    var id: UUID = UUID()
-    var title: String
-    var emotion: String
-    var color: Color
-    var points: [ChartPoint] = []
-    
-    mutating func addPoint(_ date: Date) {
-        points.append(ChartPoint(date: date))
-    }
-
-}
-
-struct ChartPoint: Identifiable, Hashable {
-    var id: UUID = UUID()
-    var date: Date
-    var count: Int = 0
-    
-    mutating func increment() {
-        self.count += 1
-    }
-    
-    mutating func setValue(_ value: Int) {
-        self.count = value
-    }
-    
-    func getDate() -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "d MMM"
-        return dateFormatter.string(from: date)
-    }
-}

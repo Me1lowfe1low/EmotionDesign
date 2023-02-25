@@ -15,9 +15,7 @@ struct EmotionDetailsView: View {
     @EnvironmentObject var dataController: DataController
     @Environment(\.managedObjectContext) var moc
     @Environment(\.dismiss) private var dismiss
-    
     @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \DayDetail.date, ascending: false)]) var userDataSet: FetchedResults<DayDetail>
-    //private let emotionJsonList: [InitialEmotion] = Bundle.main.decode([InitialEmotion].self, from: "EmotionInitialList.json")
     
     @Binding var element: EmotionDTO
     @State var description: String = ""
@@ -46,13 +44,21 @@ struct EmotionDetailsView: View {
                         Text(initialDate, style: .time)
                     }
                 }
-                Text("Commit")
-                    .gesture(
-                        TapGesture()
-                            .onEnded {
-                                processTheEntry()
-                            }
-                    )
+            }
+            Button( action: processTheEntry )
+            {
+                    RoundedRectangle(cornerRadius: 20)
+                        .fill(.white)
+                        .frame(height: 50 ,alignment: .center)
+                        .shadow(radius: 5)
+                        .padding()
+                        .overlay(
+                            Text("Save")
+                                .font(.caption2)
+                                .bold()
+                                .fixedSize()
+                                .scaledToFit()
+                        )
             }
         }
         .navigationTitle("Choose emotion")

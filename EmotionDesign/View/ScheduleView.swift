@@ -48,7 +48,7 @@ struct ScheduleView: View {
                 HStack(spacing: 0) {
                     Text("Repeat")
                         .frame(maxWidth: .infinity, alignment: .leading)
-                    NavigationLink(destination: DayList(scheme: $notificationDTO)) {
+                    NavigationLink(destination: DayList(days: $notificationDTO.period.days)) {
                         Text(notificationDTO.returnPeriod().capitalized)
                     }
                         .frame(maxWidth: .infinity, alignment: .trailing)

@@ -16,7 +16,7 @@ struct ElementsView: View {
     @EnvironmentObject var dataController: DataController
     @Binding var choice: Int
     @Binding var emotionDTO: EmotionDTO
-    //private let emotionJsonList: [InitialEmotion] = Bundle.main.decode([InitialEmotion].self, from: "EmotionInitialList.json")
+
     
     var body: some View {
         ZStack {
@@ -27,11 +27,8 @@ struct ElementsView: View {
                         })
                         {
                             RoundedRectangle(cornerRadius: 20)
-                                //.fill(.white)
-                                .fill(LinearGradient(gradient: Gradient(colors: [
-                                    emotion.name == emotionDTO.emotion.name ? dataController.emotionJsonList[choice].getColor() : .white,
-                                    emotion.name == emotionDTO.emotion.name ? dataController.emotionJsonList[choice].getAccentColor() : .white
-                                ]),
+                                .fill(LinearGradient(gradient: Gradient(colors:
+                                                                            emotionDTO.getColor(emotion.name,colorSet: dataController.emotionJsonList[choice].returnColors())),
                                                startPoint: .leading,
                                                endPoint: .trailing))
                                 .frame(width: 90, height: 90 ,alignment: .center)

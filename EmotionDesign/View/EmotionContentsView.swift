@@ -14,7 +14,6 @@ import SwiftUI
 struct EmotionContentsView: View {
     @Environment(\.managedObjectContext) var moc
     @EnvironmentObject var dataController: DataController
-    //private let emotionJsonList: [InitialEmotion] = Bundle.main.decode([InitialEmotion].self, from: "EmotionInitialList.json")
     
     @State private var emotionDTO: EmotionDTO = EmotionDTO(emotion: SubEmotion(), color: .gray)
     @State private var choice: Int = -1
@@ -34,12 +33,10 @@ struct EmotionContentsView: View {
                             emotionDTO.chosen = false } )
                         {
                             RoundedRectangle(cornerRadius: 20)
-                                .fill(LinearGradient(gradient: Gradient(colors: [
-                                    choice == index ?  dataController.emotionJsonList[index].getColor() : .white,
-                                    choice == index ? dataController.emotionJsonList[index].getAccentColor() : .white
-                                ]),
-                                               startPoint: .leading,
-                                               endPoint: .trailing))
+                                .fill(LinearGradient(gradient: Gradient(colors:
+                                                                            choice == index ? dataController.emotionJsonList[index].returnColors() : [.white, .white]),
+                                                     startPoint: .leading,
+                                                     endPoint: .trailing))
                                 .frame(width: 100, height: 100 ,alignment: .center)
                                 .shadow(radius: 5)
                                 .padding()
@@ -84,9 +81,6 @@ struct EmotionContentsView: View {
         .navigationBarTitleDisplayMode(.inline)
     }
 }
-
-
-
 
 struct EmotionContentsView_Previews: PreviewProvider {
     static var previews: some View {
