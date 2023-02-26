@@ -27,9 +27,9 @@ struct NotificationView: View {
                 Button("Request permission") {
                     UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
                         if success {
-                            print("All set!")
+                            dataController.logger.info("All set!")
                         } else if let error = error {
-                            print(error.localizedDescription)
+                            dataController.logger.error("\(error.localizedDescription)")
                         }
                     }
                 }

@@ -12,12 +12,15 @@
 import CoreData
 import Foundation
 import SwiftUI
+import OSLog
 
 class DataController: ObservableObject {
     let container = NSPersistentContainer(name: "EmotionDesign")
     let calendar = Calendar.current
     let center = UNUserNotificationCenter.current()
     let emotionJsonList: [InitialEmotion] = Bundle.main.decode([InitialEmotion].self, from: "EmotionInitialList.json")
+    let logger = Logger(subsystem: "EmotionDesign", category: "main")
+    
     
     init(inMemory: Bool = false) {
         if inMemory {
@@ -81,17 +84,16 @@ class DataController: ObservableObject {
         } else {
             dateComponents.weekday = dayIndex!
         }
-        print(dateComponents)
+        logger.debug("Created entry for following day: \(dateComponents)")
         
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
         let notificationObject = NotificationList(context: context)
         notificationObject.id = UUID()
         notificationObject.appNotification = notification
-        print(notificationObject)
         saveContext(context)
-        print("List of alert ID: ")
-        print(data)
-        counter == 0 ? print("Push one entry to Notification Center") : print("Refresh data in Notification Center")
+        logger.debug("Created entry for notification: \(notificationObject)")
+        logger.debug("List of alert ID: \(notification.wrappedId.uuidString)")
+        counter == 0 ? logger.info("Push one entry to Notification Center") : logger.info("Refresh data in Notification Center")
         let request = UNNotificationRequest(identifier: notificationObject.id!.uuidString, content: content, trigger: trigger)
         center.add(request)
     }
@@ -105,27 +107,26 @@ class DataController: ObservableObject {
         }
         
         days.forEach { day in
-            print("Current date: \(day.getDate())")
+            logger.debug("Current date: \(day.getDate())")
             for ind in 0..<chartList.charts.count {
-                // If there are no points for given date - create one with 0 value
                 var tempIndex = 0
                 if chartList.charts[ind].points.firstIndex(where: { Calendar.current.isDate(  $0.date , equalTo: day.wrappedDate, toGranularity: .day ) }) == nil  {
-                    print("Creating point for date: \(day.getDate())")
+                    logger.debug("Creating point for date: \(day.getDate())")
                     chartList.charts[ind].addPoint(day.wrappedDate)
-                    print("Added new point:")
-                    print("day: \(chartList.charts[ind].points.last!.getDate()), value: \(chartList.charts[ind].points.last!.count), emotion: \(chartList.charts[ind].emotion)")
+                    logger.debug("Added new point:")
+                    logger.debug("day: \(chartList.charts[ind].points.last!.getDate()), value: \(chartList.charts[ind].points.last!.count), emotion: \(chartList.charts[ind].emotion)")
                     tempIndex = chartList.charts[ind].points.firstIndex(where: { Calendar.current.isDate(  $0.date , equalTo: day.wrappedDate, toGranularity: .day ) })!
                 } else {
                     tempIndex = chartList.charts[ind].points.firstIndex(where: { Calendar.current.isDate(  $0.date , equalTo: day.wrappedDate, toGranularity: .day ) })!
-                    print("Saved index: \(tempIndex)")
+                    logger.debug("Saved index: \(tempIndex)")
                 }
                 
                 // Check users data unique emotions
                 day.uniqueMainEmotion.forEach { element in
                     if chartList.charts[ind].emotion == emotionJsonList[element.key].name {
                         chartList.charts[ind].points[tempIndex].setValue(element.value)
-                        print("Changed point:")
-                        print("Date: \(chartList.charts[ind].points[tempIndex].getDate()), value: \(chartList.charts[ind].points[tempIndex].count ), emotion: \(chartList.charts[ind].emotion)")
+                        logger.info("Changed point:")
+                        logger.debug("Date: \(chartList.charts[ind].points[tempIndex].getDate()), value: \(chartList.charts[ind].points[tempIndex].count ), emotion: \(chartList.charts[ind].emotion)")
                     }
                 }
             }
@@ -138,7 +139,8 @@ class DataController: ObservableObject {
             try context.save()
         } catch {
             let nsError = error as NSError
-            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+            logger.error("Unresolved error \(nsError), \(nsError.userInfo)")
+            fatalError("\(nsError)")
         }
     }
     
@@ -193,7 +195,7 @@ class DataController: ObservableObject {
             saveContext(context)
             
             if day.checked {
-                print("Day is: \(day.name)")
+                logger.debug("Day is: \(day.name)")
                 counter += 1
                 pushEntryToNotificationCenter(context, content: content, data: data, notification: alarm, counter: counter, dayIndex: day.shortName.id)
             }
@@ -226,25 +228,24 @@ class DataController: ObservableObject {
         } else {
             dateComponents.weekday = dayIndex!
         }
-        print(dateComponents)
+        logger.debug("Created entry for following day: \(dateComponents)")
         
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
         let notificationObject = NotificationList(context: context)
         notificationObject.id = UUID()
         notificationObject.appNotification = data
-        print(notificationObject)
         saveContext(context)
-        print("List of alert ID: ")
-        print(data)
-        counter == 0 ? print("Push one entry to Notification Center") : print("Refresh data in Notification Center")
+        logger.debug("Created entry for notification: \(notificationObject)")
+        logger.debug("List of alert ID: \(data.wrappedId.uuidString)")
+        counter == 0 ? logger.info("Push one entry to Notification Center") : logger.info("Refresh data in Notification Center")
         let request = UNNotificationRequest(identifier: notificationObject.id!.uuidString, content: content, trigger: trigger)
         center.add(request)
     }
     
     func editData(_ context: NSManagedObjectContext, data: AppNotification, from: NotificationEntry) {
-        print("Starting to edit")
+        logger.info("Starting to edit")
         deleteNotificationList(context, notification: data)
-        print("NotificationCleared")
+        logger.info("NotificationCleared")
         let content = UNMutableNotificationContent()
         content.title = "Schedule notification"
         content.subtitle = "What is your feelings right now?"
@@ -262,7 +263,7 @@ class DataController: ObservableObject {
                 
                 if from.period.days[ind].checked  {
                     counter += 1
-                    print("Day is: \(data.weekdays[ind].wrappedName)")
+                    logger.debug("Day is: \(data.weekdays[ind].wrappedName)")
                     editEntryInNotificationCenter(context, content: content, data: data, counter: counter, dayIndex: ind)
                 }
             }
@@ -281,19 +282,19 @@ class DataController: ObservableObject {
     func delete(_ context: NSManagedObjectContext, day: DayDetail ) {
         context.delete(day)
         saveContext(context)
-        print("Data removed")
+        logger.info("Data removed")
     }
     
     func delete(_ context: NSManagedObjectContext, notification: AppNotification ) {
         context.delete(notification)
         saveContext(context)
-        print("Data removed")
+        logger.info("Data removed")
     }
     
     func delete(_ context: NSManagedObjectContext, alert: NotificationList ) {
         context.delete(alert)
         saveContext(context)
-        print("Data removed")
+        logger.info("Data removed")
     }
     
     func deleteNotificationList(_ context: NSManagedObjectContext, notification: AppNotification ) {
@@ -303,16 +304,16 @@ class DataController: ObservableObject {
             notification.notificationObjects.forEach { alert in
                 delete(context, alert: alert)
             }
-            print("Data removed")
+            logger.info("Data removed")
             return
         }
-        print("Nothing to remove")
+        logger.info("Nothing to remove")
     }
     
     func removeNotificationsFromTheCenter(_ context: NSManagedObjectContext, notification: AppNotification ) {
-        print("Removing notifications...")
+        logger.info("Removing notifications...")
         center.removeDeliveredNotifications(withIdentifiers: notification.notificationObjects.map { $0.id!.uuidString })
-        print("Done")
+        logger.info("Done")
     }
     
     func clearData(_ context: NSManagedObjectContext, data: FetchedResults<DayDetail>) {
