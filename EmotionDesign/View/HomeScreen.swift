@@ -27,7 +27,7 @@ struct HomeScreen: View {
                             Text("Hello there!")
                                 .font(.title2)
                                 .bold()
-                            Text("Welcome back! Can you share with me how you're feeling right now?")
+                            Text("Welcome back!\n Can you share with me\n how you're feeling right now?")
                                 .font(.caption)
                         }
                         .padding(.vertical)
@@ -35,7 +35,7 @@ struct HomeScreen: View {
                     
                 )
                 .padding()
-                .shadow(radius: 15)
+                .shadow(radius: 5)
             
             RoundedRectangle(cornerRadius: 40)
                 .fill(.white)
@@ -47,7 +47,7 @@ struct HomeScreen: View {
                         .padding()
                 )
                 .padding()
-                .shadow(radius: 15)
+                .shadow(radius: 5)
         }
         .padding()
     }
