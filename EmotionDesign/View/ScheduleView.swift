@@ -41,17 +41,18 @@ struct ScheduleView: View {
                     .font(.title3)
                 NavigationLink(destination: DayList(days: $notificationDTO.period.days)) {
                     Text(notificationDTO.returnPeriod().capitalized)
+                        .frame(maxWidth: .infinity, alignment: .trailing)
                 }
-                .frame(maxWidth: .infinity, alignment: .trailing)
+               
             }
             .padding()
-            HStack {
+            HStack(spacing: 0) {
                 Text("Label: ")
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .font(.title3)
                 TextField("Alarm", text: $notificationDTO.title)
                     .frame(maxWidth: .infinity, alignment: .trailing)
-                    .font(.title3)
+                    .multilineTextAlignment(.trailing)
             }
             .padding()
             Spacer()

@@ -22,25 +22,23 @@ struct NotificationView: View {
     
     var body: some View {
         VStack {
-        Divider()
-        ScrollView {
-                NavigationLink(destination: ScheduleView(recievedNotification: nil)
-                    .environment(\.managedObjectContext, moc)
-                    .environmentObject(dataController)) {
-                        HStack {
-                            Text( "Notification")
-                                .textCase(.uppercase)
-                                .padding()
-                            Spacer()
-                            Image(systemName: "plus" )
-                                .padding()
-                        }
-                        .foregroundColor(.black)
-                        .bold()
-                        .font(.title2)
-                        .padding()
+            NavigationLink(destination: ScheduleView(recievedNotification: nil)
+                .environment(\.managedObjectContext, moc)
+                .environmentObject(dataController)) {
+                    HStack {
+                        Text( "Notification")
+                            .textCase(.uppercase)
+                            .padding()
+                        Spacer()
+                        Image(systemName: "plus" )
+                            .padding()
                     }
-                
+                    .foregroundColor(.black)
+                    .bold()
+                    .font(.title2)
+                    .padding()
+                }
+            List {
                 if notifications.isEmpty {
                     EmptyView()
                 } else {
@@ -57,6 +55,7 @@ struct NotificationView: View {
                     .onDelete(perform: delete)
                 }
             }
+            .listStyle(.plain)
         }
         .onAppear(perform: checkPermissions )
     }
