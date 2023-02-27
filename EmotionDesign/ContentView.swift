@@ -14,16 +14,14 @@ import SwiftUI
 struct ContentView: View {
     @Environment(\.managedObjectContext) var moc
     @EnvironmentObject var dataController: DataController
-    @State private var selection = 4
+    @State private var selection = 0
     
     var body: some View {
         TabView(selection: $selection)  {
-            NotificationView()
-                .environment(\.managedObjectContext, moc)
-                .environmentObject(dataController)
+            HomeScreen()
                 .tabItem {
-                    Image(systemName: "alarm")
-                    Text("Schedule")
+                    Image(systemName: "house.circle.fill")
+                    Text("Home")
                 }
                 .tag(0)
             InfoView()
@@ -51,12 +49,15 @@ struct ContentView: View {
                     Text("Analyze")
                 }
                 .tag(3)
-            HomeScreen()
+            NotificationView()
+                .environment(\.managedObjectContext, moc)
+                .environmentObject(dataController)
                 .tabItem {
-                    Image(systemName: "house.circle.fill")
-                    Text("Home")
+                    Image(systemName: "alarm")
+                    Text("Schedule")
                 }
                 .tag(4)
+            
         }
     }
 }

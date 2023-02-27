@@ -17,6 +17,10 @@ struct EmotionDTO {
     var color: Color
     var chosen: Bool = false
     
+    mutating func changeChosenState(to state: Bool) {
+        self.chosen = state
+    }
+    
     mutating func setEmotion(_ emotion: SubEmotion, color: Color, chosen: Bool) {
         self.emotion = emotion
         self.color = color
@@ -24,7 +28,7 @@ struct EmotionDTO {
     }
     
     func getColor(_ emotion: String, colorSet: [Color] ) -> [Color] {
-        if self.emotion.name == emotion {
+        if self.emotion.name == emotion && self.chosen == true {
             return colorSet
         }
         return [ .white, .white]

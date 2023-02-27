@@ -20,7 +20,7 @@ struct ElementsView: View {
     
     var body: some View {
         ZStack {
-            ScrollView {
+            //ScrollView {
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 100))]) {
                     ForEach(dataController.emotionJsonList[choice].subEmotions, id: \.id) { emotion in
                         Button(action: { emotionDTO.setEmotion(emotion, color: dataController.emotionJsonList[choice].getColor(), chosen: true)
@@ -31,11 +31,12 @@ struct ElementsView: View {
                                                                             emotionDTO.getColor(emotion.name,colorSet: dataController.emotionJsonList[choice].returnColors())),
                                                startPoint: .leading,
                                                endPoint: .trailing))
-                                .frame(width: 90, height: 90 ,alignment: .center)
+                                .frame(width: 100, height: 100 ,alignment: .center)
                                 .shadow(radius: 5)
                                 .overlay(
                                     Text(emotion.name)
-                                        .font(.caption2)
+                                        .font(.caption)
+                                        .textCase(.uppercase)
                                         .bold()
                                         .fixedSize()
                                         .scaledToFit()
@@ -45,7 +46,7 @@ struct ElementsView: View {
                     }
                     .padding()
                 }
-            }
+            //}
         }
     }
 }
