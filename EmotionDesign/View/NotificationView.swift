@@ -20,51 +20,52 @@ struct NotificationView: View {
     
     @State var currentTIme: Date = Date()
     
-    
     var body: some View {
         VStack {
-            HStack {
-                Button("Request permission") {
-                    UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
-                        if success {
-                            print("All set!")
-                        } else if let error = error {
-                            print(error.localizedDescription)
-                        }
+            NavigationLink(destination: ScheduleView(recievedNotification: nil)
+                .environment(\.managedObjectContext, moc)
+                .environmentObject(dataController)) {
+                    HStack {
+                        Text( "Notification")
+                            .textCase(.uppercase)
+                            .padding()
+                        Spacer()
+                        Image(systemName: "plus" )
+                            .padding()
                     }
+                    .foregroundColor(.black)
+                    .bold()
+                    .font(.title2)
+                    .padding()
                 }
-                Spacer()
-                NavigationLink(destination: ScheduleView(recievedNotification: nil)
-                    .environment(\.managedObjectContext, moc)
-                    .environmentObject(dataController)) {
-                    Image(systemName: "plus")
-                }
-            }
-            .padding()
-           
-            Spacer()
-            Form {
-                HStack {
-                    Text("Notification")
-                    Spacer()
-                }
-                .padding()
+            List {
                 if notifications.isEmpty {
                     EmptyView()
                 } else {
-                    List {
-                        ForEach(notifications, id: \.id) { entry in
-                            ZStack {
-                                ScheduledNotification(recievedNotification: entry)
-                                NavigationLink("Invisible link", destination: ScheduleView(recievedNotification: entry)
-                                    .environment(\.managedObjectContext, moc)
-                                    .environmentObject(dataController))
-                                .opacity(0.0)
-                            }
+                    ForEach(notifications, id: \.id) { entry in
+                        ZStack {
+                            ScheduledNotification(recievedNotification: entry)
+                            NavigationLink("Invisible link", destination: ScheduleView(recievedNotification: entry)
+                                .environment(\.managedObjectContext, moc)
+                                .environmentObject(dataController))
+                            .opacity(0.0)
                         }
-                        .onDelete(perform: delete)
+                        .padding()
                     }
+                    .onDelete(perform: delete)
                 }
+            }
+            .listStyle(.plain)
+        }
+        .onAppear(perform: checkPermissions )
+    }
+    
+    func checkPermissions() {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
+            if success {
+                dataController.logger.info("All set!")
+            } else if let error = error {
+                dataController.logger.error("\(error.localizedDescription)")
             }
         }
     }

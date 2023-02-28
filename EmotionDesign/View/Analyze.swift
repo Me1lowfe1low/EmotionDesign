@@ -24,157 +24,168 @@ struct Analyze: View {
     @State private var isConfirmed: Bool = false
     @State var selectionName: String = "Chart"
     @State var selectionId: Int?
+    @State var color: Color = Color.accentColor
     
     var body: some View {
-        VStack(alignment: .leading) {
-            HStack {
+        ZStack {
+            VStack(alignment: .leading) {
                 Spacer()
-                Menu {
-                    ForEach( chartList.charts.indices, id: \.self) { chartId in
-                        Button(action: { selectionId = chartId
-                            selectionName = chartList.charts[chartId].title
-                        } ) {
-                            Text(chartList.charts[chartId].title)
-                                .bold()
-                                .font(.title3)
+                ScrollView(.vertical) {
+                    VStack(spacing: 20) {
+                        Menu {
+                            ForEach( chartList.charts.indices, id: \.self) { chartId in
+                                Button(action: { selectionId = chartId
+                                    selectionName = chartList.charts[chartId].title
+                                } ) {
+                                    Text(chartList.charts[chartId].title)
+                                        .bold()
+                                        .font(.title3)
+                                }
+                            }
+                        } label: {
+                            HStack(spacing: 20) {
+                                Text(selectionName)
+                                    .font(.title2)
+                                    .bold()
+                                    .textCase(.uppercase)
+                                    .padding(.horizontal)
+                                    //.foregroundStyle(selectionId != nil ? chartList.charts[selectionId!].color : color)
+                                    .foregroundStyle(.black)
+                                Spacer()
+                            }
+                            .padding()
                         }
-                    }
-                } label: {
-                    Image(systemName: "list.bullet")
-                        .font(.title)
-                        .frame(alignment: .trailing)
-                }
-            }
-            Section(header: Text(selectionName)
-                .font(.caption)
-                .textCase(.uppercase)
-                .padding(.vertical)
-                    
-            ){
-                VStack  {
-                    if selectionId != nil {
-                        VStack {
-                            if !chartList.charts[selectionId!].points.isEmpty {
-                                RoundedRectangle(cornerRadius: 20)
-                                    .fill(.white)
-                                    .frame(height: 250 ,alignment: .center)
-                                    .shadow(radius: 5)
-                                    .padding()
-                                    .overlay(
+                        
+                        
+                        VStack  {
+                            if selectionId != nil {
+                                VStack {
+                                    if !chartList.charts[selectionId!].points.isEmpty {
                                         Chart(chartList.charts[selectionId!].points.prefix(7)) { point in
                                             LineMark(x: .value("Date", point.getDate()),
                                                      y: .value("Total count", point.count))
                                             PointMark(x: .value("Date", point.getDate()),
                                                       y: .value("Total count", point.count))
                                         }
-                                            .frame(width: 200, height: 200 ,alignment: .center)
-                                            .foregroundStyle(chartList.charts[selectionId!].color)
-                                            .chartXAxisLabel("Date")
-                                            .chartYAxisLabel("Counts")
-                                    )
-                            }
-                            else {
-                                ZStack {
-                                    RoundedRectangle(cornerRadius: 20)
-                                        .fill(.white)
-                                        .frame(height: 250 ,alignment: .center)
-                                        .shadow(radius: 5)
+                                        .frame(height: 220 ,alignment: .center)
+                                        .foregroundStyle(chartList.charts[selectionId!].color)
+                                        .chartXAxisLabel("Date")
+                                        .chartYAxisLabel("Counts")
                                         .padding()
-                                        .overlay(
+                                    }
+                                    else {
+                                        ZStack {
                                             Text("Currently there is no data in this chart")
                                                 .font(.caption2)
                                                 .bold()
                                                 .fixedSize()
                                                 .scaledToFit()
-                                        )
+                                                //.frame(height: 250 ,alignment: .center)
+                                        }
+                                    }
                                 }
                             }
+                            else {
+                                Text("You may look through your weekly \n emotion statistics by clicking\n on the name of the chart\n at the top left corner.")
+                                    .font(.title3)
+                                    .bold()
+                                    .padding()
+                                    .multilineTextAlignment(.leading)
+                            }
                         }
+                        .frame(height: 250 ,alignment: .center)
+                        .onAppear(perform: { chartList = dataController.getChartData(moc, days: userDataSet)
+                        })
                     }
-                    else {
-                        RoundedRectangle(cornerRadius: 20)
-                             .fill(.white)
-                             .frame(height: 250 ,alignment: .center)
-                             .shadow(radius: 5)
-                             .padding()
-                             .overlay(
-                                 Text("You may look through your weekly \n emotion statistics by clicking \n on the bullet list \n at the top right corner")
-                                     .font(.caption2)
-                                     .bold()
-                                     .padding()
-                                     .multilineTextAlignment(.center)
-                             )
+                    .background(RoundedRectangle(cornerRadius: 40)
+                        .fill(.white)
+                        .shadow(radius: 5))
+                    .padding()
+                    VStack {
+                        HStack(spacing: 20) {
+                            Text("Journal")
+                                .font(.title2)
+                                .bold()
+                                .textCase(.uppercase)
+                                .padding(.horizontal)
+                            Spacer()
+                            Text ("date")
+                                .font(.caption)
+                                .textCase(.uppercase)
+                                .padding(.horizontal)
+                        }
+                        .padding()
+                        VStack {
+                            ForEach(userDataSetOrdered, id: \.self ) { day in
+                                ForEach(day.emotions, id: \.self) { emotion in
+                                    HStack(spacing: 10) {
+                                        ZStack {
+                                            RoundedRectangle(cornerRadius: 20)
+                                                .fill(.white)
+                                                .frame(width: 90, height: 90, alignment: .leading)
+                                                .shadow(radius: 5)
+                                            Image(dataController.emotionJsonList[Int(emotion.parent)].findEmotionIcon(emotion.name!))
+                                                .resizable()
+                                                .aspectRatio(contentMode: .fill)
+                                                .clipShape(RoundedRectangle(cornerRadius:  20))
+                                                .frame(width: 90, height: 90)
+                                        }
+                                        VStack(alignment: .leading) {
+                                            Text(emotion.name!)
+                                                .font(.title3)
+                                                .foregroundColor(dataController.emotionJsonList[Int(emotion.parent)].getColor())
+                                                .textCase(.uppercase)
+                                                .fixedSize()
+                                                .bold()
+                                            Text(emotion.comment!)
+                                                .font(.caption)
+                                        }
+                                        Spacer()
+                                        Text(day.getDate())
+                                            .font(.caption2)
+                                            .fixedSize()
+                                    }
+                                    .padding(.horizontal)
+                                }
+                            }
+                            .padding(.vertical)
+                        }
+                        .padding(.horizontal)
+                        Spacer()
                     }
+                    .background(RoundedRectangle(cornerRadius: 40)
+                        .fill(.white)
+                        .shadow(radius: 5))
+                    .padding()
                 }
-                .onAppear(perform: { chartList = dataController.getChartData(moc, days: userDataSet)
-                })
-            }
-            .padding(.horizontal)
-            Section(header: Text("Journal")
-                .font(.caption)
-                .textCase(.uppercase)
-            ){
-                ScrollView(.vertical) {
-                    ForEach(userDataSetOrdered, id: \.self ) { day in
-                        ForEach(day.emotions, id: \.self) { emotion in
-                            HStack(spacing: 20) {
-                                ZStack {
-                                    RoundedRectangle(cornerRadius: 20)
-                                        .fill(.white)
-                                        .frame(width: 90, height: 90, alignment: .leading)
-                                        .shadow(radius: 5)
-                                    Image(dataController.emotionJsonList[Int(emotion.parent)].findEmotionIcon(emotion.name!))
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fill)
-                                        .clipShape(RoundedRectangle(cornerRadius:  20))
-                                        .frame(width: 90, height: 90)
-                                }
-                                VStack(alignment: .leading) {
-                                    Text(emotion.name!)
-                                        .font(.caption)
-                                        .foregroundColor(dataController.emotionJsonList[Int(emotion.parent)].getColor())
-                                        .textCase(.uppercase)
-                                        .bold()
-                                    Text(emotion.comment!)
-                                        .font(.caption)
-                                }
-                                Spacer()
-                                Text(day.getDate())
-                                    .font(.caption)
-                            }
-                            .padding()
-                        }
+
+                Button(role: .destructive) { isConfirmed = true }
+            label:
+                {
+                    RoundedRectangle(cornerRadius: 20)
+                        .fill(.white)
+                        .frame(height: 50 ,alignment: .center)
+                        .shadow(radius: 5)
+                        .padding()
+                        .overlay(
+                            Text("Clear all data")
+                                .font(.title3)
+                                .bold()
+                                .fixedSize()
+                                .scaledToFit()
+                        )
+                }
+                .confirmationDialog("Are you sure?", isPresented: $isConfirmed ) {
+                    Button("Clear", role: .destructive)
+                    {
+                        clearData()
                     }
                 }
             }
             .padding()
-            
-            
-            Button(role: .destructive) { isConfirmed = true }
-        label:
-            {
-                RoundedRectangle(cornerRadius: 20)
-                    .fill(.white)
-                    .frame(height: 50 ,alignment: .center)
-                    .shadow(radius: 5)
-                    .padding()
-                    .overlay(
-                        Text("Clear all data")
-                            .font(.caption2)
-                            .bold()
-                            .fixedSize()
-                            .scaledToFit()
-                    )
-            }
-            .confirmationDialog("Are you sure?", isPresented: $isConfirmed ) {
-                Button("Clear", role: .destructive)
-                {
-                    clearData()
-                }
-            }
         }
-        .padding()
     }
+        
         
     
     func clearData() {

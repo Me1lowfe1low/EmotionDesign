@@ -25,29 +25,30 @@ struct HomeScreen: View {
                             .padding()
                         VStack {
                             Text("Hello there!")
-                                .font(.title2)
+                                .font(.largeTitle)
                                 .bold()
-                            Text("Welcome back! Can you share with me how you're feeling right now?")
-                                .font(.caption)
+                            Text("Welcome back!")
+                                .font(.title2)
+                                .multilineTextAlignment(.center)
                         }
                         .padding(.vertical)
                     }
                     
                 )
                 .padding()
-                .shadow(radius: 15)
+                .shadow(radius: 5)
             
             RoundedRectangle(cornerRadius: 40)
                 .fill(.white)
-                .frame(height: 300)
+                //.frame(height: 300)
                 .overlay(
-                    Text("This application was created with intention to help users to control and analyze their emotions. \n\n It contains a wide range of emotions that user could choose and review an infographycs in day slices. \n\n Finally one could review how all emotions they felt are accumulated in the colorfull graph. The less negative emotions were felt - the clearer would be the image.")
-                        .font(.caption)
-                        .bold()
+                    Text("This application was created with intention to help users to control and analyze their emotions. \n\n It contains a wide range of emotions that user could choose and review an infographycs in day slices. \n\n Finally one could review how all emotions they felt are accumulated in the colorfull graph.")
+                        .font(.title3)
                         .padding()
+                        .multilineTextAlignment(.leading)
                 )
                 .padding()
-                .shadow(radius: 15)
+                .shadow(radius: 5)
         }
         .padding()
     }

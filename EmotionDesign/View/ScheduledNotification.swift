@@ -26,7 +26,7 @@ struct ScheduledNotification: View {
     var body: some View {
         VStack(alignment: .trailing) {
             Toggle(notification.wrappedDate.formatted(date: .omitted, time: .shortened),isOn: $enabled )
-                .font(.title3)
+                .font(.largeTitle)
                 .onChange(of: enabled ) { _ in
                     notification.enabled = enabled as NSNumber
                     dataController.saveContext(moc)

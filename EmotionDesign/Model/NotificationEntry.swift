@@ -75,13 +75,13 @@ enum ChosenState: Int {
 }
 
 enum WeekdaySchedule: Int, CaseIterable, Hashable {
-    case mon = 0
-    case tue = 1
-    case wed = 2
-    case thu = 3
-    case fri = 4
-    case sat = 5
-    case sun = 6
+    case mon = 2
+    case tue = 3
+    case wed = 4
+    case thu = 5
+    case fri = 6
+    case sat = 7
+    case sun = 1
     
     var id: Int {
         return self.rawValue

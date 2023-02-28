@@ -30,36 +30,54 @@ struct ScheduleView: View {
     
     var body: some View {
         VStack {
-            HStack {
-                Spacer()
-                Button("Save") {
-                    saveNotification()
-                    dismiss()
-                }
-                .frame(alignment: .topTrailing)
-            }
-            .padding()
             DatePicker(selection: $notificationDTO.time, in: Date.now..., displayedComponents: .hourAndMinute)
             {
                 Text("")
             }
             .datePickerStyle(.wheel)
-            List {
-                HStack(spacing: 0) {
-                    Text("Repeat")
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    NavigationLink(destination: DayList(days: $notificationDTO.period.days)) {
-                        Text(notificationDTO.returnPeriod().capitalized)
-                    }
+            HStack(spacing: 0) {
+                Text("Repeat")
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .font(.title3)
+                NavigationLink(destination: DayList(days: $notificationDTO.period.days)) {
+                    Text(notificationDTO.returnPeriod().capitalized)
                         .frame(maxWidth: .infinity, alignment: .trailing)
                 }
-                HStack {
-                    Text("Label: ")
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    TextField("Alarm", text: $notificationDTO.title)
-                        .frame(maxWidth: .infinity, alignment: .trailing)
-                }
+               
             }
+            .padding()
+            HStack(spacing: 0) {
+                Text("Label: ")
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .font(.title3)
+                TextField("Alarm", text: $notificationDTO.title)
+                    .frame(maxWidth: .infinity, alignment: .trailing)
+                    .multilineTextAlignment(.trailing)
+            }
+            .padding()
+            Spacer()
+            HStack {
+                Spacer()
+                Button(action: { saveNotification()
+                    dismiss() }) {
+                        RoundedRectangle(cornerRadius: 20)
+                            .fill(.white)
+                            .frame(height: 50 ,alignment: .center)
+                            .shadow(radius: 5)
+                            .padding()
+                            .overlay(
+                                Text("Save")
+                                    .font(.title3)
+                                    .bold()
+                                    .fixedSize()
+                                    .scaledToFit()
+                            )
+                        
+                }
+                .font(.title3)
+                .frame(alignment: .topTrailing)
+            }
+            .padding()
         }
         .padding()
         .navigationTitle("Add notification")
