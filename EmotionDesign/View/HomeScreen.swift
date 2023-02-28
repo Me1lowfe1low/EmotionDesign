@@ -2,12 +2,8 @@
 //  HomeScreen.swift
 //  EmotionDesign
 //
-// Using Swift 5.0
-// Running on macOS 13.0
+// COPYRIGHT dmgordienko@gmail.com 2023
 //
-//   
-// Unauthorised reproduction is prohibited, contact dmgordienko@gmail.com for details
-// Could be used in educational purposes 
 
 import SwiftUI
 
@@ -15,7 +11,7 @@ struct HomeScreen: View {
     var body: some View {
         VStack(alignment: .leading) {
             RoundedRectangle(cornerRadius: 25)
-                .fill(.white)
+                //.fill(.white)
                 .frame(height: 100)
                 .overlay(
                     HStack(spacing: 20) {
@@ -39,7 +35,7 @@ struct HomeScreen: View {
                 .shadow(radius: 5)
             
             RoundedRectangle(cornerRadius: 40)
-                .fill(.white)
+                //.fill(.white)
                 //.frame(height: 300)
                 .overlay(
                     Text("This application was created with intention to help users to control and analyze their emotions. \n\n It contains a wide range of emotions that user could choose and review an infographycs in day slices. \n\n Finally one could review how all emotions they felt are accumulated in the colorfull graph.")
@@ -57,6 +53,7 @@ struct HomeScreen: View {
 
 struct HomeScreen_Previews: PreviewProvider {
     static var previews: some View {
-        HomeScreen()
+        HomeScreen().preferredColorScheme(.dark)
+        HomeScreen().preferredColorScheme(.light)
     }
 }

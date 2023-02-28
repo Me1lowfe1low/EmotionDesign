@@ -2,12 +2,8 @@
 //  EmotionChart.swift
 //  EmotionDesign
 //
-// Using Swift 5.0
-// Running on macOS 13.0
+// COPYRIGHT dmgordienko@gmail.com 2023
 //
-//   
-// Unauthorised reproduction is prohibited, contact dmgordienko@gmail.com for details
-// Could be used in educational purposes 
 
 import Foundation
 import SwiftUI

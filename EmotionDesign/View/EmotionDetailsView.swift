@@ -2,12 +2,8 @@
 //  EmotionDetailsView.swift
 //  EmotionDesign
 //
-// Using Swift 5.0
-// Running on macOS 13.0
+// COPYRIGHT dmgordienko@gmail.com 2023
 //
-//
-// Unauthorised reproduction is prohibited, contact dmgordienko@gmail.com for details
-// Could be used in educational purposes
 
 import SwiftUI
 
@@ -39,6 +35,7 @@ struct EmotionDetailsView: View {
             Form {
                 Section(header: Text(element.emotion.name)) {
                     TextField("Description", text: $description)
+                        .textCase(.uppercase)
                     HStack {
                         Text(initialDate, style: .date)
                         Text(initialDate, style: .time)
@@ -55,13 +52,14 @@ struct EmotionDetailsView: View {
                         .overlay(
                             Text("Save")
                                 .font(.caption2)
+                                .textCase(.uppercase)
                                 .bold()
                                 .fixedSize()
                                 .scaledToFit()
                         )
             }
         }
-        .navigationTitle("Choose emotion")
+        .navigationTitle("CHOSE EMOTION")
         .navigationBarTitleDisplayMode(.inline)
     }
     
