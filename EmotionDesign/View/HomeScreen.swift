@@ -36,7 +36,6 @@ struct HomeScreen: View {
         
             RoundedRectangle(cornerRadius: 40)
                 .fill(Color(UIColor.tertiarySystemBackground))
-                //.frame(height: 300)
                 .overlay(
                     Text("This application was created with intention to help users to control and analyze their emotions. \n\n It contains a wide range of emotions that user could choose and review an infographycs in day slices. \n\n Finally one could review how all emotions they felt are accumulated in the colorfull graph.")
                         .font(.title3)
