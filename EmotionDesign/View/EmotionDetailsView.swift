@@ -33,7 +33,11 @@ struct EmotionDetailsView: View {
                     .blendMode(.sourceAtop)
             }
             Form {
-                Section(header: Text(element.emotion.name)) {
+                Section(header: Text(element.emotion.name)
+                    .bold()
+                    .textCase(.uppercase)
+                    .foregroundColor(dataController.emotionJsonList[element.emotion.parent].getColor())
+                ) {
                     TextField("Description", text: $description)
                         .textCase(.uppercase)
                     HStack {
@@ -42,10 +46,12 @@ struct EmotionDetailsView: View {
                     }
                 }
             }
+            .formStyle(.columns)
+            .padding()
             Button( action: processTheEntry )
             {
                     RoundedRectangle(cornerRadius: 20)
-                        .fill(.white)
+                    .fill(Color(UIColor.tertiarySystemBackground))
                         .frame(height: 50 ,alignment: .center)
                         .shadow(radius: 5)
                         .padding()
@@ -58,7 +64,9 @@ struct EmotionDetailsView: View {
                                 .scaledToFit()
                         )
             }
+            .buttonStyle(.plain)
         }
+        .background(Color(UIColor.secondarySystemBackground))
         .navigationTitle("CHOSE EMOTION")
         .navigationBarTitleDisplayMode(.inline)
     }
@@ -73,7 +81,7 @@ struct EmotionDetailsView: View {
 struct EmotionDetailsView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            EmotionDetailsView(element: .constant(EmotionDTO(emotion: SubEmotion.emotionSample, color: .red)))
+            EmotionDetailsView(element: .constant(EmotionDTO(emotion: SubEmotion.emotionSample1, color: .red)))
                 .environmentObject(DataController.preview)
                 .environment(\.managedObjectContext, DataController.preview.container.viewContext)
         }

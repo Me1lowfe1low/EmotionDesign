@@ -29,11 +29,11 @@ struct NotificationView: View {
                         Image(systemName: "plus" )
                             .padding()
                     }
-                    .foregroundColor(.black)
                     .bold()
                     .font(.title2)
                     .padding()
                 }
+                .buttonStyle(.plain)
             List {
                 if notifications.isEmpty {
                     EmptyView()
@@ -53,6 +53,7 @@ struct NotificationView: View {
             }
             .listStyle(.plain)
         }
+        .background(Color(UIColor.secondarySystemBackground))
         .onAppear(perform: checkPermissions )
     }
     
@@ -74,7 +75,7 @@ struct NotificationView: View {
     }
 }
 
-struct Schedule_Previews: PreviewProvider {
+struct NotificationView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             NotificationView()

@@ -104,7 +104,7 @@ struct EmotionContentsView: View {
         }
         .padding()
         .navigationTitle("How are you feeling?")
-        //.onAppear(perform: { updater.toggle() })
+        .background(Color(UIColor.secondarySystemBackground))
     }
 }
 

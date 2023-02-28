@@ -10,32 +10,32 @@ import SwiftUI
 struct HomeScreen: View {
     var body: some View {
         VStack(alignment: .leading) {
-            RoundedRectangle(cornerRadius: 25)
-                //.fill(.white)
-                .frame(height: 100)
-                .overlay(
-                    HStack(spacing: 20) {
-                        Image("enjoyment")
-                            .resizable()
-                            .frame(width: 70, height: 70, alignment: .leading)
-                            .padding()
-                        VStack {
-                            Text("Hello there!")
-                                .font(.largeTitle)
-                                .bold()
-                            Text("Welcome back!")
-                                .font(.title2)
-                                .multilineTextAlignment(.center)
+                RoundedRectangle(cornerRadius: 25)
+                    .fill(Color(UIColor.tertiarySystemBackground))
+                    .frame(height: 100)
+                    .overlay(
+                        HStack(spacing: 20) {
+                            Image("enjoyment")
+                                .resizable()
+                                .frame(width: 70, height: 70, alignment: .leading)
+                                .padding()
+                            VStack {
+                                Text("Hello there!")
+                                    .font(.largeTitle)
+                                    .bold()
+                                Text("Welcome back!")
+                                    .font(.title2)
+                                    .multilineTextAlignment(.center)
+                            }
+                            .padding(.vertical)
                         }
-                        .padding(.vertical)
-                    }
-                    
-                )
-                .padding()
-                .shadow(radius: 5)
-            
+                        
+                    )
+                    .padding()
+                    .shadow(radius: 5)
+        
             RoundedRectangle(cornerRadius: 40)
-                //.fill(.white)
+                .fill(Color(UIColor.tertiarySystemBackground))
                 //.frame(height: 300)
                 .overlay(
                     Text("This application was created with intention to help users to control and analyze their emotions. \n\n It contains a wide range of emotions that user could choose and review an infographycs in day slices. \n\n Finally one could review how all emotions they felt are accumulated in the colorfull graph.")
@@ -47,13 +47,13 @@ struct HomeScreen: View {
                 .shadow(radius: 5)
         }
         .padding()
+        .background(Color(UIColor.secondarySystemBackground))
     }
         
 }
 
 struct HomeScreen_Previews: PreviewProvider {
     static var previews: some View {
-        HomeScreen().preferredColorScheme(.dark)
-        HomeScreen().preferredColorScheme(.light)
+        HomeScreen()
     }
 }

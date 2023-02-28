@@ -13,7 +13,7 @@ struct ButtonView: View {
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 30)
-                .fill(.white)
+                .fill(Color(UIColor.tertiarySystemBackground))
                 .frame(height: 120)
                 .shadow(radius: 5)
                 .overlay (

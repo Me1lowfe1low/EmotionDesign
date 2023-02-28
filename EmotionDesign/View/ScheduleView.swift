@@ -25,58 +25,68 @@ struct ScheduleView: View {
     }
     
     var body: some View {
-        VStack {
-            DatePicker(selection: $notificationDTO.time, in: Date.now..., displayedComponents: .hourAndMinute)
-            {
-                Text("")
-            }
-            .datePickerStyle(.wheel)
-            HStack(spacing: 0) {
-                Text("Repeat")
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .font(.title3)
-                NavigationLink(destination: DayList(days: $notificationDTO.period.days)) {
-                    Text(notificationDTO.returnPeriod().capitalized)
+        ZStack {
+            Color(UIColor.secondarySystemBackground)
+                .ignoresSafeArea()
+            VStack {
+                DatePicker(selection: $notificationDTO.time, in: Date.now..., displayedComponents: .hourAndMinute)
+                {
+                    Text("")
+                }
+                .datePickerStyle(.wheel)
+                Divider()
+                HStack(spacing: 0) {
+                    Text("Repeat")
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .font(.title3)
+                    NavigationLink(destination: DayList(days: $notificationDTO.period.days)) {
+                        Text(notificationDTO.returnPeriod().capitalized)
+                            .frame(maxWidth: .infinity, alignment: .trailing)
+                    }
+                    .buttonStyle(.plain)
+                }
+                .padding()
+                Divider()
+                HStack(spacing: 0) {
+                    Text("Label: ")
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .font(.title3)
+                    TextField("Alarm", text: $notificationDTO.title)
                         .frame(maxWidth: .infinity, alignment: .trailing)
+                        .multilineTextAlignment(.trailing)
                 }
-               
-            }
-            .padding()
-            HStack(spacing: 0) {
-                Text("Label: ")
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .font(.title3)
-                TextField("Alarm", text: $notificationDTO.title)
-                    .frame(maxWidth: .infinity, alignment: .trailing)
-                    .multilineTextAlignment(.trailing)
-            }
-            .padding()
-            Spacer()
-            HStack {
+                .padding()
+                Divider()
                 Spacer()
-                Button(action: { saveNotification()
-                    dismiss() }) {
-                        RoundedRectangle(cornerRadius: 20)
-                            .fill(.white)
-                            .frame(height: 50 ,alignment: .center)
-                            .shadow(radius: 5)
-                            .padding()
-                            .overlay(
-                                Text("Save")
-                                    .font(.title3)
-                                    .bold()
-                                    .fixedSize()
-                                    .scaledToFit()
-                            )
-                        
+                HStack {
+                    Spacer()
+                    Button(action: { saveNotification()
+                        dismiss() }) {
+                            RoundedRectangle(cornerRadius: 20)
+                                .fill(Color(UIColor.tertiarySystemBackground))
+                                .frame(height: 50 ,alignment: .center)
+                                .shadow(radius: 5)
+                                .padding()
+                                .overlay(
+                                    Text("Save")
+                                        .textCase(.uppercase)
+                                        .font(.title3)
+                                        .bold()
+                                        .fixedSize()
+                                        .scaledToFit()
+                                )
+                            
+                        }
+                        .font(.title3)
+                        .frame(alignment: .topTrailing)
+                        .buttonStyle(.plain)
                 }
-                .font(.title3)
-                .frame(alignment: .topTrailing)
+                .padding()
+                
             }
             .padding()
         }
-        .padding()
-        .navigationTitle("Add notification")
+        .navigationTitle("ADD NOTIFICATION")
         .navigationBarTitleDisplayMode(.inline)
     }
     
