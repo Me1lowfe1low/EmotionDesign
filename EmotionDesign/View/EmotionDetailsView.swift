@@ -25,7 +25,7 @@ struct EmotionDetailsView: View {
                  endPoint: .bottomTrailing)
                 .mask(RoundedRectangle(cornerRadius: 40)
                     .padding())
-                .opacity(0.3)
+                .opacity(0.75)
                 Image(element.emotion.icon)
                     .resizable()
                     .scaledToFit()
@@ -81,7 +81,7 @@ struct EmotionDetailsView: View {
 struct EmotionDetailsView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            EmotionDetailsView(element: .constant(EmotionDTO(emotion: SubEmotion.emotionSample1, color: .red)))
+            EmotionDetailsView(element: .constant(EmotionDTO(emotion: SubEmotion.emotionSample1, color: .red))).preferredColorScheme(.dark)
                 .environmentObject(DataController.preview)
                 .environment(\.managedObjectContext, DataController.preview.container.viewContext)
         }

@@ -35,6 +35,7 @@ struct ElementsView: View {
                                         .bold()
                                         .fixedSize()
                                         .scaledToFit()
+                                        .shadow(radius: 5)
                                 )
                         }
                         .buttonStyle(PlainButtonStyle())
