@@ -23,6 +23,7 @@
 		51427FB229978AE40078AC53 /* SubEmotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51427FB129978AE40078AC53 /* SubEmotion.swift */; };
 		5162FBD9299567CA00E34A85 /* EmotionDesign.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5162FBD7299567CA00E34A85 /* EmotionDesign.xcdatamodeld */; };
 		5162FBE3299574D500E34A85 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5162FBE2299574D500E34A85 /* DataController.swift */; };
+		51796D3329ADE3D900878F17 /* JSONReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51796D3229ADE3D900878F17 /* JSONReader.swift */; };
 		5186757F298655AB006BE4D0 /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5186757E298655AB006BE4D0 /* ButtonView.swift */; };
 		518675812986E6E0006BE4D0 /* EmotionDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518675802986E6E0006BE4D0 /* EmotionDTO.swift */; };
 		518ED6BD29A4B8E800DA3669 /* ScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518ED6BC29A4B8E800DA3669 /* ScheduleView.swift */; };
@@ -64,6 +65,7 @@
 		51427FB129978AE40078AC53 /* SubEmotion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubEmotion.swift; sourceTree = "<group>"; };
 		5162FBD8299567CA00E34A85 /* EmotionDesign.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = EmotionDesign.xcdatamodel; sourceTree = "<group>"; };
 		5162FBE2299574D500E34A85 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
+		51796D3229ADE3D900878F17 /* JSONReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONReader.swift; sourceTree = "<group>"; };
 		5186757E298655AB006BE4D0 /* ButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonView.swift; sourceTree = "<group>"; };
 		518675802986E6E0006BE4D0 /* EmotionDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmotionDTO.swift; sourceTree = "<group>"; };
 		518ED6BC29A4B8E800DA3669 /* ScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleView.swift; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 				514077472996D23900585A88 /* DayDetail+CoreDataProperties.swift */,
 				5162FBE2299574D500E34A85 /* DataController.swift */,
 				518ED6D429A7FA6000DA3669 /* ChartController.swift */,
+				51796D3229ADE3D900878F17 /* JSONReader.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -299,6 +302,7 @@
 				514077482996D23900585A88 /* Emotion+CoreDataClass.swift in Sources */,
 				514077492996D23900585A88 /* Emotion+CoreDataProperties.swift in Sources */,
 				518ED6D129A661BB00DA3669 /* NotificationList+CoreDataProperties.swift in Sources */,
+				51796D3329ADE3D900878F17 /* JSONReader.swift in Sources */,
 				51D4153129813DDF001D367B /* ColorMap.swift in Sources */,
 				513A9A6B29AA2AB700AE66A1 /* EmotionView.swift in Sources */,
 				518ED6C429A5149800DA3669 /* AppWeekday+CoreDataClass.swift in Sources */,
