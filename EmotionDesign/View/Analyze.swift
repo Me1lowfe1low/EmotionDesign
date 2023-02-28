@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Charts
 
 struct Analyze: View {
     @Environment(\.managedObjectContext) var moc
@@ -16,11 +15,8 @@ struct Analyze: View {
     @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \DayDetail.date, ascending: false)]) var userDataSetOrdered: FetchedResults<DayDetail>
     
     @State var chartList: ChartController = ChartController()
-    @State private var currentDate: Date = Date()
+    @State var chosenDateFilter: ChartFilter = ChartFilter(7)
     @State private var isConfirmed: Bool = false
-    @State var selectionName: String = "Chart"
-    @State var selectionId: Int?
-    @State var color: Color = Color.accentColor
     
     var body: some View {
         ZStack {
@@ -29,76 +25,7 @@ struct Analyze: View {
             VStack(alignment: .leading) {
                 Spacer()
                 ScrollView(.vertical) {
-                    VStack(spacing: 20) {
-                        Menu {
-                            ForEach( chartList.charts.indices, id: \.self) { chartId in
-                                Button(action: { selectionId = chartId
-                                    selectionName = chartList.charts[chartId].title
-                                } ) {
-                                    Text(chartList.charts[chartId].title)
-                                        .bold()
-                                        .font(.title3)
-                                }
-                            }
-                        } label: {
-                            HStack(spacing: 20) {
-                                Text(selectionName)
-                                    .font(.title2)
-                                    .bold()
-                                    .textCase(.uppercase)
-                                    .padding(.horizontal)
-                                    //.foregroundStyle(selectionId != nil ? chartList.charts[selectionId!].color : color)
-                                    //.foregroundStyle(.black)
-                                Spacer()
-                            }
-                            .padding()
-                        }
-                        
-                        
-                        VStack  {
-                            if selectionId != nil {
-                                VStack {
-                                    if !chartList.charts[selectionId!].points.isEmpty {
-                                        Chart(chartList.charts[selectionId!].points.prefix(7)) { point in
-                                            LineMark(x: .value("Date", point.getDate()),
-                                                     y: .value("Total count", point.count))
-                                            PointMark(x: .value("Date", point.getDate()),
-                                                      y: .value("Total count", point.count))
-                                        }
-                                        .frame(height: 220 ,alignment: .center)
-                                        .foregroundStyle(chartList.charts[selectionId!].color)
-                                        .chartXAxisLabel("Date")
-                                        .chartYAxisLabel("Counts")
-                                        .padding()
-                                    }
-                                    else {
-                                        ZStack {
-                                            Text("Currently there is no data in this chart")
-                                                .font(.caption2)
-                                                .bold()
-                                                .fixedSize()
-                                                .scaledToFit()
-                                                //.frame(height: 250 ,alignment: .center)
-                                        }
-                                    }
-                                }
-                            }
-                            else {
-                                Text("You may look through your weekly \n emotion statistics by clicking\n on the name of the chart\n at the top left corner.")
-                                    .font(.title3)
-                                    .bold()
-                                    .padding()
-                                    .multilineTextAlignment(.leading)
-                            }
-                        }
-                        .frame(height: 250 ,alignment: .center)
-                        .onAppear(perform: { chartList = dataController.getChartData(moc, days: userDataSet)
-                        })
-                    }
-                    .background(RoundedRectangle(cornerRadius: 40)
-                        .fill(Color(UIColor.tertiarySystemBackground))
-                        .shadow(radius: 5))
-                    .padding()
+                    ChartView(filter: $chosenDateFilter)
                     VStack {
                         HStack(spacing: 20) {
                             Text("Journal")
@@ -115,36 +42,7 @@ struct Analyze: View {
                         .padding()
                         VStack {
                             ForEach(userDataSetOrdered, id: \.self ) { day in
-                                ForEach(day.emotions, id: \.self) { emotion in
-                                    HStack(spacing: 10) {
-                                        ZStack {
-                                            RoundedRectangle(cornerRadius: 20)
-                                                .fill(Color(UIColor.tertiarySystemBackground))
-                                                .frame(width: 90, height: 90, alignment: .leading)
-                                                .shadow(radius: 5)
-                                            Image(dataController.emotionJsonList[Int(emotion.parent)].findEmotionIcon(emotion.name!))
-                                                .resizable()
-                                                .aspectRatio(contentMode: .fill)
-                                                .clipShape(RoundedRectangle(cornerRadius:  20))
-                                                .frame(width: 90, height: 90)
-                                        }
-                                        VStack(alignment: .leading) {
-                                            Text(emotion.name!)
-                                                .font(.title3)
-                                                .foregroundColor(dataController.emotionJsonList[Int(emotion.parent)].getColor())
-                                                .textCase(.uppercase)
-                                                .fixedSize()
-                                                .bold()
-                                            Text(emotion.comment!)
-                                                .font(.caption)
-                                        }
-                                        Spacer()
-                                        Text(day.getDate())
-                                            .font(.caption2)
-                                            .fixedSize()
-                                    }
-                                    .padding(.horizontal)
-                                }
+                                EmotionJournalEntryView(day: day, filter: $chosenDateFilter)
                             }
                             .padding(.vertical)
                         }
@@ -185,12 +83,9 @@ struct Analyze: View {
         }
     }
         
-        
-    
     func clearData() {
         dataController.clearData(moc, data: userDataSet)
     }
-    
 
 }
 

@@ -13,9 +13,7 @@ struct NotificationView: View {
     @EnvironmentObject var dataController: DataController
     
     @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \AppNotification.date, ascending: false)]) var notifications: FetchedResults<AppNotification>
-    
-    @State var currentTIme: Date = Date()
-    
+
     var body: some View {
         VStack {
             NavigationLink(destination: ScheduleView(recievedNotification: nil)
