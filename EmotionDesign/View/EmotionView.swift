@@ -2,12 +2,8 @@
 //  EmotionView.swift
 //  EmotionDesign
 //
-// Using Swift 5.0
-// Running on macOS 13.0
+// COPYRIGHT dmgordienko@gmail.com 2023
 //
-//   
-// Unauthorised reproduction is prohibited, contact dmgordienko@gmail.com for details
-// Could be used in educational purposes 
 
 import SwiftUI
 
@@ -24,7 +20,7 @@ struct EmotionView: View {
             }
             ZStack {
                 RoundedRectangle(cornerRadius: position.getRadius())
-                    .fill(.white)
+                    .fill(Color(UIColor.tertiarySystemBackground))
                     .frame(width: position.getSize(), height: position.getSize())
                     .shadow(radius: 25)
                 Image(dataController.emotionJsonList[position.elementId].icon)

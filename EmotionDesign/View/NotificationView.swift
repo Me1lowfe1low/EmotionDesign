@@ -2,12 +2,8 @@
 //  NotificationView.swift
 //  EmotionDesign
 //
-// Using Swift 5.0
-// Running on macOS 13.0
+// COPYRIGHT dmgordienko@gmail.com 2023
 //
-//   
-// Unauthorised reproduction is prohibited, contact dmgordienko@gmail.com for details
-// Could be used in educational purposes 
 
 import SwiftUI
 import UserNotifications
@@ -33,11 +29,11 @@ struct NotificationView: View {
                         Image(systemName: "plus" )
                             .padding()
                     }
-                    .foregroundColor(.black)
                     .bold()
                     .font(.title2)
                     .padding()
                 }
+                .buttonStyle(.plain)
             List {
                 if notifications.isEmpty {
                     EmptyView()
@@ -57,6 +53,7 @@ struct NotificationView: View {
             }
             .listStyle(.plain)
         }
+        .background(Color(UIColor.secondarySystemBackground))
         .onAppear(perform: checkPermissions )
     }
     
@@ -78,7 +75,7 @@ struct NotificationView: View {
     }
 }
 
-struct Schedule_Previews: PreviewProvider {
+struct NotificationView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             NotificationView()

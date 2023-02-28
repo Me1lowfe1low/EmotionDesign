@@ -2,12 +2,8 @@
 //  ElementsView.swift
 //  EmotionDesign
 //
-// Using Swift 5.0
-// Running on macOS 13.0
+// COPYRIGHT dmgordienko@gmail.com 2023
 //
-//   
-// Unauthorised reproduction is prohibited, contact dmgordienko@gmail.com for details
-// Could be used in educational purposes 
 
 import SwiftUI
 
@@ -20,7 +16,6 @@ struct ElementsView: View {
     
     var body: some View {
         ZStack {
-            //ScrollView {
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 100))]) {
                     ForEach(dataController.emotionJsonList[choice].subEmotions, id: \.id) { emotion in
                         Button(action: { emotionDTO.setEmotion(emotion, color: dataController.emotionJsonList[choice].getColor(), chosen: true)
@@ -40,14 +35,15 @@ struct ElementsView: View {
                                         .bold()
                                         .fixedSize()
                                         .scaledToFit()
+                                        .shadow(radius: 5)
                                 )
                         }
                         .buttonStyle(PlainButtonStyle())
                     }
                     .padding()
                 }
-            //}
         }
+        .background(Color(UIColor.secondarySystemBackground))
     }
 }
 

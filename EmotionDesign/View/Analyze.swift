@@ -2,12 +2,8 @@
 //  Analyze.swift
 //  EmotionDesign
 //
-// Using Swift 5.0
-// Running on macOS 13.0
+// COPYRIGHT dmgordienko@gmail.com 2023
 //
-//   
-// Unauthorised reproduction is prohibited, contact dmgordienko@gmail.com for details
-// Could be used in educational purposes 
 
 import SwiftUI
 import Charts
@@ -28,6 +24,8 @@ struct Analyze: View {
     
     var body: some View {
         ZStack {
+            Color(UIColor.secondarySystemBackground)
+                .ignoresSafeArea()
             VStack(alignment: .leading) {
                 Spacer()
                 ScrollView(.vertical) {
@@ -50,7 +48,7 @@ struct Analyze: View {
                                     .textCase(.uppercase)
                                     .padding(.horizontal)
                                     //.foregroundStyle(selectionId != nil ? chartList.charts[selectionId!].color : color)
-                                    .foregroundStyle(.black)
+                                    //.foregroundStyle(.black)
                                 Spacer()
                             }
                             .padding()
@@ -98,7 +96,7 @@ struct Analyze: View {
                         })
                     }
                     .background(RoundedRectangle(cornerRadius: 40)
-                        .fill(.white)
+                        .fill(Color(UIColor.tertiarySystemBackground))
                         .shadow(radius: 5))
                     .padding()
                     VStack {
@@ -121,7 +119,7 @@ struct Analyze: View {
                                     HStack(spacing: 10) {
                                         ZStack {
                                             RoundedRectangle(cornerRadius: 20)
-                                                .fill(.white)
+                                                .fill(Color(UIColor.tertiarySystemBackground))
                                                 .frame(width: 90, height: 90, alignment: .leading)
                                                 .shadow(radius: 5)
                                             Image(dataController.emotionJsonList[Int(emotion.parent)].findEmotionIcon(emotion.name!))
@@ -154,7 +152,7 @@ struct Analyze: View {
                         Spacer()
                     }
                     .background(RoundedRectangle(cornerRadius: 40)
-                        .fill(.white)
+                        .fill(Color(UIColor.tertiarySystemBackground))
                         .shadow(radius: 5))
                     .padding()
                 }
@@ -163,20 +161,21 @@ struct Analyze: View {
             label:
                 {
                     RoundedRectangle(cornerRadius: 20)
-                        .fill(.white)
+                        .fill(Color(UIColor.tertiarySystemBackground))
                         .frame(height: 50 ,alignment: .center)
                         .shadow(radius: 5)
                         .padding()
                         .overlay(
                             Text("Clear all data")
+                                .textCase(.uppercase)
                                 .font(.title3)
                                 .bold()
                                 .fixedSize()
                                 .scaledToFit()
                         )
                 }
-                .confirmationDialog("Are you sure?", isPresented: $isConfirmed ) {
-                    Button("Clear", role: .destructive)
+                .confirmationDialog("ARE YOU SURE?", isPresented: $isConfirmed ) {
+                    Button("CLEAR", role: .destructive)
                     {
                         clearData()
                     }

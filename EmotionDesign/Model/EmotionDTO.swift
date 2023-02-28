@@ -2,12 +2,8 @@
 //  EmotionDTO.swift
 //  EmotionDesign
 //
-// Using Swift 5.0
-// Running on macOS 13.0
+// COPYRIGHT dmgordienko@gmail.com 2023
 //
-//
-// Unauthorised reproduction is prohibited, contact dmgordienko@gmail.com for details
-// Could be used in educational purposes
 
 import Foundation
 import SwiftUI
@@ -31,7 +27,7 @@ struct EmotionDTO {
         if self.emotion.name == emotion && self.chosen == true {
             return colorSet
         }
-        return [ .white, .white]
+        return [ Color(UIColor.tertiarySystemBackground), Color(UIColor.tertiarySystemBackground)]
     }
 }
 

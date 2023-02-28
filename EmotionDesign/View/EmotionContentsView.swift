@@ -2,12 +2,8 @@
 //  EmotionContentsView.swift
 //  EmotionDesign
 //
-// Using Swift 5.0
-// Running on macOS 13.0
+// COPYRIGHT dmgordienko@gmail.com 2023
 //
-//
-// Unauthorised reproduction is prohibited, contact dmgordienko@gmail.com for details
-// Could be used in educational purposes
 
 import SwiftUI
 
@@ -108,14 +104,14 @@ struct EmotionContentsView: View {
         }
         .padding()
         .navigationTitle("How are you feeling?")
-        //.onAppear(perform: { updater.toggle() })
+        .background(Color(UIColor.secondarySystemBackground))
     }
 }
 
 struct EmotionContentsView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            EmotionContentsView()
+            EmotionContentsView().preferredColorScheme(.dark)
                 .environment(\.managedObjectContext, DataController.preview.container.viewContext)
                 .environmentObject(DataController.preview)
         }
