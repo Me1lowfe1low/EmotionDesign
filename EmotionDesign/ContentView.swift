@@ -53,7 +53,6 @@ struct ContentView: View {
                     Text("Schedule")
                 }
                 .tag(4)
-            
         }
     }
 }

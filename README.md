@@ -48,7 +48,7 @@ A brief description about the project:
 At the main view there is a TabView with 5 tabs that one could find below. \
 All tabs are interactive and would be described further in this guide.
 
-<img src="DemoImages/7_preview_1.png" width="200" ><img src="DemoImages/7_preview_2.png" width="200" >|<img src="DemoImages/7_preview_3.png" width="200" >|<img src="DemoImages/7_preview_4.png" width="200" >|<img src="DemoImages/7_preview_5.png" width="200" >
+<img src="DemoImages/7_preview_1.png" width="175" ><img src="DemoImages/7_preview_2.png" width="175" >|<img src="DemoImages/7_preview_3.png" width="175" >|<img src="DemoImages/7_preview_4.png" width="175" >|<img src="DemoImages/7_preview_5.png" width="175" >
 
 [Back to the table of contents ⬆](#TableOfContents)
 

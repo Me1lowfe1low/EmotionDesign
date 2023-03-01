@@ -51,6 +51,7 @@ struct NotificationView: View {
             }
             .listStyle(.plain)
         }
+        .padding(.bottom, 10)
         .background(Color(UIColor.secondarySystemBackground))
         .onAppear(perform: checkPermissions )
     }
