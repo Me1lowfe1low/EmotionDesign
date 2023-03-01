@@ -5,7 +5,7 @@
 </p>
 
 > EmotionDesign is an app that allows users to track their emotions daily \
-> and analyse the range of their feelings over time using statistics. \
+> and analyse the range of their feelings over time using statistics. 
 
 <a id="TableOfContents"></a>
 # Table of contents
@@ -151,11 +151,12 @@ Light Theme
 [Back to the table of contents ⬆](#TableOfContents)
 
 
-# <a name="SpecialThanks">Special thanks</a>
+<a id="SpecialThanks"></a>
+# Special thanks
 Special thanks to Rodion Gilmanov who prepared a concept for this application.  
 
 | Main View |  Info View | Analytics View  | Notification View |
-| --- | --- | --- | --- | --- |
-|<img src="DemoImages/8_prototype_mainView.JPG" width="300" >| <img src="DemoImages/8_prototype_InfoView.JPG" width="300" >| <img src="DemoImages/8_prototype_AnalyticsView.JPG" width="300" >| <img src="DemoImages/8_prototype_AnalyticsView.JPG" width="300" > |
+| --- | --- | --- | --- |
+| <img src="DemoImages/8_prototype_mainView.JPG" width="300" > | <img src="DemoImages/8_prototype_InfoView.JPG" width="300" > | <img src="DemoImages/8_prototype_AnalyticsView.JPG" width="300" > | <img src="DemoImages/8_prototype_AnalyticsView.JPG" width="300" > |
 
 [Back to the table of contents ⬆](#TableOfContents)
