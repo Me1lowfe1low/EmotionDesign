@@ -24,6 +24,7 @@ struct DayList: View {
                     }
                 }
             }
+            .listRowBackground(Color(UIColor.secondarySystemBackground).ignoresSafeArea())
         }
         .buttonStyle(.plain)
     }

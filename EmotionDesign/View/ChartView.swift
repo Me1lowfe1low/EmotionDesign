@@ -114,8 +114,8 @@ struct ChartView: View {
             })
         }
         .background(RoundedRectangle(cornerRadius: 40)
-            .fill(Color(UIColor.tertiarySystemBackground))
-            .shadow(radius: 5))
+            .fill(Color(UIColor.secondarySystemBackground))
+            .shadow(color: Color(UIColor.systemFill) ,radius: 5))
         .padding()
     }
 }

@@ -52,7 +52,7 @@ struct InfoView: View {
                     .font(.title2)
                     .foregroundColor(dataController.emotionJsonList[emotionsView.positionList.last!.elementId].getColor())
                     .bold()
-                    .shadow(radius: 0.8)
+                    .shadow(color: Color(UIColor.systemFill) ,radius: 5)
                     .textCase(.uppercase)
                     .padding()
                 Text(dataController.emotionJsonList[emotionsView.positionList.last!.elementId].description)

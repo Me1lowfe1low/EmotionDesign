@@ -44,11 +44,11 @@ struct EmotionContentsView: View {
                                     ZStack {
                                         RoundedRectangle(cornerRadius: 20)
                                             .fill(LinearGradient(gradient: Gradient(colors:
-                                                                                        choice == index ? dataController.emotionJsonList[index].returnColors() : [.white, .white]),
+                                                                                        choice == index ? dataController.emotionJsonList[index].returnColors() : [Color(UIColor.secondarySystemBackground), Color(UIColor.secondarySystemBackground)]),
                                                                  startPoint: .leading,
                                                                  endPoint: .trailing))
                                             .frame(width: 100, height: 100)
-                                            .shadow(radius: 5)
+                                            .shadow(color: Color(UIColor.systemFill) ,radius: 5)
                                         Image(dataController.emotionJsonList[index].icon)
                                             .resizable()
                                             .aspectRatio(contentMode: .fill)

@@ -50,8 +50,8 @@ struct Analyze: View {
                         Spacer()
                     }
                     .background(RoundedRectangle(cornerRadius: 40)
-                        .fill(Color(UIColor.tertiarySystemBackground))
-                        .shadow(radius: 5))
+                        .fill(Color(UIColor.secondarySystemBackground))
+                        .shadow(color: Color(UIColor.systemFill) ,radius: 5))
                     .padding()
                 }
 
@@ -59,9 +59,10 @@ struct Analyze: View {
             label:
                 {
                     RoundedRectangle(cornerRadius: 20)
-                        .fill(Color(UIColor.tertiarySystemBackground))
+                        .fill(Color(UIColor.secondarySystemBackground))
+
                         .frame(height: 50 ,alignment: .center)
-                        .shadow(radius: 5)
+                        .shadow(color: Color(UIColor.systemFill) ,radius: 5)
                         .padding()
                         .overlay(
                             Text("Clear all data")
@@ -92,7 +93,7 @@ struct Analyze: View {
 
 struct Analyze_Previews: PreviewProvider {
     static var previews: some View {
-        Analyze()
+        Analyze().preferredColorScheme(.dark)
             .environment(\.managedObjectContext, DataController.preview.container.viewContext)
             .environmentObject(DataController.preview)
     }

@@ -19,9 +19,9 @@ struct EmotionJournalEntryView: View {
                 HStack(spacing: 10) {
                     ZStack {
                         RoundedRectangle(cornerRadius: 20)
-                            .fill(Color(UIColor.tertiarySystemBackground))
+                            .fill(Color(UIColor.secondarySystemBackground))
                             .frame(width: 90, height: 90, alignment: .leading)
-                            .shadow(radius: 5)
+                            .shadow(color: Color(UIColor.systemFill) ,radius: 5)
                         Image(dataController.emotionJsonList[Int(emotion.parent)].findEmotionIcon(emotion.name!))
                             .resizable()
                             .aspectRatio(contentMode: .fill)

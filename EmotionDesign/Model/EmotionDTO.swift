@@ -27,7 +27,7 @@ struct EmotionDTO {
         if self.emotion.name == emotion && self.chosen == true {
             return colorSet
         }
-        return [ Color(UIColor.tertiarySystemBackground), Color(UIColor.tertiarySystemBackground)]
+        return [ Color(UIColor.secondarySystemBackground), Color(UIColor.secondarySystemBackground)]
     }
 }
 

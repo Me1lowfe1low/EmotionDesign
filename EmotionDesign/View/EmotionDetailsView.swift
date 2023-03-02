@@ -51,9 +51,9 @@ struct EmotionDetailsView: View {
             Button( action: processTheEntry )
             {
                     RoundedRectangle(cornerRadius: 20)
-                    .fill(Color(UIColor.tertiarySystemBackground))
+                    .fill(Color(UIColor.secondarySystemBackground))
                         .frame(height: 50 ,alignment: .center)
-                        .shadow(radius: 5)
+                        .shadow(color: Color(UIColor.systemFill) ,radius: 5)
                         .padding()
                         .overlay(
                             Text("Save")

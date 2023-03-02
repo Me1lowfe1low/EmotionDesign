@@ -13,9 +13,9 @@ struct ButtonView: View {
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 30)
-                .fill(Color(UIColor.tertiarySystemBackground))
+                .fill(Color(UIColor.secondarySystemBackground))
                 .frame(height: 120)
-                .shadow(radius: 5)
+                .shadow(color: Color(UIColor.systemFill) ,radius: 5)
                 .overlay (
             HStack(alignment: .center, spacing: 0) {
                 Spacer()
@@ -25,7 +25,7 @@ struct ButtonView: View {
                         .font(.title3)
                         .bold()
                         .foregroundColor(element.color)
-                        .shadow(radius: 0.5)
+                        .shadow(color: Color(UIColor.systemFill) ,radius: 5)
                     Text(element.emotion.description)
                         .font(.caption2)
                         .lineLimit(nil)
