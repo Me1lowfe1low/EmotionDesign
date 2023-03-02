@@ -20,9 +20,9 @@ struct EmotionView: View {
             }
             ZStack {
                 RoundedRectangle(cornerRadius: position.getRadius())
-                    .fill(Color(UIColor.tertiarySystemBackground))
+                    .fill(Color(UIColor.secondarySystemBackground))
                     .frame(width: position.getSize(), height: position.getSize())
-                    .shadow(radius: 25)
+                    .shadow(color: Color(UIColor.systemFill) ,radius: 10)
                 Image(dataController.emotionJsonList[position.elementId].icon)
                     .resizable()
                     .aspectRatio(contentMode: .fill)

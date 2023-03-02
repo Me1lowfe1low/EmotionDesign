@@ -32,6 +32,7 @@ struct NotificationView: View {
                     .padding()
                 }
                 .buttonStyle(.plain)
+            Divider()
             List {
                 if notifications.isEmpty {
                     EmptyView()
@@ -44,15 +45,18 @@ struct NotificationView: View {
                                 .environmentObject(dataController))
                             .opacity(0.0)
                         }
+                        .listRowBackground(Color(UIColor.secondarySystemBackground))
                         .padding()
                     }
                     .onDelete(perform: delete)
                 }
             }
+            .background(Color(UIColor.secondarySystemBackground))
             .listStyle(.plain)
         }
         .padding(.bottom, 10)
         .background(Color(UIColor.secondarySystemBackground))
+        .scrollContentBackground(.hidden)
         .onAppear(perform: checkPermissions )
     }
     

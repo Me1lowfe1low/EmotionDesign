@@ -27,7 +27,7 @@ struct ElementsView: View {
                                                startPoint: .leading,
                                                endPoint: .trailing))
                                 .frame(width: 100, height: 100 ,alignment: .center)
-                                .shadow(radius: 5)
+                                .shadow(color: Color(UIColor.systemFill) ,radius: 5)
                                 .overlay(
                                     Text(emotion.name)
                                         .font(.caption)
@@ -35,7 +35,7 @@ struct ElementsView: View {
                                         .bold()
                                         .fixedSize()
                                         .scaledToFit()
-                                        .shadow(radius: 5)
+                                        .shadow(color: Color(UIColor.systemFill) ,radius: 5)
                                 )
                         }
                         .buttonStyle(PlainButtonStyle())
