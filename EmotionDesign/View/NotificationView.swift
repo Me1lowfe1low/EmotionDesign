@@ -78,7 +78,7 @@ struct NotificationView: View {
     }
 }
 
-struct NotificationView_Previews: PreviewProvider {
+/*struct NotificationView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             NotificationView()
@@ -86,4 +86,4 @@ struct NotificationView_Previews: PreviewProvider {
                 .environmentObject(DataController.preview)
         }
     }
-}
+}*/

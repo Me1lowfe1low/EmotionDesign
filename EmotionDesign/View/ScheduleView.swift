@@ -97,7 +97,7 @@ struct ScheduleView: View {
 }
 
 
-struct ScheduleView_Previews: PreviewProvider {
+/*struct ScheduleView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             ScheduleView(recievedNotification: nil)
@@ -105,4 +105,4 @@ struct ScheduleView_Previews: PreviewProvider {
                 .environmentObject(DataController.preview)
         }
     }
-}
+}*/

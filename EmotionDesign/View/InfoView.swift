@@ -68,10 +68,10 @@ struct InfoView: View {
 }
 
 
-struct InfoView_Previews: PreviewProvider {
+/*struct InfoView_Previews: PreviewProvider {
     static var previews: some View {
         InfoView()
             .environment(\.managedObjectContext, DataController.preview.container.viewContext)
             .environmentObject(DataController.preview)
     }
-}
+}*/

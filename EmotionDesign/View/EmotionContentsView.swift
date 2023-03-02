@@ -108,7 +108,7 @@ struct EmotionContentsView: View {
     }
 }
 
-struct EmotionContentsView_Previews: PreviewProvider {
+/*struct EmotionContentsView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             EmotionContentsView().preferredColorScheme(.dark)
@@ -116,5 +116,5 @@ struct EmotionContentsView_Previews: PreviewProvider {
                 .environmentObject(DataController.preview)
         }
     }
-}
+}*/
 

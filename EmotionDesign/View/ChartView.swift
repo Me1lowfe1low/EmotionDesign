@@ -120,10 +120,10 @@ struct ChartView: View {
     }
 }
 
-struct ChartView_Previews: PreviewProvider {
+/*struct ChartView_Previews: PreviewProvider {
     static var previews: some View {
         ChartView(filter: .constant(ChartFilter()))
             .environment(\.managedObjectContext, DataController.preview.container.viewContext)
             .environmentObject(DataController.preview)
     }
-}
+}*/

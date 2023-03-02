@@ -91,13 +91,13 @@ struct Analyze: View {
 }
 
 
-struct Analyze_Previews: PreviewProvider {
+/*struct Analyze_Previews: PreviewProvider {
     static var previews: some View {
         Analyze().preferredColorScheme(.dark)
             .environment(\.managedObjectContext, DataController.preview.container.viewContext)
             .environmentObject(DataController.preview)
     }
-}
+}*/
 
 
 

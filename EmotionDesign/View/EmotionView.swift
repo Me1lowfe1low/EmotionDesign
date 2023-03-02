@@ -37,10 +37,11 @@ struct EmotionView: View {
         .padding()
     }
 }
-struct EmotionView_Previews: PreviewProvider {
+
+/*struct EmotionView_Previews: PreviewProvider {
     static var previews: some View {
         EmotionView(position: .constant(PostitionListDTO().positionList[1]))
             .environment(\.managedObjectContext, DataController.preview.container.viewContext)
             .environmentObject(DataController.preview)
     }
-}
+}*/

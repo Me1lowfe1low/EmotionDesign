@@ -47,10 +47,10 @@ struct ElementsView: View {
     }
 }
 
-struct ElementsView_Previews: PreviewProvider {
+/*struct ElementsView_Previews: PreviewProvider {
     static var previews: some View {
         ElementsView(choice: .constant(0), emotionDTO: .constant(EmotionDTO(emotion: SubEmotion(), color: .green)))
             .environment(\.managedObjectContext, DataController.preview.container.viewContext)
             .environmentObject(DataController.preview)
     }
-}
+}*/

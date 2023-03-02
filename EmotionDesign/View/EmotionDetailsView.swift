@@ -78,7 +78,7 @@ struct EmotionDetailsView: View {
     }
 }
 
-struct EmotionDetailsView_Previews: PreviewProvider {
+/*struct EmotionDetailsView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             EmotionDetailsView(element: .constant(EmotionDTO(emotion: SubEmotion.emotionSample1, color: .red))).preferredColorScheme(.dark)
@@ -86,4 +86,4 @@ struct EmotionDetailsView_Previews: PreviewProvider {
                 .environment(\.managedObjectContext, DataController.preview.container.viewContext)
         }
     }
-}
+}*/
