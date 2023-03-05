@@ -5,7 +5,8 @@
 </p>
 
 > EmotionDesign is an app that allows users to track their emotions daily \
-> and analyse the range of their feelings over time using statistics. 
+> and analyse the range of their feelings over time using statistics. \
+> The app could be downloaded via [Apple Store](https://apps.apple.com/ge/app/emotion-design/id6445963420)  
 
 <a id="TableOfContents"></a>
 # Table of contents
