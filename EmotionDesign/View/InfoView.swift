@@ -9,7 +9,7 @@ import SwiftUI
 
 struct InfoView: View {
     @Environment(\.managedObjectContext) var moc
-    @EnvironmentObject var dataController: DataController
+    @EnvironmentObject var dataController: FunctionLayer//DataController
 
     @State var emotionsView = PostitionListDTO()
     @State private var offset = CGSize.zero

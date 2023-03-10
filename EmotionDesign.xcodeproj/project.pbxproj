@@ -43,6 +43,7 @@
 		5190C78E29A0E8A200E4E2B0 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5190C78D29A0E8A200E4E2B0 /* InfoView.swift */; };
 		51A07DDB29A3FA37009F18A0 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51A07DDA29A3FA37009F18A0 /* NotificationView.swift */; };
 		51A07DDD29A402CE009F18A0 /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51A07DDC29A402CE009F18A0 /* HomeScreen.swift */; };
+		51C3C6F029BB0D2300D50359 /* FunctionLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51C3C6EF29BB0D2300D50359 /* FunctionLayer.swift */; };
 		51D4151B298132BC001D367B /* EmotionDesignApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51D4151A298132BC001D367B /* EmotionDesignApp.swift */; };
 		51D4151D298132BC001D367B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51D4151C298132BC001D367B /* ContentView.swift */; };
 		51D4151F298132BF001D367B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 51D4151E298132BF001D367B /* Assets.xcassets */; };
@@ -89,6 +90,9 @@
 		5190C78D29A0E8A200E4E2B0 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		51A07DDA29A3FA37009F18A0 /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		51A07DDC29A402CE009F18A0 /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
+		51C3C6E729BA36B600D50359 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		51C3C6E929BA36D300D50359 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		51C3C6EF29BB0D2300D50359 /* FunctionLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunctionLayer.swift; sourceTree = "<group>"; };
 		51D41517298132BC001D367B /* EmotionDesign.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EmotionDesign.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		51D4151A298132BC001D367B /* EmotionDesignApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmotionDesignApp.swift; sourceTree = "<group>"; };
 		51D4151C298132BC001D367B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -109,11 +113,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		51C3C6E429BA34D700D50359 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		51C3C6E829BA36D100D50359 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				51C3C6E929BA36D300D50359 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		51D4150E298132BB001D367B = {
 			isa = PBXGroup;
 			children = (
 				51D41519298132BC001D367B /* EmotionDesign */,
 				51D41518298132BC001D367B /* Products */,
+				51C3C6E829BA36D100D50359 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -128,6 +148,8 @@
 		51D41519298132BC001D367B /* EmotionDesign */ = {
 			isa = PBXGroup;
 			children = (
+				51C3C6E729BA36B600D50359 /* Info.plist */,
+				51C3C6E429BA34D700D50359 /* Tests */,
 				5135FBE529B09A760031BF9E /* EmotionDesign.entitlements */,
 				514077322996326800585A88 /* EmotionInitialList.json */,
 				51D4151A298132BC001D367B /* EmotionDesignApp.swift */,
@@ -190,6 +212,7 @@
 		51D4152A29813865001D367B /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				51C3C6EF29BB0D2300D50359 /* FunctionLayer.swift */,
 				518ED6CE29A661BB00DA3669 /* NotificationList+CoreDataClass.swift */,
 				518ED6CF29A661BB00DA3669 /* NotificationList+CoreDataProperties.swift */,
 				518ED6BE29A5149700DA3669 /* AppNotification+CoreDataClass.swift */,
@@ -286,6 +309,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				51427FB229978AE40078AC53 /* SubEmotion.swift in Sources */,
+				51C3C6F029BB0D2300D50359 /* FunctionLayer.swift in Sources */,
 				51796D3729AE26B800878F17 /* EmotionJournalEntryView.swift in Sources */,
 				51407739299668D700585A88 /* ElementsView.swift in Sources */,
 				518ED6C729A5FC7E00DA3669 /* DayList.swift in Sources */,
@@ -456,6 +480,7 @@
 				DEVELOPMENT_TEAM = GB5Z88B74J;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = EmotionDesign/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -490,6 +515,7 @@
 				DEVELOPMENT_TEAM = GB5Z88B74J;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = EmotionDesign/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

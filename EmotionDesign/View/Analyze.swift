@@ -9,7 +9,7 @@ import SwiftUI
 
 struct Analyze: View {
     @Environment(\.managedObjectContext) var moc
-    @EnvironmentObject var dataController: DataController
+    @EnvironmentObject var dataController: FunctionLayer //DataController
     
     @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \DayDetail.date, ascending: true)]) var userDataSet: FetchedResults<DayDetail>
     @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \DayDetail.date, ascending: false)]) var userDataSetOrdered: FetchedResults<DayDetail>
@@ -85,7 +85,8 @@ struct Analyze: View {
     }
         
     func clearData() {
-        dataController.clearData(moc, data: userDataSet)
+//        dataController.clearData(moc, data: userDataSet)
+        dataController.clearData(data: userDataSet)
     }
 
 }

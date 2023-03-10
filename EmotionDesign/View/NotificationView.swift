@@ -10,7 +10,7 @@ import UserNotifications
 
 struct NotificationView: View {
     @Environment(\.managedObjectContext) var moc
-    @EnvironmentObject var dataController: DataController
+    @EnvironmentObject var dataController: FunctionLayer //DataController
     
     @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \AppNotification.date, ascending: false)]) var notifications: FetchedResults<AppNotification>
 
@@ -72,8 +72,10 @@ struct NotificationView: View {
     
     func delete(at offsets: IndexSet) {
         for offset in offsets {
-            dataController.removeNotificationsFromTheCenter(moc, notification: notifications[offset])
-            dataController.delete(moc, notification: notifications[offset])
+//            dataController.removeNotificationsFromTheCenter(moc, notification: notifications[offset])
+//            dataController.delete(moc, notification: notifications[offset])
+            dataController.removeNotificationsFromTheCenter(notification: notifications[offset])
+            dataController.delete(notification: notifications[offset])
         }
     }
 }

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct EmotionDetailsView: View {
-    @EnvironmentObject var dataController: DataController
+    @EnvironmentObject var dataController: FunctionLayer//DataController
     @Environment(\.managedObjectContext) var moc
     @Environment(\.dismiss) private var dismiss
     @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \DayDetail.date, ascending: false)]) var userDataSet: FetchedResults<DayDetail>
@@ -72,7 +72,8 @@ struct EmotionDetailsView: View {
     }
     
     func processTheEntry() {
-        dataController.saveData(moc, data: userDataSet, element: element, comment: description, date: initialDate)
+//        dataController.saveData(moc, data: userDataSet, element: element, comment: description, date: initialDate)
+        dataController.saveData(data: userDataSet, element: element, comment: description, date: initialDate)
         element.chosen = false
         dismiss()
     }

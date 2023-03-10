@@ -9,7 +9,7 @@ import SwiftUI
 
 struct EmotionJournalEntryView: View {
     @Environment(\.managedObjectContext) var moc
-    @EnvironmentObject var dataController: DataController
+    @EnvironmentObject var dataController: FunctionLayer //DataController
     @State var day: DayDetail
     @Binding var filter: ChartFilter
     

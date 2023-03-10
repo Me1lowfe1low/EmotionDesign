@@ -9,7 +9,7 @@ import SwiftUI
 
 struct EmotionView: View {
     @Environment(\.managedObjectContext) var moc
-    @EnvironmentObject var dataController: DataController
+    @EnvironmentObject var dataController: FunctionLayer //DataController
     @Binding var position: PositionDTO
     
     

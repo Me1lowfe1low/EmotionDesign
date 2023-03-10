@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ScheduledNotification: View {
     @Environment(\.managedObjectContext) var moc
-    @EnvironmentObject var dataController: DataController
+    @EnvironmentObject var dataController: FunctionLayer //DataController
    
     @StateObject var notification: AppNotification
     @State private var enabled: Bool
@@ -25,8 +25,10 @@ struct ScheduledNotification: View {
                 .font(.largeTitle)
                 .onChange(of: enabled ) { _ in
                     notification.enabled = enabled as NSNumber
-                    dataController.saveContext(moc)
-                    dataController.toggleNotifications(moc, data: notification)
+//                    dataController.saveContext(moc)
+//                    dataController.toggleNotifications(moc, data: notification)
+                    dataController.saveContext()
+                    dataController.toggleNotifications(data: notification)
                 }
             HStack {
                 Text(notification.wrappedTitle)

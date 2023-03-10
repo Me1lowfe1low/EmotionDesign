@@ -10,7 +10,7 @@ import SwiftUI
 struct ScheduleView: View {
     @Environment(\.managedObjectContext) var moc
     @Environment(\.dismiss) private var dismiss
-    @EnvironmentObject var dataController: DataController
+    @EnvironmentObject var dataController: FunctionLayer //DataController
 
     @State var notification: AppNotification?
     @State var notificationDTO: NotificationEntry
@@ -91,7 +91,8 @@ struct ScheduleView: View {
     }
     
     func saveNotification() {
-        dataController.saveData(moc, toAdd: notificationDTO, toEdit: notification)
+//        dataController.saveData(moc, toAdd: notificationDTO, toEdit: notification)
+        dataController.saveData(toAdd: notificationDTO, toEdit: notification)
         dismiss()
     }
 }

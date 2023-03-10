@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ElementsView: View {
     @Environment(\.managedObjectContext) var moc
-    @EnvironmentObject var dataController: DataController
+    @EnvironmentObject var dataController: FunctionLayer //DataController
     @Binding var choice: Int
     @Binding var emotionDTO: EmotionDTO
 

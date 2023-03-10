@@ -10,7 +10,7 @@ import Charts
 
 struct ChartView: View {
     @Environment(\.managedObjectContext) var moc
-    @EnvironmentObject var dataController: DataController
+    @EnvironmentObject var dataController: FunctionLayer //DataController
     
     @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \DayDetail.date, ascending: true)]) var userDataSet: FetchedResults<DayDetail>
     @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \DayDetail.date, ascending: false)]) var userDataSetOrdered: FetchedResults<DayDetail>
@@ -110,7 +110,8 @@ struct ChartView: View {
                 }
             }
             .frame(height: 250, alignment: .center)
-            .onAppear(perform: { chartList = dataController.getChartData(moc, days: userDataSet)
+            //.onAppear(perform: { chartList = dataController.getChartData(moc, days: userDataSet)
+            .onAppear(perform: { chartList = dataController.getChartData(days: userDataSet)
             })
         }
         .background(RoundedRectangle(cornerRadius: 40)
