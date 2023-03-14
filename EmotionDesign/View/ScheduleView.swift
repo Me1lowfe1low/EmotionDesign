@@ -18,7 +18,7 @@ struct ScheduleView: View {
     init(recievedNotification: AppNotification?) {
         if let notificationItem = recievedNotification {
             _notification = State(initialValue: notificationItem)
-            _notificationDTO = State(initialValue: NotificationEntry(title: notificationItem.wrappedTitle, time: notificationItem.wrappedDate, period: notificationItem.returnWeek() , enabled: notificationItem.wrappedEnabled) )
+            _notificationDTO = State(initialValue: NotificationEntry(title: notificationItem.wrappedTitle, date: notificationItem.wrappedDate, period: notificationItem.returnWeek() , enabled: notificationItem.wrappedEnabled) )
         } else {
             _notificationDTO = State(initialValue: NotificationEntry() )
         }
@@ -29,7 +29,7 @@ struct ScheduleView: View {
             Color(UIColor.secondarySystemBackground)
                 .ignoresSafeArea()
             VStack {
-                DatePicker(selection: $notificationDTO.time, in: Date.now..., displayedComponents: .hourAndMinute)
+                DatePicker(selection: $notificationDTO.date, in: Date.now..., displayedComponents: .hourAndMinute)
                 {
                     Text("")
                 }

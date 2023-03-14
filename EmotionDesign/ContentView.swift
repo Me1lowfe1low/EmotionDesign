@@ -11,6 +11,7 @@ struct ContentView: View {
     @Environment(\.managedObjectContext) var moc
     @EnvironmentObject var dataController: FunctionLayer //DataController
     @State private var selection = 0
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \DayDetail.date, ascending: true)]) var userDataSet: FetchedResults<DayDetail>
     
     var body: some View {
         TabView(selection: $selection)  {
@@ -54,6 +55,8 @@ struct ContentView: View {
                 }
                 .tag(4)
         }
+        .onAppear(perform: { dataController.getChartData(days: userDataSet)
+        })
     }
 }
 

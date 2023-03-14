@@ -10,7 +10,7 @@ import Foundation
 struct NotificationEntry: Identifiable {
     let id = UUID()
     var title: String = "Alert"
-    var time: Date = Date()
+    var date: Date = Date()
     var period: Week = Week()
     var enabled: Bool = false
 

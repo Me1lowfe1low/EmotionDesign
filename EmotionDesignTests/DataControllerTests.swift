@@ -1,24 +1,33 @@
-// Created for EmotionDesign on 09.03.2023
-//  EmotionDesignTests.swift
-//  EmotionDesign
+// Created for EmotionDesign on 13.03.2023
+//  DataControllerTests.swift
+//  EmotionDesignTests
 //
 //
 //    dmgordienko@gmail.com 2023
 
 import XCTest
+import CoreData
+@testable import EmotionDesign
 
-
-final class EmotionDesignTests: XCTestCase {
-
+final class DataControllerTests: XCTestCase {
+    var dataStorage: DataControllerTestStack!
+    var sut: FunctionLayer!
+    var dataControllerMock: DataControllerMock!
     
     override func setUpWithError() throws {
-        //try super.setUpWithError()
-        
         // Put setup code here. This method is called before the invocation of each test method in the class.
+        try super.setUpWithError()
+        dataStorage = DataControllerTestStack()
+        dataControllerMock = DataControllerMock()
+        dataControllerMock.mainContextStub = dataStorage.backgroundContext
+        sut = FunctionLayer(dataController: dataControllerMock)
     }
 
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
+        try super.tearDownWithError()
+        //...
+        sut = nil
     }
 
     func testExample() throws {
@@ -35,7 +44,4 @@ final class EmotionDesignTests: XCTestCase {
             // Put the code you want to measure the time of here.
         }
     }
-    
-    
-
 }

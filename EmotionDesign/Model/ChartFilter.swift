@@ -11,8 +11,6 @@ struct ChartFilter {
     var startDate: Date
     var endDate: Date
     
-
-    
     init() {
         self.startDate = Date(timeIntervalSince1970: 0)
         self.endDate = Date(timeIntervalSinceNow: 60 * 60 * 24 )

@@ -14,7 +14,7 @@ struct EmotionDesignApp: App {
     var body: some Scene {
         WindowGroup {
             let dataController = DataController()
-            let dataManipulator = FunctionLayer(mainContext: dataController.container.viewContext)
+            let dataManipulator = FunctionLayer(dataController: dataController)
             
             NavigationView {
                 ContentView()
