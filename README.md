@@ -1,7 +1,7 @@
 # This project implements EmotionDesign app
 
 <p  align="center">
-<img src="EmotionDesign/Images/EmotionDesignLogo.png" width="200" height="200">
+<img src="EmotionDesign/Images/EmotionDesignLogo_filled.jpeg" width="200" height="200">
 </p>
 
 > EmotionDesign is an app that allows users to track their emotions daily \
