@@ -1,54 +1,50 @@
-// Created for EmotionDesign on 09.02.2023
-//  DataController.swift
+// Created for EmotionDesign on 10.03.2023
+//  FunctionLayerTestStack.swift
 //  EmotionDesign
 //
-// COPYRIGHT dmgordienko@gmail.com 2023
 //
+//    dmgordienko@gmail.com 2023
 
-import CoreData
 import Foundation
+import CoreData
 import SwiftUI
 import OSLog
+@testable import EmotionDesign
 
-class DataController: ObservableObject {
-    let container = NSPersistentContainer(name: "EmotionDesign")
-    let calendar = Calendar.current
-    let center = UNUserNotificationCenter.current()
-    let emotionJsonList: [InitialEmotion] = Bundle.main.decode([InitialEmotion].self, from: "EmotionInitialList.json")
-    let logger = Logger(subsystem: "EmotionDesign", category: "main")
+class FunctionLayer: ObservableObject {
+    let mainContext: NSManagedObjectContext
+    let calendar: Calendar
+    let center: UNUserNotificationCenter
+    let emotionJsonList: [InitialEmotion]
+    let logger: Logger
     
-    
-    init(inMemory: Bool = false) {
-        if inMemory {
-            container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
-        }
-        container.loadPersistentStores { description, error in
-            if let error = error {
-                print("Core Data failed to load: \(error.localizedDescription)")
-                return
-            }
-            self.container.viewContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
-        }
+    init(mainContext: NSManagedObjectContext = DataControllerTestStack.shared.mainContext) {
+        self.mainContext = mainContext
+        
+        self.logger = Logger(subsystem: "EmotionDesign", category: "main")
+        self.emotionJsonList = Bundle.main.decode([InitialEmotion].self, from: "EmotionInitialList.json")
+        self.calendar = Calendar.current
+        self.center = UNUserNotificationCenter.current()
     }
 
-    func createAndFillNewDayEntry(_ context: NSManagedObjectContext, element: EmotionDTO, comment: String, date: Date) {
-        let dayDetails = DayDetail(context: context)
+    func createAndFillNewDayEntry(element: EmotionDTO, comment: String, date: Date) {
+        let dayDetails = DayDetail(context: mainContext)
         dayDetails.id = UUID()
         dayDetails.comment = ""
         dayDetails.date = date
-        saveContext(context)
+        saveContext()
         
-        let emotion = Emotion(context: context)
+        let emotion = Emotion(context: mainContext)
         emotion.id = element.emotion.id
         emotion.name = element.emotion.name
         emotion.parent = Int32(element.emotion.parent)
         emotion.comment = comment
         emotion.timestamp = date
         emotion.day = dayDetails
-        saveContext(context)
+        saveContext()
     }
 
-    func toggleNotifications(_ context: NSManagedObjectContext, data: AppNotification ) {
+    func toggleNotifications(data: AppNotification ) {
         guard data.wrappedEnabled == false else {
             let content = UNMutableNotificationContent()
             content.title = "Schedule notification"
@@ -59,19 +55,19 @@ class DataController: ObservableObject {
             for ind in 0..<data.weekdays.count {
                 if data.weekdays[ind].wrappedChecked == true  {
                     counter += 1
-                    editEntryInNotificationCenter(context, content: content, data: data, counter: counter, dayIndex: ind)
+                    editEntryInNotificationCenter(content: content, data: data, counter: counter, dayIndex: ind)
                 }
-                saveContext(context)
+                saveContext()
             }
             if counter == 0 {
-                editEntryInNotificationCenter(context, content: content, data: data, counter: counter, dayIndex: nil)
+                editEntryInNotificationCenter(content: content, data: data, counter: counter, dayIndex: nil)
             }
             return
         }
-        deleteNotificationList(context, notification: data )
+        deleteNotificationList(notification: data )
     }
     
-    func pushEntryToNotificationCenter(_ context: NSManagedObjectContext, content: UNMutableNotificationContent, data: NotificationEntry, notification: AppNotification, counter: Int, dayIndex: Int?) {
+    func pushEntryToNotificationCenter(content: UNMutableNotificationContent, data: NotificationEntry, notification: AppNotification, counter: Int, dayIndex: Int?) {
         var dateComponents = DateComponents()
         dateComponents.hour = calendar.component(.hour, from: data.time)
         dateComponents.minute = calendar.component(.minute, from:  data.time)
@@ -83,10 +79,10 @@ class DataController: ObservableObject {
         logger.debug("Created entry for following day: \(dateComponents)")
         
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
-        let notificationObject = NotificationList(context: context)
+        let notificationObject = NotificationList(context: mainContext)
         notificationObject.id = UUID()
         notificationObject.appNotification = notification
-        saveContext(context)
+        saveContext()
         logger.debug("Created entry for notification: \(notificationObject)")
         logger.debug("List of alert ID: \(notification.wrappedId.uuidString)")
         counter == 0 ? logger.info("Push one entry to Notification Center") : logger.info("Refresh data in Notification Center")
@@ -94,7 +90,7 @@ class DataController: ObservableObject {
         center.add(request)
     }
     
-    func getChartData(_ context: NSManagedObjectContext, days: FetchedResults<DayDetail>) -> ChartController {
+    func getChartData(days: FetchedResults<DayDetail>) -> ChartController {
         var chartList: ChartController = ChartController()
         emotionJsonList.forEach { emotion in
             let tempTitle = "\(emotion.name.capitalized) chart"
@@ -130,9 +126,9 @@ class DataController: ObservableObject {
         return chartList
     }
     
-    func saveContext(_ context: NSManagedObjectContext) {
+    func saveContext() {
         do {
-            try context.save()
+            try mainContext.save()
         } catch {
             let nsError = error as NSError
             logger.error("Unresolved error \(nsError), \(nsError.userInfo)")
@@ -141,68 +137,68 @@ class DataController: ObservableObject {
     }
     
     
-    func saveData(_ context: NSManagedObjectContext, data: FetchedResults<DayDetail>, element: EmotionDTO, comment: String, date: Date) {
+    func saveData(data: FetchedResults<DayDetail>, element: EmotionDTO, comment: String, date: Date) {
         guard data.first == nil else {
             var dateFound = false
             data.forEach {
                 if Calendar.current.isDate( $0.wrappedDate , equalTo: Date(), toGranularity: .day ) {
                     dateFound = true
-                    addEmotionEntryToDay(context,day: $0, element: element, comment: comment, date: date)
+                    addEmotionEntryToDay(day: $0, element: element, comment: comment, date: date)
                 }
             }
             if dateFound == false {
-                createAndFillNewDayEntry(context, element: element, comment: comment, date: date)
+                createAndFillNewDayEntry(element: element, comment: comment, date: date)
             }
             
             return
         }
-        createAndFillNewDayEntry(context, element: element, comment: comment, date: date)
+        createAndFillNewDayEntry(element: element, comment: comment, date: date)
     }
     
-    func saveData(_ context: NSManagedObjectContext, toAdd: NotificationEntry, toEdit: AppNotification?) {
+    func saveData(toAdd: NotificationEntry, toEdit: AppNotification?) {
         guard toEdit != nil else {
-            saveData(context, data: toAdd)
+            saveData(data: toAdd)
             return
         }
-        editData(context, data: toEdit!, from: toAdd)
+        editData(data: toEdit!, from: toAdd)
     }
     
-    func saveData(_ context: NSManagedObjectContext, data: NotificationEntry) {
+    func saveData( data: NotificationEntry) {
         let content = UNMutableNotificationContent()
         content.title = "Schedule notification"
         content.subtitle = "What is your feelings right now?"
         content.sound = UNNotificationSound.default
         
-        let alarm = AppNotification(context: context)
+        let alarm = AppNotification(context: mainContext)
         alarm.id = UUID()
         alarm.title = data.title
         alarm.date = data.time
-        saveContext(context)
+        saveContext()
         
         var counter: Int = 0
         
         data.period.days.forEach { day in
-            let weekday = AppWeekday(context: context)
+            let weekday = AppWeekday(context: mainContext)
             weekday.checked = day.checked as NSNumber
             weekday.name = day.name
             weekday.id = day.id
             weekday.position = Int16(day.shortName.rawValue)
             weekday.notification = alarm
-            saveContext(context)
+            saveContext()
             
             if day.checked {
                 logger.debug("Day is: \(day.name)")
                 counter += 1
-                pushEntryToNotificationCenter(context, content: content, data: data, notification: alarm, counter: counter, dayIndex: day.shortName.id)
+                pushEntryToNotificationCenter(content: content, data: data, notification: alarm, counter: counter, dayIndex: day.shortName.id)
             }
         }
         if counter == 0 {
-            pushEntryToNotificationCenter(context, content: content, data: data, notification: alarm, counter: counter, dayIndex: nil)
+            pushEntryToNotificationCenter(content: content, data: data, notification: alarm, counter: counter, dayIndex: nil)
         }
     }
     
-    func addEmotionEntryToDay(_ context: NSManagedObjectContext,day: DayDetail, element: EmotionDTO, comment: String, date: Date) {
-        let emotion = Emotion(context: context)
+    func addEmotionEntryToDay(day: DayDetail, element: EmotionDTO, comment: String, date: Date) {
+        let emotion = Emotion(context: mainContext)
         emotion.id = element.emotion.id
         emotion.name = element.emotion.name
         emotion.parent = Int32(element.emotion.parent)
@@ -212,10 +208,10 @@ class DataController: ObservableObject {
         emotion.day?.id = day.wrappedId
         emotion.day?.comment = day.wrappedComment
         emotion.day?.date = day.wrappedDate
-        saveContext(context)
+        saveContext()
     }
     
-    func editEntryInNotificationCenter(_ context: NSManagedObjectContext, content: UNMutableNotificationContent, data: AppNotification, counter: Int, dayIndex: Int?) {
+    func editEntryInNotificationCenter( content: UNMutableNotificationContent, data: AppNotification, counter: Int, dayIndex: Int?) {
         var dateComponents = DateComponents()
         dateComponents.hour = calendar.component(.hour, from: data.wrappedDate)
         dateComponents.minute = calendar.component(.minute, from:  data.wrappedDate)
@@ -227,10 +223,10 @@ class DataController: ObservableObject {
         logger.debug("Created entry for following day: \(dateComponents)")
         
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
-        let notificationObject = NotificationList(context: context)
+        let notificationObject = NotificationList(context: mainContext)
         notificationObject.id = UUID()
         notificationObject.appNotification = data
-        saveContext(context)
+        saveContext()
         logger.debug("Created entry for notification: \(notificationObject)")
         logger.debug("List of alert ID: \(data.wrappedId.uuidString)")
         counter == 0 ? logger.info("Push one entry to Notification Center") : logger.info("Refresh data in Notification Center")
@@ -238,9 +234,9 @@ class DataController: ObservableObject {
         center.add(request)
     }
     
-    func editData(_ context: NSManagedObjectContext, data: AppNotification, from: NotificationEntry) {
+    func editData(data: AppNotification, from: NotificationEntry) {
         logger.info("Starting to edit")
-        deleteNotificationList(context, notification: data)
+        deleteNotificationList(notification: data)
         logger.info("NotificationCleared")
         let content = UNMutableNotificationContent()
         content.title = "Schedule notification"
@@ -249,7 +245,7 @@ class DataController: ObservableObject {
         
         data.title = from.title
         data.date = from.time
-        saveContext(context)
+        saveContext()
         
         guard data.wrappedEnabled == false else {
             var counter: Int = 0
@@ -260,45 +256,45 @@ class DataController: ObservableObject {
                 if from.period.days[ind].checked  {
                     counter += 1
                     logger.debug("Day is: \(data.weekdays[ind].wrappedName)")
-                    editEntryInNotificationCenter(context, content: content, data: data, counter: counter, dayIndex: ind)
+                    editEntryInNotificationCenter(content: content, data: data, counter: counter, dayIndex: ind)
                 }
             }
             if counter == 0 {
-                editEntryInNotificationCenter(context, content: content, data: data, counter: counter, dayIndex: nil)
+                editEntryInNotificationCenter(content: content, data: data, counter: counter, dayIndex: nil)
             }
-            saveContext(context)
+            saveContext()
             return
         }
         for ind in 0..<data.weekdays.count {
             data.weekdays[ind].checked = from.period.days[ind].checked as NSNumber
-            saveContext(context)
+            saveContext()
         }
     }
     
-    func delete(_ context: NSManagedObjectContext, day: DayDetail ) {
-        context.delete(day)
-        saveContext(context)
+    func delete( day: DayDetail ) {
+        mainContext.delete(day)
+        saveContext()
         logger.info("Data removed")
     }
     
-    func delete(_ context: NSManagedObjectContext, notification: AppNotification ) {
-        context.delete(notification)
-        saveContext(context)
+    func delete(notification: AppNotification ) {
+        mainContext.delete(notification)
+        saveContext()
         logger.info("Data removed")
     }
     
-    func delete(_ context: NSManagedObjectContext, alert: NotificationList ) {
-        context.delete(alert)
-        saveContext(context)
+    func delete(alert: NotificationList ) {
+        mainContext.delete(alert)
+        saveContext()
         logger.info("Data removed")
     }
     
-    func deleteNotificationList(_ context: NSManagedObjectContext, notification: AppNotification ) {
+    func deleteNotificationList( notification: AppNotification ) {
         guard notification.notificationObjects.count == 0 else {
-            removeNotificationsFromTheCenter(context, notification: notification)
+            removeNotificationsFromTheCenter(notification: notification)
             
             notification.notificationObjects.forEach { alert in
-                delete(context, alert: alert)
+                delete(alert: alert)
             }
             logger.info("Data removed")
             return
@@ -306,47 +302,16 @@ class DataController: ObservableObject {
         logger.info("Nothing to remove")
     }
     
-    func removeNotificationsFromTheCenter(_ context: NSManagedObjectContext, notification: AppNotification ) {
+    func removeNotificationsFromTheCenter(notification: AppNotification ) {
         logger.info("Removing notifications...")
         center.removeDeliveredNotifications(withIdentifiers: notification.notificationObjects.map { $0.id!.uuidString })
         logger.info("Done")
     }
     
-    func clearData(_ context: NSManagedObjectContext, data: FetchedResults<DayDetail>) {
+    func clearData(data: FetchedResults<DayDetail>) {
         data.forEach {
-            context.delete($0)
-            saveContext(context)
+            mainContext.delete($0)
+            saveContext()
         }
     }
-    
-    
-    
-#if DEBUG
-    static var preview: DataController {
-        let storage = DataController(inMemory: true)
-        
-        let emotionDTO0 = EmotionDTO(emotion: SubEmotion.emotionSample0, color: .green)
-        let emotionDTO1 = EmotionDTO(emotion: SubEmotion.emotionSample1, color: .green)
-        let emotionDTO2 = EmotionDTO(emotion: SubEmotion.emotionSample2, color: .green)
-        let emotionDTO3 = EmotionDTO(emotion: SubEmotion.emotionSample3, color: .green)
-        let emotionDTO4 = EmotionDTO(emotion: SubEmotion.emotionSample4, color: .green)
-        let emotionDTO5 = EmotionDTO(emotion: SubEmotion.emotionSample5, color: .green)
-        let notificationSample = NotificationEntry()
-        let tempDate = Calendar.current.date(byAdding: .day, value: -1, to: Date())!
-        let tempDate1 = Calendar.current.date(byAdding: .day, value: -2, to: Date())!
-        storage.createAndFillNewDayEntry(storage.container.viewContext, element: emotionDTO0, comment: "", date: tempDate)
-        storage.createAndFillNewDayEntry(storage.container.viewContext, element: emotionDTO1, comment: "I've found my car broken", date: tempDate)
-        storage.createAndFillNewDayEntry(storage.container.viewContext, element: emotionDTO2, comment: "They said that I've passed the exams", date: tempDate)
-        storage.createAndFillNewDayEntry(storage.container.viewContext, element: emotionDTO2, comment: "Hmm", date: tempDate)
-        storage.createAndFillNewDayEntry(storage.container.viewContext, element: emotionDTO3, comment: "Strange feeling", date: Date())
-        storage.createAndFillNewDayEntry(storage.container.viewContext, element: emotionDTO4, comment: "I've broken my favourite cup", date: Date())
-        storage.createAndFillNewDayEntry(storage.container.viewContext, element: emotionDTO5, comment: "I've been invited to the party", date: Date())
-        storage.createAndFillNewDayEntry(storage.container.viewContext, element: emotionDTO2, comment: "Saad", date: tempDate1)
-        storage.saveData(storage.container.viewContext, toAdd: notificationSample, toEdit: nil)
-        
-        return storage
-    }
-#endif
 }
-
-

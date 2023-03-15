@@ -9,7 +9,7 @@ import SwiftUI
 
 struct EmotionContentsView: View {
     @Environment(\.managedObjectContext) var moc
-    @EnvironmentObject var dataController: DataController
+    @EnvironmentObject var dataOrchestrator: DataOrchestrator
     
     @State private var emotionDTO: EmotionDTO
     @State private var choice: Int
@@ -34,7 +34,7 @@ struct EmotionContentsView: View {
                 .padding(.horizontal)
                 ScrollView(.horizontal) {
                     HStack {
-                        ForEach(dataController.emotionJsonList.indices, id: \.self) { index in
+                        ForEach(dataOrchestrator.emotionJsonList.indices, id: \.self) { index in
                             Button(action: {
                                 choice = index
                                 emotionDTO.changeChosenState(to: false)
@@ -44,19 +44,19 @@ struct EmotionContentsView: View {
                                     ZStack {
                                         RoundedRectangle(cornerRadius: 20)
                                             .fill(LinearGradient(gradient: Gradient(colors:
-                                                                                        choice == index ? dataController.emotionJsonList[index].returnColors() : [Color(UIColor.secondarySystemBackground), Color(UIColor.secondarySystemBackground)]),
+                                                                                        choice == index ? dataOrchestrator.emotionJsonList[index].returnColors() : [Color(UIColor.secondarySystemBackground), Color(UIColor.secondarySystemBackground)]),
                                                                  startPoint: .leading,
                                                                  endPoint: .trailing))
                                             .frame(width: 100, height: 100)
                                             .shadow(color: Color(UIColor.systemFill) ,radius: 5)
-                                        Image(dataController.emotionJsonList[index].icon)
+                                        Image(dataOrchestrator.emotionJsonList[index].icon)
                                             .resizable()
                                             .aspectRatio(contentMode: .fill)
                                             .clipShape(RoundedRectangle(cornerRadius: 20)
                                             )
                                             .frame(width: 100, height: 100)
                                     }
-                                    Text(dataController.emotionJsonList[index].name)
+                                    Text(dataOrchestrator.emotionJsonList[index].name)
                                         .font(.title3)
                                         .textCase(.uppercase)
                                         .bold()
@@ -87,14 +87,14 @@ struct EmotionContentsView: View {
                     } else {
                         ElementsView(choice: $choice, emotionDTO:  $emotionDTO)
                             .environment(\.managedObjectContext, moc)
-                            .environmentObject(dataController)
+                            .environmentObject(dataOrchestrator)
                     }
                 }
             }
             if emotionDTO.chosen {
                 NavigationLink(destination: EmotionDetailsView(element: $emotionDTO)
                     .environment(\.managedObjectContext, moc)
-                    .environmentObject(dataController)
+                    .environmentObject(dataOrchestrator)
                 )
                 {
                     ButtonView(element: $emotionDTO )
@@ -108,13 +108,13 @@ struct EmotionContentsView: View {
     }
 }
 
-struct EmotionContentsView_Previews: PreviewProvider {
+/*struct EmotionContentsView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             EmotionContentsView().preferredColorScheme(.dark)
-                .environment(\.managedObjectContext, DataController.preview.container.viewContext)
+                .environment(\.managedObjectContext, CoreDataManipulator.preview.container.viewContext)
                 .environmentObject(DataController.preview)
         }
     }
-}
+}*/
 

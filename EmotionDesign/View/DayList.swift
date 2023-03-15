@@ -30,8 +30,8 @@ struct DayList: View {
     }
 }
 
-struct DayList_Previews: PreviewProvider {
+/*struct DayList_Previews: PreviewProvider {
     static var previews: some View {
         DayList(days: .constant(NotificationEntry().period.days))
     }
-}
+}*/

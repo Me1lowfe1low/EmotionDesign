@@ -9,7 +9,7 @@ import SwiftUI
 
 struct EmotionView: View {
     @Environment(\.managedObjectContext) var moc
-    @EnvironmentObject var dataController: DataController
+    @EnvironmentObject var dataOrchestrator: DataOrchestrator 
     @Binding var position: PositionDTO
     
     
@@ -23,7 +23,7 @@ struct EmotionView: View {
                     .fill(Color(UIColor.secondarySystemBackground))
                     .frame(width: position.getSize(), height: position.getSize())
                     .shadow(color: Color(UIColor.systemFill) ,radius: 10)
-                Image(dataController.emotionJsonList[position.elementId].icon)
+                Image(dataOrchestrator.emotionJsonList[position.elementId].icon)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .clipShape(RoundedRectangle(cornerRadius: position.getRadius())
@@ -37,10 +37,11 @@ struct EmotionView: View {
         .padding()
     }
 }
-struct EmotionView_Previews: PreviewProvider {
+
+/*struct EmotionView_Previews: PreviewProvider {
     static var previews: some View {
         EmotionView(position: .constant(PostitionListDTO().positionList[1]))
-            .environment(\.managedObjectContext, DataController.preview.container.viewContext)
+            .environment(\.managedObjectContext, CoreDataManipulator.preview.container.viewContext)
             .environmentObject(DataController.preview)
     }
-}
+}*/

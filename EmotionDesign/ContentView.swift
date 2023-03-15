@@ -9,8 +9,9 @@ import SwiftUI
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) var moc
-    @EnvironmentObject var dataController: DataController
+    @EnvironmentObject var dataController: DataOrchestrator //CoreDataManipulator
     @State private var selection = 0
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \DayDetail.date, ascending: true)]) var userDataSet: FetchedResults<DayDetail>
     
     var body: some View {
         TabView(selection: $selection)  {
@@ -54,13 +55,15 @@ struct ContentView: View {
                 }
                 .tag(4)
         }
+        .onAppear(perform: { dataController.getChartData(days: userDataSet)
+        })
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+/*struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
-            .environment(\.managedObjectContext, DataController.preview.container.viewContext)
+            .environment(\.managedObjectContext, CoreDataManipulator.preview.container.viewContext)
             .environmentObject(DataController.preview)
     }
-}
+}*/

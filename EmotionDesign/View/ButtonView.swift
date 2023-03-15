@@ -45,8 +45,8 @@ struct ButtonView: View {
 }
 
 
-struct ButtonView_Previews: PreviewProvider {
+/*struct ButtonView_Previews: PreviewProvider {
     static var previews: some View {
         ButtonView(element: .constant(EmotionDTO(emotion: SubEmotion.emotionSample , color: .yellow )))
     }
-}
+}*/

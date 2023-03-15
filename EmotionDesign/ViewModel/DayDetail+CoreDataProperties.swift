@@ -80,14 +80,11 @@ extension DayDetail {
 
 extension DayDetail : Identifiable {
 
-    /*func fillDataForCharts() -> [ChartPoint] {
-        //var chartDetails: [ChartPoint] = []
-        let set = emotion as? Set<Emotion> ?? []
-        let counts = set.reduce(into: [:]) { counts, element in
-            counts[element.wrappedParent, default: 0] += 1
-        }
-        var chartDetails: [ChartPoint] = counts.map { ChartPoint(date: self.wrappedDate, color: .red, count: $0.value , emotion: $0.key ) }
-    }*/
+    func fetchRequest() -> NSFetchRequest<DayDetail> {
+        var request: NSFetchRequest<DayDetail> = NSFetchRequest<DayDetail>(entityName: "DayDetail")
+        request.sortDescriptors = [NSSortDescriptor(keyPath: \DayDetail.date, ascending: false)]
+        return request
+    }
     
     func getDate() -> String {
         let dateFormatter = DateFormatter()

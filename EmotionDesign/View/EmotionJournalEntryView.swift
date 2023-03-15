@@ -9,7 +9,7 @@ import SwiftUI
 
 struct EmotionJournalEntryView: View {
     @Environment(\.managedObjectContext) var moc
-    @EnvironmentObject var dataController: DataController
+    @EnvironmentObject var dataOrchestrator: DataOrchestrator
     @State var day: DayDetail
     @Binding var filter: ChartFilter
     
@@ -22,7 +22,7 @@ struct EmotionJournalEntryView: View {
                             .fill(Color(UIColor.secondarySystemBackground))
                             .frame(width: 90, height: 90, alignment: .leading)
                             .shadow(color: Color(UIColor.systemFill) ,radius: 5)
-                        Image(dataController.emotionJsonList[Int(emotion.parent)].findEmotionIcon(emotion.name!))
+                        Image(dataOrchestrator.emotionJsonList[Int(emotion.parent)].findEmotionIcon(emotion.name!))
                             .resizable()
                             .aspectRatio(contentMode: .fill)
                             .clipShape(RoundedRectangle(cornerRadius:  20))
@@ -31,7 +31,7 @@ struct EmotionJournalEntryView: View {
                     VStack(alignment: .leading) {
                         Text(emotion.name!)
                             .font(.caption)
-                            .foregroundColor(dataController.emotionJsonList[Int(emotion.parent)].getColor())
+                            .foregroundColor(dataOrchestrator.emotionJsonList[Int(emotion.parent)].getColor())
                             .textCase(.uppercase)
                             .fixedSize()
                             .bold()

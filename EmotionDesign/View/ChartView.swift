@@ -10,35 +10,33 @@ import Charts
 
 struct ChartView: View {
     @Environment(\.managedObjectContext) var moc
-    @EnvironmentObject var dataController: DataController
+    @EnvironmentObject var dataOrchestrator: DataOrchestrator
     
-    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \DayDetail.date, ascending: true)]) var userDataSet: FetchedResults<DayDetail>
-    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \DayDetail.date, ascending: false)]) var userDataSetOrdered: FetchedResults<DayDetail>
-    
-    @State var chartList: ChartController = ChartController()
     @State var selectionName: String = "Chart"
-    @State var selectionId: Int?
-    @State var position: ChartPoint?
-    @State var currentTab: String = "7 days"
+    @State var selectionId: Int? = nil
+    @State var position:ChartPoint?
+    @State var currentTab:String = "7 days"
     @Binding var filter: ChartFilter
     
     var body: some View {
         VStack(spacing: 20) {
             VStack {
                 Menu {
-                    ForEach( chartList.charts.indices, id: \.self) { chartId in
+                    ForEach( dataOrchestrator.getEmotionCharts().indices, id: \.self) { chartId in
                         Button(action: { selectionId = chartId
-                            selectionName = chartList.charts[chartId].title
+                            selectionName = dataOrchestrator.getChartTitle(chartId)
+                            dataOrchestrator.logger.debug("Selection name: \(selectionName)")
                         } ) {
-                            Text(chartList.charts[chartId].title)
-                                .bold()
+                            Text(dataOrchestrator.getChartTitle(chartId))
                                 .font(.title3)
+                                .bold()
                         }
                     }
                 } label: {
                     HStack(spacing: 20) {
                         Text(selectionName)
-                            .foregroundColor(selectionName == "Chart" ? Color(UIColor.link) : chartList.charts[selectionId!].color )
+                            .foregroundColor(dataOrchestrator.getChartColor(selectionName, index: selectionId)
+                                )
                             .fixedSize()
                             .font(.title2)
                             .bold()
@@ -61,8 +59,7 @@ struct ChartView: View {
                         .tag("Whole history")
                 }
                 .onChange(of: currentTab) { tag in
-                    if tag == "Whole history" { filter = ChartFilter() }  else  { filter = ChartFilter(7) }
-                    dataController.logger.debug("\(filter.getDate())")
+                    filter = dataOrchestrator.getChartPeriod(tag)
                 }
                 .padding(.horizontal)
                 .pickerStyle(.segmented)
@@ -70,8 +67,8 @@ struct ChartView: View {
             VStack  {
                 if selectionId != nil {
                     VStack {
-                        if !chartList.charts[selectionId!].points.isEmpty {
-                            Chart(chartList.charts[selectionId!].points) { point in
+                        if !dataOrchestrator.chartIsEmpty(selectionId) {
+                            Chart(dataOrchestrator.getChartPoints(selectionId)) { point in
                                 if filter.contains(point.date) {
                                     LineMark(x: .value("Date", point.getDate()),
                                              y: .value("Total count", point.count))
@@ -79,13 +76,13 @@ struct ChartView: View {
                                     AreaMark(x: .value("Date", point.getDate()),
                                              y: .value("Total count", point.count))
                                     .interpolationMethod(.monotone)
-                                    .foregroundStyle(chartList.charts[selectionId!].color.opacity(0.2).gradient)
+                                    .foregroundStyle(dataOrchestrator.getChartColor(selectionId).opacity(0.2).gradient)
                                     PointMark(x: .value("Date", point.getDate()),
                                               y: .value("Total count", point.count))
                                 }
                             }
                             .frame(height: 220, alignment: .center)
-                            .foregroundStyle(chartList.charts[selectionId!].color)
+                            .foregroundStyle(dataOrchestrator.getChartColor(selectionId))
                             .chartXAxisLabel("Date")
                             .chartYAxisLabel("Counts")
                             .padding()
@@ -110,8 +107,6 @@ struct ChartView: View {
                 }
             }
             .frame(height: 250, alignment: .center)
-            .onAppear(perform: { chartList = dataController.getChartData(moc, days: userDataSet)
-            })
         }
         .background(RoundedRectangle(cornerRadius: 40)
             .fill(Color(UIColor.secondarySystemBackground))
@@ -120,10 +115,10 @@ struct ChartView: View {
     }
 }
 
-struct ChartView_Previews: PreviewProvider {
+/*struct ChartView_Previews: PreviewProvider {
     static var previews: some View {
         ChartView(filter: .constant(ChartFilter()))
-            .environment(\.managedObjectContext, DataController.preview.container.viewContext)
+            .environment(\.managedObjectContext, CoreDataManipulator.preview.container.viewContext)
             .environmentObject(DataController.preview)
     }
-}
+}*/

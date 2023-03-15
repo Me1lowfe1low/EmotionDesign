@@ -10,7 +10,7 @@ import SwiftUI
 struct ScheduleView: View {
     @Environment(\.managedObjectContext) var moc
     @Environment(\.dismiss) private var dismiss
-    @EnvironmentObject var dataController: DataController
+    @EnvironmentObject var dataOrchestrator: DataOrchestrator
 
     @State var notification: AppNotification?
     @State var notificationDTO: NotificationEntry
@@ -18,7 +18,7 @@ struct ScheduleView: View {
     init(recievedNotification: AppNotification?) {
         if let notificationItem = recievedNotification {
             _notification = State(initialValue: notificationItem)
-            _notificationDTO = State(initialValue: NotificationEntry(title: notificationItem.wrappedTitle, time: notificationItem.wrappedDate, period: notificationItem.returnWeek() , enabled: notificationItem.wrappedEnabled) )
+            _notificationDTO = State(initialValue: NotificationEntry(title: notificationItem.wrappedTitle, date: notificationItem.wrappedDate, period: notificationItem.returnWeek() , enabled: notificationItem.wrappedEnabled) )
         } else {
             _notificationDTO = State(initialValue: NotificationEntry() )
         }
@@ -29,7 +29,7 @@ struct ScheduleView: View {
             Color(UIColor.secondarySystemBackground)
                 .ignoresSafeArea()
             VStack {
-                DatePicker(selection: $notificationDTO.time, in: Date.now..., displayedComponents: .hourAndMinute)
+                DatePicker(selection: $notificationDTO.date, in: Date.now..., displayedComponents: .hourAndMinute)
                 {
                     Text("")
                 }
@@ -91,18 +91,18 @@ struct ScheduleView: View {
     }
     
     func saveNotification() {
-        dataController.saveData(moc, toAdd: notificationDTO, toEdit: notification)
+        dataOrchestrator.saveData(toAdd: notificationDTO, toEdit: notification)
         dismiss()
     }
 }
 
 
-struct ScheduleView_Previews: PreviewProvider {
+/*struct ScheduleView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             ScheduleView(recievedNotification: nil)
-                .environment(\.managedObjectContext, DataController.preview.container.viewContext)
+                .environment(\.managedObjectContext, CoreDataManipulator.preview.container.viewContext)
                 .environmentObject(DataController.preview)
         }
     }
-}
+}*/

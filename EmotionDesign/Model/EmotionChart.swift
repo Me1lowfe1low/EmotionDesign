@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct EmotionChart: Identifiable {
+struct EmotionChart: Identifiable, Hashable {
     var id: UUID = UUID()
     var title: String
     var emotion: String

@@ -10,49 +10,53 @@ import CoreData
 
 
 extension AppNotification {
-
+    
     @nonobjc public class func fetchRequest() -> NSFetchRequest<AppNotification> {
         return NSFetchRequest<AppNotification>(entityName: "AppNotification")
     }
-
+    
     @NSManaged public var date: Date?
     @NSManaged public var enabled: NSNumber?
     @NSManaged public var id: UUID?
     @NSManaged public var title: String?
     @NSManaged public var weekday: NSSet?
     @NSManaged public var notifications: NSSet?
-
+    
     public var wrappedId: UUID {
-           id ?? UUID()
-       }
-       
-       public var wrappedTitle: String {
-           title ?? ""
-       }
-       
-       public var wrappedDate: Date {
-           date ?? Date()
-       }
-       
-       public var wrappedEnabled: Bool {
-           enabled?.boolValue ?? true
-       }
-       
-       public var weekdays: [AppWeekday] {
-           let set = weekday as? Set<AppWeekday> ?? []
-           
-           return set.sorted {
-               $0.position < $1.position
-           }
-       }
-
-       public var notificationObjects : [NotificationList] {
-           let set = notifications as? Set<NotificationList> ?? []
-           
-           return set.sorted {
-               $0.wrappedId.uuidString < $1.wrappedId.uuidString
-           }
-       }
+        id ?? UUID()
+    }
+    
+    public var wrappedTitle: String {
+        title ?? ""
+    }
+    
+    public var wrappedDate: Date {
+        date ?? Date()
+    }
+    
+    public var wrappedEnabled: Bool {
+        enabled?.boolValue ?? true
+    }
+    
+    public var weekdays: [AppWeekday] {
+        let set = weekday as? Set<AppWeekday> ?? []
+        
+        return set.sorted {
+            $0.position < $1.position
+        }
+    }
+    
+    public var notificationObjects : [NotificationList] {
+        let set = notifications as? Set<NotificationList> ?? []
+        
+        return set.sorted {
+            $0.wrappedId.uuidString < $1.wrappedId.uuidString
+        }
+    }
+    
+    public var notificationsAreEmpty: Bool {
+        notificationObjects.count == 0
+    }
 }
 
 // MARK: Generated accessors for weekday
@@ -115,4 +119,6 @@ extension AppNotification : Identifiable {
          }
          return weekEntry
      }
+    
+    
 }

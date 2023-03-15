@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ChartPoint: Identifiable, Hashable {
+struct ChartPoint: ChartPointProtocol {
     var id: UUID = UUID()
     var date: Date
     var count: Int = 0
@@ -25,4 +25,14 @@ struct ChartPoint: Identifiable, Hashable {
         dateFormatter.dateFormat = "d MMM"
         return dateFormatter.string(from: date)
     }
+}
+
+protocol ChartPointProtocol: Identifiable, Hashable, Equatable {
+    var id: UUID { get set }
+    var date: Date { get set }
+    var count: Int { get set }
+    
+    mutating func increment()
+    mutating func setValue(_ value: Int)
+    func getDate() -> String
 }
