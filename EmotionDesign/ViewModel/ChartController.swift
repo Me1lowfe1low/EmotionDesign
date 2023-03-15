@@ -9,23 +9,20 @@ import Foundation
 import OSLog
 import SwiftUI
 
-class ChartController: ChartProtocol {
-    @Published var id: UUID
+class ChartController: ChartControllerProtocol {
     @Published var charts: [EmotionChart]
     
     private let emotionJsonList: [InitialEmotion]
     private let logger: Logger
     
     init() {
-        self.id = UUID()
         self.charts = []
         self.logger = Logger(subsystem: "EmotionDesign", category: "ChartData")
         self.emotionJsonList = Bundle.main.decode([InitialEmotion].self, from: "EmotionInitialList.json")
     }
 }
 
-protocol ChartProtocol {
-    var id: UUID { set get }
+protocol ChartControllerProtocol {
     var charts: [EmotionChart] { set get }
     
     func createChartTemplate()
@@ -41,10 +38,12 @@ extension ChartController {
     
     func createChartTemplate() {
         logger.debug("Creating chart template")
-        emotionJsonList.forEach { emotion in
-            let tempTitle = "\(emotion.name.capitalized) chart"
-            let emotionChart: EmotionChart = EmotionChart(title: tempTitle, emotion: emotion.name, color: emotion.getColor())
+        if charts.isEmpty {
+            emotionJsonList.forEach { emotion in
+                let tempTitle = "\(emotion.name.capitalized) chart"
+                let emotionChart: EmotionChart = EmotionChart(title: tempTitle, emotion: emotion.name, color: emotion.getColor())
                 self.charts.append(emotionChart)
+            }
         }
     }
     

@@ -13,14 +13,13 @@ struct EmotionDesignApp: App {
 
     var body: some Scene {
         WindowGroup {
-            let dataController = DataController()
-            let dataManipulator = FunctionLayer(dataController: dataController)
+            let coreDataManipulator = CoreDataManipulator()
+            let dataOrchestrator = DataOrchestrator(coreDataManipulator)
             
             NavigationView {
                 ContentView()
-                    .environment(\.managedObjectContext, dataController.container.viewContext)
-                    //.environment(\.managedObjectContext, dataManipulator.mainContext)
-                    .environmentObject(dataManipulator)
+                    .environment(\.managedObjectContext, coreDataManipulator.container.viewContext)
+                    .environmentObject(dataOrchestrator)
             }
         }
     }

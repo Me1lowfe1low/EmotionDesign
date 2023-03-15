@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct EmotionDetailsView: View {
-    @EnvironmentObject var dataController: FunctionLayer//DataController
+    @EnvironmentObject var dataOrchestrator: DataOrchestrator
     @Environment(\.managedObjectContext) var moc
     @Environment(\.dismiss) private var dismiss
     @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \DayDetail.date, ascending: false)]) var userDataSet: FetchedResults<DayDetail>
@@ -20,7 +20,7 @@ struct EmotionDetailsView: View {
     var body: some View {
         VStack {
             ZStack {
-                LinearGradient(colors: dataController.emotionJsonList[element.emotion.parent].returnColors(),
+                LinearGradient(colors: dataOrchestrator.emotionJsonList[element.emotion.parent].returnColors(),
                  startPoint: .topLeading,
                  endPoint: .bottomTrailing)
                 .mask(RoundedRectangle(cornerRadius: 40)
@@ -36,7 +36,7 @@ struct EmotionDetailsView: View {
                 Section(header: Text(element.emotion.name)
                     .bold()
                     .textCase(.uppercase)
-                    .foregroundColor(dataController.emotionJsonList[element.emotion.parent].getColor())
+                    .foregroundColor(dataOrchestrator.emotionJsonList[element.emotion.parent].getColor())
                 ) {
                     TextField("Description", text: $description)
                         .textCase(.uppercase)
@@ -72,9 +72,9 @@ struct EmotionDetailsView: View {
     }
     
     func processTheEntry() {
-//        dataController.saveData(moc, data: userDataSet, element: element, comment: description, date: initialDate)
-        dataController.saveData(data: userDataSet, element: element, comment: description, date: initialDate)
-        element.chosen = false
+        element.applyChanges(comment: description, date: initialDate)
+        dataOrchestrator.saveData(data: userDataSet, element: element)
+        element.resetState()
         dismiss()
     }
 }
@@ -83,7 +83,7 @@ struct EmotionDetailsView: View {
     static var previews: some View {
         NavigationView {
             EmotionDetailsView(element: .constant(EmotionDTO(emotion: SubEmotion.emotionSample1, color: .red))).preferredColorScheme(.dark)
-                .environmentObject(DataController.preview)
+                .environmentObject(CoreDataManipulator.preview)
                 .environment(\.managedObjectContext, DataController.preview.container.viewContext)
         }
     }

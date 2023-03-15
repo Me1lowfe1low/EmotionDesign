@@ -10,7 +10,7 @@ import UserNotifications
 
 struct NotificationView: View {
     @Environment(\.managedObjectContext) var moc
-    @EnvironmentObject var dataController: FunctionLayer //DataController
+    @EnvironmentObject var dataOrchestrator: DataOrchestrator
     
     @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \AppNotification.date, ascending: false)]) var notifications: FetchedResults<AppNotification>
 
@@ -18,7 +18,7 @@ struct NotificationView: View {
         VStack {
             NavigationLink(destination: ScheduleView(recievedNotification: nil)
                 .environment(\.managedObjectContext, moc)
-                .environmentObject(dataController)) {
+                .environmentObject(dataOrchestrator)) {
                     HStack {
                         Text( "Notification")
                             .textCase(.uppercase)
@@ -42,7 +42,7 @@ struct NotificationView: View {
                             ScheduledNotification(recievedNotification: entry)
                             NavigationLink("Invisible link", destination: ScheduleView(recievedNotification: entry)
                                 .environment(\.managedObjectContext, moc)
-                                .environmentObject(dataController))
+                                .environmentObject(dataOrchestrator))
                             .opacity(0.0)
                         }
                         .listRowBackground(Color(UIColor.secondarySystemBackground))
@@ -63,19 +63,17 @@ struct NotificationView: View {
     func checkPermissions() {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
             if success {
-                dataController.logger.info("All set!")
+                dataOrchestrator.logger.info("All set!")
             } else if let error = error {
-                dataController.logger.error("\(error.localizedDescription)")
+                dataOrchestrator.logger.error("\(error.localizedDescription)")
             }
         }
     }
     
     func delete(at offsets: IndexSet) {
         for offset in offsets {
-//            dataController.removeNotificationsFromTheCenter(moc, notification: notifications[offset])
-//            dataController.delete(moc, notification: notifications[offset])
-            dataController.removeNotificationsFromTheCenter(notification: notifications[offset])
-            dataController.delete(notification: notifications[offset])
+            dataOrchestrator.removeNotifications(notification: notifications[offset])
+            dataOrchestrator.delete(notifications[offset])
         }
     }
 }
@@ -84,7 +82,7 @@ struct NotificationView: View {
     static var previews: some View {
         NavigationView {
             NotificationView()
-                .environment(\.managedObjectContext, DataController.preview.container.viewContext)
+                .environment(\.managedObjectContext, CoreDataManipulator.preview.container.viewContext)
                 .environmentObject(DataController.preview)
         }
     }

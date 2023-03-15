@@ -9,7 +9,7 @@ import SwiftUI
 
 struct InfoView: View {
     @Environment(\.managedObjectContext) var moc
-    @EnvironmentObject var dataController: FunctionLayer//DataController
+    @EnvironmentObject var dataOrchestrator: DataOrchestrator
 
     @State var emotionsView = PostitionListDTO()
     @State private var offset = CGSize.zero
@@ -48,14 +48,14 @@ struct InfoView: View {
                         }
                     }
                 }
-                Text(dataController.emotionJsonList[emotionsView.positionList.last!.elementId].name)
+                Text(dataOrchestrator.emotionJsonList[emotionsView.positionList.last!.elementId].name)
                     .font(.title2)
-                    .foregroundColor(dataController.emotionJsonList[emotionsView.positionList.last!.elementId].getColor())
+                    .foregroundColor(dataOrchestrator.emotionJsonList[emotionsView.positionList.last!.elementId].getColor())
                     .bold()
                     .shadow(color: Color(UIColor.systemFill) ,radius: 5)
                     .textCase(.uppercase)
                     .padding()
-                Text(dataController.emotionJsonList[emotionsView.positionList.last!.elementId].description)
+                Text(dataOrchestrator.emotionJsonList[emotionsView.positionList.last!.elementId].description)
                     .font(.title3)
                     .padding()
                 Spacer()
@@ -71,7 +71,7 @@ struct InfoView: View {
 /*struct InfoView_Previews: PreviewProvider {
     static var previews: some View {
         InfoView()
-            .environment(\.managedObjectContext, DataController.preview.container.viewContext)
+            .environment(\.managedObjectContext, CoreDataManipulator.preview.container.viewContext)
             .environmentObject(DataController.preview)
     }
 }*/

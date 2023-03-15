@@ -10,7 +10,7 @@ import SwiftUI
 struct ScheduleView: View {
     @Environment(\.managedObjectContext) var moc
     @Environment(\.dismiss) private var dismiss
-    @EnvironmentObject var dataController: FunctionLayer //DataController
+    @EnvironmentObject var dataOrchestrator: DataOrchestrator
 
     @State var notification: AppNotification?
     @State var notificationDTO: NotificationEntry
@@ -91,8 +91,7 @@ struct ScheduleView: View {
     }
     
     func saveNotification() {
-//        dataController.saveData(moc, toAdd: notificationDTO, toEdit: notification)
-        dataController.saveData(toAdd: notificationDTO, toEdit: notification)
+        dataOrchestrator.saveData(toAdd: notificationDTO, toEdit: notification)
         dismiss()
     }
 }
@@ -102,7 +101,7 @@ struct ScheduleView: View {
     static var previews: some View {
         NavigationView {
             ScheduleView(recievedNotification: nil)
-                .environment(\.managedObjectContext, DataController.preview.container.viewContext)
+                .environment(\.managedObjectContext, CoreDataManipulator.preview.container.viewContext)
                 .environmentObject(DataController.preview)
         }
     }

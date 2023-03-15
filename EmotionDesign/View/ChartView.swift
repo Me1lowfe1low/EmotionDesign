@@ -10,24 +10,24 @@ import Charts
 
 struct ChartView: View {
     @Environment(\.managedObjectContext) var moc
-    @EnvironmentObject var dataController: FunctionLayer //DataController
+    @EnvironmentObject var dataOrchestrator: DataOrchestrator
     
     @State var selectionName: String = "Chart"
     @State var selectionId: Int? = nil
     @State var position:ChartPoint?
-    @State var currentTab: String = "7 days"
-    @Binding var filter:ChartFilter
+    @State var currentTab:String = "7 days"
+    @Binding var filter: ChartFilter
     
     var body: some View {
         VStack(spacing: 20) {
             VStack {
                 Menu {
-                    ForEach( dataController.getEmotionCharts().indices, id: \.self) { chartId in
+                    ForEach( dataOrchestrator.getEmotionCharts().indices, id: \.self) { chartId in
                         Button(action: { selectionId = chartId
-                            selectionName = dataController.getChartTitle(chartId)
-                            dataController.logger.debug("Selection name: \(selectionName)")
+                            selectionName = dataOrchestrator.getChartTitle(chartId)
+                            dataOrchestrator.logger.debug("Selection name: \(selectionName)")
                         } ) {
-                            Text(dataController.getChartTitle(chartId))
+                            Text(dataOrchestrator.getChartTitle(chartId))
                                 .font(.title3)
                                 .bold()
                         }
@@ -35,7 +35,7 @@ struct ChartView: View {
                 } label: {
                     HStack(spacing: 20) {
                         Text(selectionName)
-                            .foregroundColor(dataController.getChartColor(selectionName, index: selectionId)
+                            .foregroundColor(dataOrchestrator.getChartColor(selectionName, index: selectionId)
                                 )
                             .fixedSize()
                             .font(.title2)
@@ -59,7 +59,7 @@ struct ChartView: View {
                         .tag("Whole history")
                 }
                 .onChange(of: currentTab) { tag in
-                    filter = dataController.getChartPeriod(tag)
+                    filter = dataOrchestrator.getChartPeriod(tag)
                 }
                 .padding(.horizontal)
                 .pickerStyle(.segmented)
@@ -67,8 +67,8 @@ struct ChartView: View {
             VStack  {
                 if selectionId != nil {
                     VStack {
-                        if !dataController.chartIsEmpty(selectionId) {
-                            Chart(dataController.getChartPoints(selectionId)) { point in
+                        if !dataOrchestrator.chartIsEmpty(selectionId) {
+                            Chart(dataOrchestrator.getChartPoints(selectionId)) { point in
                                 if filter.contains(point.date) {
                                     LineMark(x: .value("Date", point.getDate()),
                                              y: .value("Total count", point.count))
@@ -76,13 +76,13 @@ struct ChartView: View {
                                     AreaMark(x: .value("Date", point.getDate()),
                                              y: .value("Total count", point.count))
                                     .interpolationMethod(.monotone)
-                                    .foregroundStyle(dataController.getChartColor(selectionId).opacity(0.2).gradient)
+                                    .foregroundStyle(dataOrchestrator.getChartColor(selectionId).opacity(0.2).gradient)
                                     PointMark(x: .value("Date", point.getDate()),
                                               y: .value("Total count", point.count))
                                 }
                             }
                             .frame(height: 220, alignment: .center)
-                            .foregroundStyle(dataController.getChartColor(selectionId))
+                            .foregroundStyle(dataOrchestrator.getChartColor(selectionId))
                             .chartXAxisLabel("Date")
                             .chartYAxisLabel("Counts")
                             .padding()
@@ -118,7 +118,7 @@ struct ChartView: View {
 /*struct ChartView_Previews: PreviewProvider {
     static var previews: some View {
         ChartView(filter: .constant(ChartFilter()))
-            .environment(\.managedObjectContext, DataController.preview.container.viewContext)
+            .environment(\.managedObjectContext, CoreDataManipulator.preview.container.viewContext)
             .environmentObject(DataController.preview)
     }
 }*/

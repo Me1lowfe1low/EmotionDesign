@@ -9,7 +9,7 @@ import SwiftUI
 
 struct Analyze: View {
     @Environment(\.managedObjectContext) var moc
-    @EnvironmentObject var dataController: FunctionLayer //DataController
+    @EnvironmentObject var dataOrchestrator: DataOrchestrator
     
     @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \DayDetail.date, ascending: true)]) var userDataSet: FetchedResults<DayDetail>
     @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \DayDetail.date, ascending: false)]) var userDataSetOrdered: FetchedResults<DayDetail>
@@ -85,8 +85,7 @@ struct Analyze: View {
     }
         
     func clearData() {
-//        dataController.clearData(moc, data: userDataSet)
-        dataController.clearData(data: userDataSet)
+        dataOrchestrator.clearData(data: userDataSet)
     }
 
 }
@@ -95,7 +94,7 @@ struct Analyze: View {
 /*struct Analyze_Previews: PreviewProvider {
     static var previews: some View {
         Analyze().preferredColorScheme(.dark)
-            .environment(\.managedObjectContext, DataController.preview.container.viewContext)
+            .environment(\.managedObjectContext, CoreDataManipulator.preview.container.viewContext)
             .environmentObject(DataController.preview)
     }
 }*/

@@ -11,17 +11,17 @@ import CoreData
 
 final class EmotionDesignTests: XCTestCase {
 
-    var dataStorage: DataControllerTestStack!
-    var sut: FunctionLayer!
-    var dataControllerMock: DataControllerMock!
+    var coreDataManipulator: CoreDataManipulatorTestStack!
+    var sut: DataOrchestrator!
+    var dataOrchestratorMock: CoreDataManipulatorMock!
     
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         try super.setUpWithError()
-        dataStorage = DataControllerTestStack()
-        dataControllerMock = DataControllerMock()
-        dataControllerMock.mainContextStub = dataStorage.backgroundContext
-        sut = FunctionLayer(dataController: dataControllerMock)
+        coreDataManipulator = CoreDataManipulatorTestStack()
+        dataOrchestratorMock = CoreDataManipulatorMock()
+        dataOrchestratorMock.mainContextStub = coreDataManipulator.backgroundContext
+        sut = DataOrchestrator(dataOrchestratorMock)
     }
 
     override func tearDownWithError() throws {

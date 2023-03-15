@@ -12,6 +12,9 @@ struct EmotionDTO {
     var emotion: SubEmotion
     var color: Color
     var chosen: Bool = false
+    var comment: String = ""
+    var date: Date = Date()
+    
     
     mutating func changeChosenState(to state: Bool) {
         self.chosen = state
@@ -28,6 +31,17 @@ struct EmotionDTO {
             return colorSet
         }
         return [ Color(UIColor.secondarySystemBackground), Color(UIColor.secondarySystemBackground)]
+    }
+    
+    mutating func resetState() {
+        self.comment = ""
+        self.date = Date()
+        self.chosen = false
+    }
+    
+    mutating func applyChanges(comment: String, date: Date) {
+        self.comment = comment
+        self.date = date
     }
 }
 

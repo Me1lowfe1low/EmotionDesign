@@ -1,5 +1,5 @@
 // Created for EmotionDesign on 13.03.2023
-//  DataControllerMock.swift
+//  CoreDataManipulatorMock.swift
 //  EmotionDesignTests
 //
 //
@@ -9,7 +9,7 @@ import XCTest
 import CoreData
 @testable import EmotionDesign
 
-class DataControllerMock: DataControllerProto {
+class CoreDataManipulatorMock: CoreDataManipulatorProtocol {
     private(set) var saveContextWasCalled: UInt = 0
     var mainContextStub: NSManagedObjectContext!
     var mainContext: NSManagedObjectContext {

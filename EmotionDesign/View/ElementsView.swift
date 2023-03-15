@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ElementsView: View {
     @Environment(\.managedObjectContext) var moc
-    @EnvironmentObject var dataController: FunctionLayer //DataController
+    @EnvironmentObject var dataOrchestrator: DataOrchestrator 
     @Binding var choice: Int
     @Binding var emotionDTO: EmotionDTO
 
@@ -17,13 +17,13 @@ struct ElementsView: View {
     var body: some View {
         ZStack {
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 100))]) {
-                    ForEach(dataController.emotionJsonList[choice].subEmotions, id: \.id) { emotion in
-                        Button(action: { emotionDTO.setEmotion(emotion, color: dataController.emotionJsonList[choice].getColor(), chosen: true)
+                    ForEach(dataOrchestrator.emotionJsonList[choice].subEmotions, id: \.id) { emotion in
+                        Button(action: { emotionDTO.setEmotion(emotion, color: dataOrchestrator.emotionJsonList[choice].getColor(), chosen: true)
                         })
                         {
                             RoundedRectangle(cornerRadius: 20)
                                 .fill(LinearGradient(gradient: Gradient(colors:
-                                                                            emotionDTO.getColor(emotion.name,colorSet: dataController.emotionJsonList[choice].returnColors())),
+                                                                            emotionDTO.getColor(emotion.name,colorSet: dataOrchestrator.emotionJsonList[choice].returnColors())),
                                                startPoint: .leading,
                                                endPoint: .trailing))
                                 .frame(width: 100, height: 100 ,alignment: .center)
@@ -50,7 +50,7 @@ struct ElementsView: View {
 /*struct ElementsView_Previews: PreviewProvider {
     static var previews: some View {
         ElementsView(choice: .constant(0), emotionDTO: .constant(EmotionDTO(emotion: SubEmotion(), color: .green)))
-            .environment(\.managedObjectContext, DataController.preview.container.viewContext)
+            .environment(\.managedObjectContext, CoreDataManipulator.preview.container.viewContext)
             .environmentObject(DataController.preview)
     }
 }*/

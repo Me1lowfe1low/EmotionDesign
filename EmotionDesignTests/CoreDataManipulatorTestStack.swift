@@ -1,5 +1,5 @@
 // Created for EmotionDesign on 10.03.2023
-//  DataControllerTestStack.swift
+//  CoreDataManipulatorTestStack.swift
 //  EmotionDesignTests
 //
 //
@@ -11,9 +11,9 @@ import Foundation
 //import SwiftUI
 //import OSLog
 
-class DataControllerTestStack {
+class CoreDataManipulatorTestStack {
     
-    static let shared = DataControllerTestStack()
+    static let shared = CoreDataManipulatorTestStack()
     
     let container: NSPersistentContainer
     let backgroundContext: NSManagedObjectContext

@@ -1,5 +1,5 @@
 // Created for EmotionDesign on 09.02.2023
-//  DataController.swift
+//  CoreDataManipulator.swift
 //  EmotionDesign
 //
 // COPYRIGHT dmgordienko@gmail.com 2023
@@ -9,9 +9,9 @@ import CoreData
 import Foundation
 import OSLog
 
-class DataController: DataControllerProto {
+class CoreDataManipulator: CoreDataManipulatorProtocol {
     
-    static let shared = DataController()
+    static let shared = CoreDataManipulator()
     
     let container: NSPersistentContainer
     let backgroundContext: NSManagedObjectContext
@@ -39,7 +39,7 @@ class DataController: DataControllerProto {
     }
 }
 
-extension DataController {
+extension CoreDataManipulator {
     
     func saveContext() {
         do {
@@ -70,13 +70,13 @@ extension DataController {
         saveContext()
     }
     
-    func saveEmotion(element: EmotionDTO, comment: String, date: Date, dayDetails: DayDetail) {
+    func saveEmotion(element: EmotionDTO, dayDetails: DayDetail) {
         let emotion = Emotion(context: mainContext)
         emotion.id = element.emotion.id
         emotion.name = element.emotion.name
         emotion.parent = Int32(element.emotion.parent)
-        emotion.comment = comment
-        emotion.timestamp = date
+        emotion.comment = element.comment
+        emotion.timestamp = element.date
         emotion.day = dayDetails
         emotion.day?.id = dayDetails.wrappedId
         emotion.day?.comment = dayDetails.wrappedComment
@@ -94,7 +94,8 @@ extension DataController {
         return alarm
     }
     
-    func saveNotificationList(data: AppNotification) -> NotificationList {
+    func saveNotificationList(data: AppNotification) -> NotificationList
+    {
         let alarm = NotificationList(context: mainContext)
         alarm.id = UUID()
         alarm.appNotification = data
@@ -108,19 +109,24 @@ extension DataController {
         saveContext()
     }
     
-   
+    func delete(_ object: NSManagedObject) {
+        mainContext.delete(object)
+        saveContext()
+        logger.info("Data removed")
+    }
 }
 
-protocol DataControllerProto: AnyObject {
+protocol CoreDataManipulatorProtocol: AnyObject {
     var mainContext: NSManagedObjectContext { get }
     
     func saveContext()
 
     func saveDay(comment: String, date: Date) -> DayDetail
-    func saveEmotion(element: EmotionDTO, comment: String, date: Date, dayDetails: DayDetail)
+    func saveEmotion(element: EmotionDTO, dayDetails: DayDetail)
     func saveNotification(data: NotificationEntry) -> AppNotification
     func saveWeekday(day: Day, alarm: AppNotification)
     func editDayData(data: AppNotification, from: NotificationEntry)
-    func saveNotificationList(data: AppNotification) -> NotificationList 
+    func saveNotificationList(data: AppNotification) -> NotificationList
+    func delete(_ object: NSManagedObject)
 }
 
